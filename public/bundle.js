@@ -8660,15 +8660,8 @@ var Routes = function (_Component) {
   }
 
   _createClass(Routes, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.props.loadInitialData();
-    }
-  }, {
     key: 'render',
     value: function render() {
-      var isLoggedIn = this.props.isLoggedIn;
-
 
       return _react2.default.createElement(
         _reactRouter.Router,
@@ -8676,18 +8669,7 @@ var Routes = function (_Component) {
         _react2.default.createElement(
           _components.Main,
           null,
-          _react2.default.createElement(
-            _reactRouterDom.Switch,
-            null,
-            _react2.default.createElement(_reactRouterDom.Route, { path: '/login', component: _components.Login }),
-            _react2.default.createElement(_reactRouterDom.Route, { path: '/signup', component: _components.Signup }),
-            isLoggedIn && _react2.default.createElement(
-              _reactRouterDom.Switch,
-              null,
-              _react2.default.createElement(_reactRouterDom.Route, { path: '/home', component: _components.UserHome })
-            ),
-            _react2.default.createElement(_reactRouterDom.Route, { component: _components.Login })
-          )
+          _react2.default.createElement(_reactRouterDom.Switch, null)
         )
       );
     }
@@ -8702,31 +8684,14 @@ var Routes = function (_Component) {
 
 
 var mapState = function mapState(state) {
-  return {
-    // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
-    // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
-  };
+  return {};
 };
 
 var mapDispatch = function mapDispatch(dispatch) {
-  return {
-    loadInitialData: function loadInitialData() {
-      dispatch((0, _store.me)());
-    }
-  };
+  return {};
 };
 
 exports.default = (0, _reactRedux.connect)(mapState, mapDispatch)(Routes);
-
-/**
- * PROP TYPES
- */
-
-Routes.propTypes = {
-  loadInitialData: _propTypes2.default.func.isRequired,
-  isLoggedIn: _propTypes2.default.bool.isRequired
-};
 
 /***/ }),
 /* 89 */
@@ -9952,59 +9917,16 @@ var _store = __webpack_require__(15);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/**
- * COMPONENT
- *  The Main component is our 'picture frame' - it displays the navbar and anything
- *  else common to our entire app. The 'picture' inside the frame is the space
- *  rendered out by the component's `children`.
- */
 var Main = function Main(props) {
-  var children = props.children,
-      handleClick = props.handleClick,
-      isLoggedIn = props.isLoggedIn;
-
 
   return _react2.default.createElement(
     'div',
     null,
     _react2.default.createElement(
-      'h1',
-      null,
-      'BOILERMAKER'
-    ),
-    _react2.default.createElement(
-      'nav',
-      null,
-      isLoggedIn ? _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(
-          _reactRouterDom.Link,
-          { to: '/home' },
-          'Home'
-        ),
-        _react2.default.createElement(
-          'a',
-          { href: '#', onClick: handleClick },
-          'Logout'
-        )
-      ) : _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(
-          _reactRouterDom.Link,
-          { to: '/login' },
-          'Login'
-        ),
-        _react2.default.createElement(
-          _reactRouterDom.Link,
-          { to: '/signup' },
-          'Sign Up'
-        )
-      )
-    ),
-    _react2.default.createElement('hr', null),
-    children
+      'a',
+      { href: '/auth/spotify' },
+      'Login with Spotify'
+    )
   );
 };
 
@@ -10012,32 +9934,16 @@ var Main = function Main(props) {
  * CONTAINER
  */
 var mapState = function mapState(state) {
-  return {
-    isLoggedIn: !!state.user.id
-  };
+  return {};
 };
 
 var mapDispatch = function mapDispatch(dispatch) {
-  return {
-    handleClick: function handleClick() {
-      dispatch((0, _store.logout)());
-    }
-  };
+  return {};
 };
 
 // The `withRouter` wrapper makes sure that updates are not blocked
 // when the url changes
 exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapState, mapDispatch)(Main));
-
-/**
- * PROP TYPES
- */
-
-Main.propTypes = {
-  children: _propTypes2.default.object,
-  handleClick: _propTypes2.default.func.isRequired,
-  isLoggedIn: _propTypes2.default.bool.isRequired
-};
 
 /***/ }),
 /* 115 */
