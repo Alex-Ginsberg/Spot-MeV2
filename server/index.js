@@ -10,7 +10,11 @@ const db = require('./db')
 const sessionStore = new SequelizeStore({db})
 const PORT = process.env.PORT || 8080
 const app = express()
+const appKey = require('../secrets').appKey
+const appSecret = require('../secrets').appSecret
 const socketio = require('socket.io')
+const User = require('./db/models/user')
+const SpotifyStrategy = require('passport-spotify').Strategy;
 module.exports = app
 
 /**
@@ -29,6 +33,38 @@ passport.deserializeUser((id, done) =>
   db.models.user.findById(id)
     .then(user => done(null, user))
     .catch(done))
+
+    passport.use(new SpotifyStrategy({
+      clientID: appKey,
+      clientSecret: appSecret,
+      callbackURL: 'http://localhost:8080/callback'
+      },
+      function(accessToken, refreshToken, profile, done) {
+        // asynchronous verification, for effect...
+        process.nextTick(function () {
+          console.log('Profile: ', profile)
+    
+          User.findOrCreate({
+            where: {
+              SpotifyId: profile.id
+            },
+            defaults: {
+              name: profile.displayName,
+              SpotifyId: profile.id,
+              accessToken: accessToken,
+              proPic: profile.photos[0],
+              refreshToken: refreshToken
+            }
+          })
+          .spread(function (user) {
+            console.log('MAKING USER: ', user)  
+            done(null, user);
+          })
+          .catch(done);
+          // return done(null, profile);
+        });
+      }));
+    
 
 const createApp = () => {
   // logging middleware
@@ -52,7 +88,19 @@ const createApp = () => {
   app.use(passport.session())
 
   // auth and api routes
-  app.use('/auth', require('./auth'))
+  app.get('/auth/spotify',
+    passport.authenticate('spotify', {scope: [ 'user-read-email','playlist-modify-private', 'playlist-modify-public'], showDialog: true}),
+    function(req, res){
+    // The request will be redirected to spotify for authentication, so this
+    // function will not be called.
+  });
+
+  app.get('/callback',
+  passport.authenticate('spotify', { failureRedirect: '/login' }),
+  function(req, res) {
+    console.log('IN CALLBACK: ')
+    res.redirect('/profile');
+  });
   app.use('/api', require('./api'))
 
   // static file-serving middleware
