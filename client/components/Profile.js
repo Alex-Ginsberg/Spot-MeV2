@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
-import {me} from '../store'
+import {me, postChat} from '../store'
 
 class Profile extends React.Component{
   componentDidMount() {
@@ -20,6 +20,13 @@ class Profile extends React.Component{
         <div>
             <p>{user.name}</p>
             <img src={user.proPic} />
+            <button onClick={() => this.props.makeNewChat({
+                name: "Test222",
+                externalUrl: "sdfafdsf",
+                playistId: "sfsdfafd",
+                likesNeeded: 2,
+                userId: 1
+            })}>Make a new chat</button>
         </div>
         }
       </div>
@@ -40,6 +47,9 @@ const mapDispatch = (dispatch) => {
   return {
     isLoggedIn() {
       dispatch(me())
+    },
+    makeNewChat(chat) {
+        dispatch(postChat(chat))
     }
   }
 }
