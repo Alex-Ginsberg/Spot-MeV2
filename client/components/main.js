@@ -2,16 +2,22 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
-import {logout} from '../store'
+import {me} from '../store'
 
-const Main = (props) => {
+class Main extends React.Component{
+  componentDidMount() {
+    this.props.isLoggedIn()   
+  }
 
 
-  return (
-    <div>
-      <a href="/auth/spotify">Login with Spotify</a>
-    </div>
-  )
+  render(){
+    
+    return (
+      <div>
+        {!this.props.user.id && <a href="/auth/spotify">Login with Spotify</a>}
+      </div>
+    )
+  }
 }
 
 /**
@@ -19,13 +25,15 @@ const Main = (props) => {
  */
 const mapState = (state) => {
   return {
-    
+    user: state.user
   }
 }
 
 const mapDispatch = (dispatch) => {
   return {
-    
+    isLoggedIn() {
+      dispatch(me())
+    }
   }
 }
 
