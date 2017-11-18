@@ -4,6 +4,7 @@ import axios from 'axios'
     ACTION TYPES
 */
 const POST_CHAT = 'POST_CHAT'
+const GET_CHATS = 'GET_CHATS'
 
 /*
     ACTION CREATORS
@@ -11,6 +12,11 @@ const POST_CHAT = 'POST_CHAT'
 const newChat = chat => ({
     type: POST_CHAT,
     chat
+})
+
+const getChats = chats => ({
+    type: GET_CHATS,
+    chats
 })
 
 /*
@@ -23,12 +29,21 @@ export const postChat = chat =>
             .then(chat => console.log(chat))
 }
 
+export const fetchChats = () => 
+    dispatch => {
+        axios.get(`/api/chat`)
+            .then(res => res.data)
+            .then(chats => dispatch(getChats(chats)))
+    }
+
 /*
     REDUCER
 */
 export default function (state = [], action) {
     switch (action.type) {
-      default:
-        return state
+        case GET_CHATS:
+            return action.chats
+        default:
+            return state
     }
 }

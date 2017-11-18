@@ -3,7 +3,6 @@ const {Chat} = require('../db/models')
 module.exports = router
 
 router.post('/', (req, res, next) => {
-    console.log('BODY: ', req.body)
     Chat.findOrCreate({
         where: {
             name: req.body.name,
@@ -17,4 +16,13 @@ router.post('/', (req, res, next) => {
         res.json(user)
     })
     .catch(next)
+})
+
+router.get('/', (req, res, next) => {
+    Chat.findAll({
+        where: {
+            userId: req.user.id
+        }
+    })
+    .then(chats => res.json(chats))
 })
