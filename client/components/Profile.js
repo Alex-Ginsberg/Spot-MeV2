@@ -6,7 +6,7 @@ import {me, postChat} from '../store'
 
 class Profile extends React.Component{
   componentDidMount() {
-    this.props.isLoggedIn()   
+    this.props.isLoggedIn()
     console.log('PRO')
   }
 
