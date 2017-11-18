@@ -1,23 +1,17 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
-import {fetchChats} from '../store'
 
-class MyChats extends React.Component{
+class SingleChat extends React.Component{
 
   componentDidMount() {
-    this.props.fetchChats()
+    
   }
 
   render() {
       return (
         <div>
-            {this.props.chats.map(chat => (
-                <div key={chat.id}>
-                    <a href={chat.externalUrl}>Play!</a>
-                    <p>{chat.name}</p>
-                </div>
-            ))}
+            
         </div>
       )
   }
@@ -43,4 +37,4 @@ const mapDispatch = (dispatch) => {
 
 // The `withRouter` wrapper makes sure that updates are not blocked
 // when the url changes
-export default withRouter(connect(mapState, mapDispatch)(MyChats))
+export default withRouter(connect(mapState, mapDispatch)(SingleChat))
