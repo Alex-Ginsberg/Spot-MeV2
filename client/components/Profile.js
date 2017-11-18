@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
 import {me, postChat} from '../store'
 import axios from 'axios'
+import {MyChats} from './index'
 
 class Profile extends React.Component{
   constructor() {
@@ -67,6 +68,7 @@ class Profile extends React.Component{
             </form>
         </div>
         }
+        <MyChats />
       </div>
     )
   }

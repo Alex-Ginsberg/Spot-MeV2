@@ -9748,6 +9748,8 @@ var _axios = __webpack_require__(23);
 
 var _axios2 = _interopRequireDefault(_axios);
 
+var _index = __webpack_require__(114);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -9850,7 +9852,8 @@ var Profile = function (_React$Component) {
               )
             )
           )
-        )
+        ),
+        _react2.default.createElement(_index.MyChats, null)
       );
     }
   }]);
@@ -10081,6 +10084,15 @@ Object.defineProperty(exports, 'Profile', {
   }
 });
 
+var _MyChats = __webpack_require__(204);
+
+Object.defineProperty(exports, 'MyChats', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_MyChats).default;
+  }
+});
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
@@ -10285,13 +10297,15 @@ _reactDom2.default.render(_react2.default.createElement(
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.postChat = undefined;
+exports.fetchChats = exports.postChat = undefined;
 
 exports.default = function () {
     var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
     var action = arguments[1];
 
     switch (action.type) {
+        case GET_CHATS:
+            return action.chats;
         default:
             return state;
     }
@@ -10307,6 +10321,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
     ACTION TYPES
 */
 var POST_CHAT = 'POST_CHAT';
+var GET_CHATS = 'GET_CHATS';
 
 /*
     ACTION CREATORS
@@ -10315,6 +10330,13 @@ var newChat = function newChat(chat) {
     return {
         type: POST_CHAT,
         chat: chat
+    };
+};
+
+var getChats = function getChats(chats) {
+    return {
+        type: GET_CHATS,
+        chats: chats
     };
 };
 
@@ -10327,6 +10349,16 @@ var postChat = exports.postChat = function postChat(chat) {
             return res.data;
         }).then(function (chat) {
             return console.log(chat);
+        });
+    };
+};
+
+var fetchChats = exports.fetchChats = function fetchChats() {
+    return function (dispatch) {
+        _axios2.default.get('/api/chat').then(function (res) {
+            return res.data;
+        }).then(function (chats) {
+            return dispatch(getChats(chats));
         });
     };
 };
@@ -35715,6 +35747,112 @@ function toArray(list, index) {
 /***/ (function(module, exports) {
 
 /* (ignored) */
+
+/***/ }),
+/* 204 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(2);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _reactRedux = __webpack_require__(9);
+
+var _reactRouterDom = __webpack_require__(35);
+
+var _store = __webpack_require__(15);
+
+var _axios = __webpack_require__(23);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var MyChats = function (_React$Component) {
+  _inherits(MyChats, _React$Component);
+
+  function MyChats() {
+    _classCallCheck(this, MyChats);
+
+    return _possibleConstructorReturn(this, (MyChats.__proto__ || Object.getPrototypeOf(MyChats)).apply(this, arguments));
+  }
+
+  _createClass(MyChats, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.props.fetchChats();
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        this.props.chats.map(function (chat) {
+          return _react2.default.createElement(
+            'div',
+            { key: chat.id },
+            _react2.default.createElement(
+              'a',
+              { href: chat.externalUrl },
+              'Play!'
+            ),
+            _react2.default.createElement(
+              'p',
+              null,
+              chat.name
+            )
+          );
+        })
+      );
+    }
+  }]);
+
+  return MyChats;
+}(_react2.default.Component);
+
+/**
+ * CONTAINER
+ */
+
+
+var mapState = function mapState(state) {
+  return {
+    user: state.user,
+    chats: state.chats
+  };
+};
+
+var mapDispatch = function mapDispatch(dispatch) {
+  return {
+    fetchChats: function fetchChats() {
+      dispatch((0, _store.fetchChats)());
+    }
+  };
+};
+
+// The `withRouter` wrapper makes sure that updates are not blocked
+// when the url changes
+exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapState, mapDispatch)(MyChats));
 
 /***/ })
 /******/ ]);

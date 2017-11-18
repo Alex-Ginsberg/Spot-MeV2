@@ -18,10 +18,10 @@ router.post('/', (req, res, next) => {
     .catch(next)
 })
 
-router.get('/:id', (req, res, next) => {
+router.get('/', (req, res, next) => {
     Chat.findAll({
         where: {
-            userId: req.params.id
+            userId: req.user.id
         }
     })
     .then(chats => res.json(chats))
