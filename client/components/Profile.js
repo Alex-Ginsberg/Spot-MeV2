@@ -3,11 +3,19 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
 import {me, postChat} from '../store'
+import axios from 'axios'
 
 class Profile extends React.Component{
+  constructor() {
+    super()
+    this.state = {
+      formName: '',
+      formLikesNeeded: 0,
+    }
+  }
+
   componentDidMount() {
     this.props.isLoggedIn()
-    console.log('PRO')
   }
 
 
@@ -20,13 +28,43 @@ class Profile extends React.Component{
         <div>
             <p>{user.name}</p>
             <img src={user.proPic} />
-            <button onClick={() => this.props.makeNewChat({
-                name: "Test222",
-                externalUrl: "sdfafdsf",
-                playistId: "sfsdfafd",
-                likesNeeded: 2,
-                userId: 1
-            })}>Make a new chat</button>
+            <form onSubmit={(e) => {
+              e.preventDefault()
+              const jsonData = {
+                name: this.state.formName,
+                public: true,
+              }
+
+              axios({
+                method: 'post',
+                url: `https://api.spotify.com/v1/users/${user.SpotifyId}/playlists`,
+                data: jsonData,
+                dataType: 'json',
+                headers: {
+                  'Authorization': 'Bearer ' + user.accessToken,
+                  'Content-Type': 'application/json'
+                }
+              })
+                .then(res => {
+                  console.log(res.data)
+                  this.props.makeNewChat({
+                    name: this.state.formName,
+                    externalUrl: res.data.external_urls.spotify,
+                    playlistId: res.data.id,
+                    likesNeeded: this.state.formLikesNeeded,
+                    userId: user.id
+                  })
+                })
+            }}>
+            <div className="form-group">
+              <label htmlFor="name">Create a new music group!</label>
+              <input className="form-control" type="text" name="playlistName" placeholder="Enter playlist name" onChange={(e) => this.setState({formName: e.target.value})} />
+              <input className="form-control" type="number" name="likesNeeded" placeholder="Enter likes needed for a song to be added" onChange={(e) => this.setState({formLikesNeeded: e.target.value})} />
+            </div>
+            <div className="form-group">
+                <button type="submit" className="btn btn-default">Submit Music Group</button>
+            </div>
+            </form>
         </div>
         }
       </div>
