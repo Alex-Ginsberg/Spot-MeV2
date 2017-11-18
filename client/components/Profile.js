@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
 import {me, postChat} from '../store'
+import axios from 'axios'
 
 class Profile extends React.Component{
   constructor() {
@@ -29,13 +30,31 @@ class Profile extends React.Component{
             <img src={user.proPic} />
             <form onSubmit={(e) => {
               e.preventDefault()
-              this.props.makeNewChat({
+              const jsonData = {
                 name: this.state.formName,
-                externalUrl: 'To Fill In',
-                playistId: 'to fill in',
-                likesNeeded: this.state.formLikesNeeded,
-                userId: this.props.user.id
+                public: true,
+              }
+
+              axios({
+                method: 'post',
+                url: `https://api.spotify.com/v1/users/${user.SpotifyId}/playlists`,
+                data: jsonData,
+                dataType: 'json',
+                headers: {
+                  'Authorization': 'Bearer ' + user.accessToken,
+                  'Content-Type': 'application/json'
+                }
               })
+                .then(res => {
+                  console.log(res.data)
+                  this.props.makeNewChat({
+                    name: this.state.formName,
+                    externalUrl: res.data.external_urls.spotify,
+                    playlistId: res.data.id,
+                    likesNeeded: this.state.formLikesNeeded,
+                    userId: user.id
+                  })
+                })
             }}>
             <div className="form-group">
               <label htmlFor="name">Create a new music group!</label>
