@@ -9758,14 +9758,19 @@ var Profile = function (_React$Component) {
   function Profile() {
     _classCallCheck(this, Profile);
 
-    return _possibleConstructorReturn(this, (Profile.__proto__ || Object.getPrototypeOf(Profile)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (Profile.__proto__ || Object.getPrototypeOf(Profile)).call(this));
+
+    _this.state = {
+      formName: '',
+      formLikesNeeded: 0
+    };
+    return _this;
   }
 
   _createClass(Profile, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.props.isLoggedIn();
-      console.log('PRO');
     }
   }, {
     key: 'render',
@@ -9788,17 +9793,41 @@ var Profile = function (_React$Component) {
           ),
           _react2.default.createElement('img', { src: user.proPic }),
           _react2.default.createElement(
-            'button',
-            { onClick: function onClick() {
-                return _this2.props.makeNewChat({
-                  name: "Test222",
-                  externalUrl: "sdfafdsf",
-                  playistId: "sfsdfafd",
-                  likesNeeded: 2,
-                  userId: 1
+            'form',
+            { onSubmit: function onSubmit(e) {
+                e.preventDefault();
+                _this2.props.makeNewChat({
+                  name: _this2.state.formName,
+                  externalUrl: 'To Fill In',
+                  playistId: 'to fill in',
+                  likesNeeded: _this2.state.formLikesNeeded,
+                  userId: _this2.props.user.id
                 });
               } },
-            'Make a new chat'
+            _react2.default.createElement(
+              'div',
+              { className: 'form-group' },
+              _react2.default.createElement(
+                'label',
+                { htmlFor: 'name' },
+                'Create a new music group!'
+              ),
+              _react2.default.createElement('input', { className: 'form-control', type: 'text', name: 'playlistName', placeholder: 'Enter playlist name', onChange: function onChange(e) {
+                  return _this2.setState({ formName: e.target.value });
+                } }),
+              _react2.default.createElement('input', { className: 'form-control', type: 'number', name: 'likesNeeded', placeholder: 'Enter likes needed for a song to be added', onChange: function onChange(e) {
+                  return _this2.setState({ formLikesNeeded: e.target.value });
+                } })
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'form-group' },
+              _react2.default.createElement(
+                'button',
+                { type: 'submit', className: 'btn btn-default' },
+                'Submit Music Group'
+              )
+            )
           )
         )
       );
