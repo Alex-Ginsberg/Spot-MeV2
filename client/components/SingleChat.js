@@ -1,14 +1,16 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
+import { fetchChat } from '../store/currentChat';
 
 class SingleChat extends React.Component{
 
   componentDidMount() {
-    
+    this.props.fetchChat(this.props.match.params.id)
   }
 
   render() {
+      console.log(this.props.currentChat)
       return (
         <div>
             
@@ -23,12 +25,15 @@ class SingleChat extends React.Component{
 const mapState = (state) => {
   return {
     user: state.user,
-    chats: state.chats
+    currentChat: state.currentChat
   }
 }
 
 const mapDispatch = (dispatch) => {
   return {
+    fetchChat(id) {
+      dispatch(fetchChat(id))
+    }
   }
 }
 

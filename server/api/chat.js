@@ -26,3 +26,10 @@ router.get('/', (req, res, next) => {
     })
     .then(chats => res.json(chats))
 })
+
+router.get('/:id', (req, res, next) => {
+    Chat.findOne({
+        where: {id: req.params.id}
+    })
+    .then(chat => res.json(chat))
+})
