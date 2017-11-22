@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
-import {me, postChat} from '../store'
+import {me, postChat, refresh} from '../store'
 import axios from 'axios'
 import {MyChats} from './index'
 
@@ -17,6 +17,7 @@ class Profile extends React.Component{
 
   componentDidMount() {
     this.props.isLoggedIn()
+    this.props.refreshToken()
   }
 
 
@@ -56,6 +57,9 @@ class Profile extends React.Component{
                     userId: user.id
                   })
                 })
+                .catch(err => {
+                  console.log('There was an error: ', err)
+                })
             }}>
             <div className="form-group">
               <label htmlFor="name">Create a new music group!</label>
@@ -90,6 +94,9 @@ const mapDispatch = (dispatch) => {
     },
     makeNewChat(chat) {
         dispatch(postChat(chat))
+    },
+    refreshToken() {
+      dispatch(refresh())
     }
   }
 }
