@@ -49,6 +49,12 @@ export const logout = () =>
       })
       .catch(err => console.log(err))
 
+export const refresh = () => 
+  dispatch => 
+      axios.get('/auth/refresh')
+        .then(res => res.data)
+        .then(token => console.log('TOKEN: ', token))
+
 /**
  * REDUCER
  */
