@@ -44,11 +44,9 @@ router.get('/me', (req, res) => {
 })
 
 router.get('/refresh', (req, res, next) => {
-  console.log('ID: ', req.user)
   refresh(req.user.refreshToken, appKey, appSecret, (err, res, body) => {
     if (err) return
     const token = body.access_token
-    console.log(token)
     User.update(
       {accessToken: token},
       {where: {id: req.user.id}}

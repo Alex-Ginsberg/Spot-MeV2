@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {withRouter} from 'react-router-dom'
+import {withRouter, Link} from 'react-router-dom'
 import {fetchChats} from '../store'
 
 class MyChats extends React.Component{
@@ -15,7 +15,9 @@ class MyChats extends React.Component{
             {this.props.chats.map(chat => (
                 <div key={chat.id}>
                     <a href={chat.externalUrl}>Play!</a>
+                    <Link to={`/singlechat/${chat.id}`}>
                     <p>{chat.name}</p>
+                    </Link>
                 </div>
             ))}
         </div>
