@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import {me} from '../store'
 import axios from 'axios'
+import socket from '../socket'
 
 
 class Messaging extends React.Component{
@@ -17,6 +18,11 @@ class Messaging extends React.Component{
 
     componentDidMount() {
         this.props.isLoggedIn()
+        socket.on('new-message', message => {
+            const oldMessages = this.state.messages
+            oldMessages.push(message)
+            this.setState({messages: oldMessages})
+        })
         axios.get(`/api/message/${this.props.chatId}`)
             .then(res => res.data)
             .then(messages => this.setState({messages}))
@@ -34,6 +40,7 @@ class Messaging extends React.Component{
                 const oldMessages = this.state.messages
                 message.user = this.props.user
                 oldMessages.push(message)
+                socket.emit('new-message', message)
                 this.setState({messages: oldMessages, currentBody: ''})
             })
     }
