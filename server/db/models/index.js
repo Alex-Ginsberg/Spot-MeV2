@@ -22,5 +22,6 @@ User.belongsToMany(User, { through: Friend, as: 'friends'})
 module.exports = {
   User,
   Chat,
-  Friend
+  Friend,
+  Message
 }
