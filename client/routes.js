@@ -14,9 +14,9 @@ class Routes extends Component {
 
     return (
       <Router history={history}>
-      <div>
-        <Main />   
+      <div>      
           <Switch>
+            <Route exact path="/" component={Main} />
             <Route exact path='/profile' component={Profile} />
             <Route path='/singlechat/:id' component={SingleChat} />
           </Switch>
