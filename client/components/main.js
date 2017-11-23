@@ -21,6 +21,7 @@ class Main extends React.Component{
           <h3 className="heading">Bringing people together through music</h3>
 
         {!this.props.user.id && <a href="/auth/spotify">Login with Spotify</a>}
+        {this.props.user.id && <Link to={'/profile'}>Profile</Link>}
       </div>
     )
   }

@@ -8826,10 +8826,10 @@ var Routes = function (_Component) {
         _react2.default.createElement(
           'div',
           null,
-          _react2.default.createElement(_components.Main, null),
           _react2.default.createElement(
             _reactRouterDom.Switch,
             null,
+            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _components.Main }),
             _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/profile', component: _components.Profile }),
             _react2.default.createElement(_reactRouterDom.Route, { path: '/singlechat/:id', component: _components.SingleChat })
           )
@@ -10434,6 +10434,11 @@ var Main = function (_React$Component) {
           'a',
           { href: '/auth/spotify' },
           'Login with Spotify'
+        ),
+        this.props.user.id && _react2.default.createElement(
+          _reactRouterDom.Link,
+          { to: '/profile' },
+          'Profile'
         )
       );
     }
