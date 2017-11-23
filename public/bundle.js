@@ -10411,10 +10411,25 @@ var Main = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-
+      var test = "Zedd.mp4";
       return _react2.default.createElement(
         'div',
-        null,
+        { className: 'fullscreen-bg' },
+        _react2.default.createElement(
+          'video',
+          { loop: true, muted: true, autoPlay: true, className: 'fullscreen-bg__video' },
+          _react2.default.createElement('source', { src: test, type: 'video/mp4' })
+        ),
+        _react2.default.createElement(
+          'h1',
+          { className: 'heading' },
+          'Spot-Me'
+        ),
+        _react2.default.createElement(
+          'h3',
+          { className: 'heading' },
+          'Bringing people together through music'
+        ),
         !this.props.user.id && _react2.default.createElement(
           'a',
           { href: '/auth/spotify' },
@@ -11014,7 +11029,7 @@ exports = module.exports = __webpack_require__(127)();
 
 
 // module
-exports.push([module.i, "body {\n  font-family: sans-serif; }\n  body a {\n    text-decoration: none; }\n  body label {\n    display: block; }\n  body nav a {\n    display: inline-block;\n    margin: 1em; }\n  body form div {\n    margin: 1em;\n    display: inline-block; }\n", ""]);
+exports.push([module.i, "body {\n  font-family: sans-serif; }\n  body a {\n    text-decoration: none; }\n  body label {\n    display: block; }\n  body nav a {\n    display: inline-block;\n    margin: 1em; }\n  body form div {\n    margin: 1em;\n    display: inline-block; }\n\n.fullscreen-bg {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  overflow: hidden;\n  z-index: -100; }\n\n.fullscreen-bg__video {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  z-index: -100; }\n\n@media (min-aspect-ratio: 16 / 9) {\n  .fullscreen-bg__video {\n    height: 300%;\n    top: -100%;\n    z-index: -100; } }\n\n@media (max-aspect-ratio: 16 / 9) {\n  .fullscreen-bg__video {\n    width: 300%;\n    left: -100%;\n    z-index: -100; } }\n\n@media (max-width: 767px) {\n  .fullscreen-bg {\n    z-index: -100; }\n  .fullscreen-bg__video {\n    display: none;\n    z-index: -100; } }\n\n.heading {\n  color: white;\n  z-index: 1; }\n", ""]);
 
 // exports
 
