@@ -30,7 +30,12 @@ class Messaging extends React.Component{
         }
         axios.post('/api/message', messageObj)
             .then(res => res.data)
-            .then(message => console.log('CREATED'))
+            .then(message => {
+                const oldMessages = this.state.messages
+                message.user = this.props.user
+                oldMessages.push(message)
+                this.setState({messages: oldMessages, currentBody: ''})
+            })
     }
 
     render() {     
@@ -49,7 +54,7 @@ class Messaging extends React.Component{
                     }}>
                     <div className="form-group">
                         <input className="form-control" type="text" name="categoryName" placeholder="Send a message..." 
-                        onChange={(e) => this.setState({currentBody: e.target.value})} />
+                        onChange={(e) => this.setState({currentBody: e.target.value})} value={this.state.currentBody} />
                     </div>
                     <div className="form-group">
                         <button type="submit" className="btn btn-default">Send</button>

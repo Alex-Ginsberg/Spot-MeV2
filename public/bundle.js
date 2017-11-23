@@ -1023,10 +1023,73 @@ module.exports = emptyFunction;
 /* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(97);
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _user = __webpack_require__(123);
+
+Object.keys(_user).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _user[key];
+    }
+  });
+});
+
+var _chats = __webpack_require__(122);
+
+Object.keys(_chats).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _chats[key];
+    }
+  });
+});
+
+var _redux = __webpack_require__(37);
+
+var _reduxLogger = __webpack_require__(193);
+
+var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
+
+var _reduxThunk = __webpack_require__(194);
+
+var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
+
+var _reduxDevtoolsExtension = __webpack_require__(189);
+
+var _user2 = _interopRequireDefault(_user);
+
+var _chats2 = _interopRequireDefault(_chats);
+
+var _currentChat = __webpack_require__(46);
+
+var _currentChat2 = _interopRequireDefault(_currentChat);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var reducer = (0, _redux.combineReducers)({ user: _user2.default, chats: _chats2.default, currentChat: _currentChat2.default });
+var middleware = (0, _reduxDevtoolsExtension.composeWithDevTools)((0, _redux.applyMiddleware)(_reduxThunk2.default, (0, _reduxLogger2.default)({ collapsed: true })));
+var store = (0, _redux.createStore)(reducer, middleware);
+
+exports.default = store;
 
 /***/ }),
 /* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(97);
+
+/***/ }),
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -1195,7 +1258,7 @@ Emitter.prototype.hasListeners = function(event){
 
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {/**
@@ -1808,7 +1871,7 @@ exports.decodePayloadAsBinary = function (data, binaryType, callback) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1865,69 +1928,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _user = __webpack_require__(123);
-
-Object.keys(_user).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _user[key];
-    }
-  });
-});
-
-var _chats = __webpack_require__(122);
-
-Object.keys(_chats).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _chats[key];
-    }
-  });
-});
-
-var _redux = __webpack_require__(37);
-
-var _reduxLogger = __webpack_require__(193);
-
-var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
-
-var _reduxThunk = __webpack_require__(194);
-
-var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
-
-var _reduxDevtoolsExtension = __webpack_require__(189);
-
-var _user2 = _interopRequireDefault(_user);
-
-var _chats2 = _interopRequireDefault(_chats);
-
-var _currentChat = __webpack_require__(46);
-
-var _currentChat2 = _interopRequireDefault(_currentChat);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var reducer = (0, _redux.combineReducers)({ user: _user2.default, chats: _chats2.default, currentChat: _currentChat2.default });
-var middleware = (0, _reduxDevtoolsExtension.composeWithDevTools)((0, _redux.applyMiddleware)(_reduxThunk2.default, (0, _reduxLogger2.default)({ collapsed: true })));
-var store = (0, _redux.createStore)(reducer, middleware);
-
-exports.default = store;
 
 /***/ }),
 /* 15 */
@@ -2656,8 +2656,8 @@ module.exports = defaults;
  * Module dependencies.
  */
 
-var parser = __webpack_require__(12);
-var Emitter = __webpack_require__(11);
+var parser = __webpack_require__(13);
+var Emitter = __webpack_require__(12);
 
 /**
  * Module exports.
@@ -3508,7 +3508,7 @@ if (process.env.NODE_ENV !== 'production' && typeof isCrushed.name === 'string' 
  */
 
 var debug = __webpack_require__(8)('socket.io-parser');
-var Emitter = __webpack_require__(11);
+var Emitter = __webpack_require__(12);
 var hasBin = __webpack_require__(56);
 var binary = __webpack_require__(200);
 var isBuf = __webpack_require__(87);
@@ -4292,7 +4292,7 @@ exports.default = function () {
     }
 };
 
-var _axios = __webpack_require__(10);
+var _axios = __webpack_require__(11);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -4429,7 +4429,7 @@ function polling (opts) {
 
 var Transport = __webpack_require__(26);
 var parseqs = __webpack_require__(22);
-var parser = __webpack_require__(12);
+var parser = __webpack_require__(13);
 var inherit = __webpack_require__(18);
 var yeast = __webpack_require__(90);
 var debug = __webpack_require__(8)('engine.io-client:polling');
@@ -7573,7 +7573,7 @@ function resolvePathname(to) {
 
 var eio = __webpack_require__(131);
 var Socket = __webpack_require__(86);
-var Emitter = __webpack_require__(11);
+var Emitter = __webpack_require__(12);
 var parser = __webpack_require__(38);
 var on = __webpack_require__(85);
 var bind = __webpack_require__(47);
@@ -8181,7 +8181,7 @@ function on (obj, ev, fn) {
  */
 
 var parser = __webpack_require__(38);
-var Emitter = __webpack_require__(11);
+var Emitter = __webpack_require__(12);
 var toArray = __webpack_require__(206);
 var on = __webpack_require__(85);
 var bind = __webpack_require__(47);
@@ -8784,7 +8784,7 @@ var _reactRedux = __webpack_require__(7);
 
 var _reactRouter = __webpack_require__(185);
 
-var _reactRouterDom = __webpack_require__(13);
+var _reactRouterDom = __webpack_require__(14);
 
 var _propTypes = __webpack_require__(2);
 
@@ -9876,11 +9876,11 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(7);
 
-var _reactRouterDom = __webpack_require__(13);
+var _reactRouterDom = __webpack_require__(14);
 
-var _store = __webpack_require__(14);
+var _store = __webpack_require__(10);
 
-var _axios = __webpack_require__(10);
+var _axios = __webpack_require__(11);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -9923,6 +9923,8 @@ var Messaging = function (_React$Component) {
     }, {
         key: 'sendMessage',
         value: function sendMessage() {
+            var _this3 = this;
+
             var messageObj = {
                 body: this.state.currentBody,
                 userId: this.props.user.id,
@@ -9931,13 +9933,16 @@ var Messaging = function (_React$Component) {
             _axios2.default.post('/api/message', messageObj).then(function (res) {
                 return res.data;
             }).then(function (message) {
-                return console.log('CREATED');
+                var oldMessages = _this3.state.messages;
+                message.user = _this3.props.user;
+                oldMessages.push(message);
+                _this3.setState({ messages: oldMessages, currentBody: '' });
             });
         }
     }, {
         key: 'render',
         value: function render() {
-            var _this3 = this;
+            var _this4 = this;
 
             var messages = this.state.messages;
 
@@ -9962,15 +9967,15 @@ var Messaging = function (_React$Component) {
                     'form',
                     { onSubmit: function onSubmit(e) {
                             e.preventDefault();
-                            _this3.sendMessage();
+                            _this4.sendMessage();
                         } },
                     _react2.default.createElement(
                         'div',
                         { className: 'form-group' },
                         _react2.default.createElement('input', { className: 'form-control', type: 'text', name: 'categoryName', placeholder: 'Send a message...',
                             onChange: function onChange(e) {
-                                return _this3.setState({ currentBody: e.target.value });
-                            } })
+                                return _this4.setState({ currentBody: e.target.value });
+                            }, value: this.state.currentBody })
                     ),
                     _react2.default.createElement(
                         'div',
@@ -10031,9 +10036,9 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(7);
 
-var _reactRouterDom = __webpack_require__(13);
+var _reactRouterDom = __webpack_require__(14);
 
-var _store = __webpack_require__(14);
+var _store = __webpack_require__(10);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -10137,11 +10142,11 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactRedux = __webpack_require__(7);
 
-var _reactRouterDom = __webpack_require__(13);
+var _reactRouterDom = __webpack_require__(14);
 
-var _store = __webpack_require__(14);
+var _store = __webpack_require__(10);
 
-var _axios = __webpack_require__(10);
+var _axios = __webpack_require__(11);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -10309,7 +10314,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(7);
 
-var _reactRouterDom = __webpack_require__(13);
+var _reactRouterDom = __webpack_require__(14);
 
 var _currentChat = __webpack_require__(46);
 
@@ -10317,7 +10322,7 @@ var _Messaging = __webpack_require__(114);
 
 var _Messaging2 = _interopRequireDefault(_Messaging);
 
-var _axios = __webpack_require__(10);
+var _axios = __webpack_require__(11);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -10439,7 +10444,7 @@ var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _store = __webpack_require__(14);
+var _store = __webpack_require__(10);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -10584,9 +10589,9 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactRedux = __webpack_require__(7);
 
-var _reactRouterDom = __webpack_require__(13);
+var _reactRouterDom = __webpack_require__(14);
 
-var _store = __webpack_require__(14);
+var _store = __webpack_require__(10);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -10753,7 +10758,7 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactRedux = __webpack_require__(7);
 
-var _store = __webpack_require__(14);
+var _store = __webpack_require__(10);
 
 var _store2 = _interopRequireDefault(_store);
 
@@ -10797,7 +10802,7 @@ exports.default = function () {
     }
 };
 
-var _axios = __webpack_require__(10);
+var _axios = __webpack_require__(11);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -10879,7 +10884,7 @@ exports.default = function () {
   }
 };
 
-var _axios = __webpack_require__(10);
+var _axios = __webpack_require__(11);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -11948,7 +11953,7 @@ module.exports = __webpack_require__(132);
  * @api public
  *
  */
-module.exports.parser = __webpack_require__(12);
+module.exports.parser = __webpack_require__(13);
 
 
 /***/ }),
@@ -11960,10 +11965,10 @@ module.exports.parser = __webpack_require__(12);
  */
 
 var transports = __webpack_require__(48);
-var Emitter = __webpack_require__(11);
+var Emitter = __webpack_require__(12);
 var debug = __webpack_require__(8)('engine.io-client:socket');
 var index = __webpack_require__(62);
-var parser = __webpack_require__(12);
+var parser = __webpack_require__(13);
 var parseuri = __webpack_require__(64);
 var parseqs = __webpack_require__(22);
 
@@ -12100,7 +12105,7 @@ Socket.protocol = parser.protocol; // this is an int
 Socket.Socket = Socket;
 Socket.Transport = __webpack_require__(26);
 Socket.transports = __webpack_require__(48);
-Socket.parser = __webpack_require__(12);
+Socket.parser = __webpack_require__(13);
 
 /**
  * Creates transport of the given type.
@@ -12949,7 +12954,7 @@ JSONPPolling.prototype.doWrite = function (data, fn) {
 
 var XMLHttpRequest = __webpack_require__(27);
 var Polling = __webpack_require__(49);
-var Emitter = __webpack_require__(11);
+var Emitter = __webpack_require__(12);
 var inherit = __webpack_require__(18);
 var debug = __webpack_require__(8)('engine.io-client:polling-xhr');
 
@@ -13368,7 +13373,7 @@ function unloadHandler () {
  */
 
 var Transport = __webpack_require__(26);
-var parser = __webpack_require__(12);
+var parser = __webpack_require__(13);
 var parseqs = __webpack_require__(22);
 var inherit = __webpack_require__(18);
 var yeast = __webpack_require__(90);
