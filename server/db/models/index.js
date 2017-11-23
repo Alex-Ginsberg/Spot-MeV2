@@ -12,6 +12,7 @@ User.hasMany(Chat)
 Chat.belongsTo(User)
 
 User.hasMany(Message)
+Message.belongsTo(User)
 Chat.hasMany(Message)
 
 Chat.hasMany(Song)
