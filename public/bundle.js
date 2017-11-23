@@ -10158,6 +10158,14 @@ var _reactRouterDom = __webpack_require__(16);
 
 var _currentChat = __webpack_require__(46);
 
+var _Messaging = __webpack_require__(207);
+
+var _Messaging2 = _interopRequireDefault(_Messaging);
+
+var _axios = __webpack_require__(17);
+
+var _axios2 = _interopRequireDefault(_axios);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10172,7 +10180,12 @@ var SingleChat = function (_React$Component) {
   function SingleChat() {
     _classCallCheck(this, SingleChat);
 
-    return _possibleConstructorReturn(this, (SingleChat.__proto__ || Object.getPrototypeOf(SingleChat)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (SingleChat.__proto__ || Object.getPrototypeOf(SingleChat)).call(this));
+
+    _this.state = {
+      owner: {}
+    };
+    return _this;
   }
 
   _createClass(SingleChat, [{
@@ -10183,8 +10196,42 @@ var SingleChat = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      console.log(this.props.currentChat);
-      return _react2.default.createElement('div', null);
+      var _this2 = this;
+
+      // Gets the info about the admin of the chat AFTER that currentChat has been set
+      if (!this.state.owner.id && this.props.currentChat.userId) {
+        _axios2.default.get('/api/users/' + this.props.currentChat.userId).then(function (res) {
+          return res.data;
+        }).then(function (user) {
+          return _this2.setState({ owner: user });
+        });
+      }
+
+      var currentChat = this.props.currentChat;
+      var owner = this.state.owner;
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'h1',
+          null,
+          currentChat.name
+        ),
+        _react2.default.createElement(
+          'a',
+          { href: currentChat.externalUrl },
+          'Open in Spotify'
+        ),
+        _react2.default.createElement(
+          'h3',
+          null,
+          'Created by ',
+          owner.name
+        ),
+        _react2.default.createElement('img', { src: owner.proPic }),
+        currentChat.id && _react2.default.createElement(_Messaging2.default, { chatId: currentChat.id })
+      );
     }
   }]);
 
@@ -36041,6 +36088,92 @@ function toArray(list, index) {
 /***/ (function(module, exports) {
 
 /* (ignored) */
+
+/***/ }),
+/* 207 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(8);
+
+var _reactRouterDom = __webpack_require__(16);
+
+var _axios = __webpack_require__(17);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Messaging = function (_React$Component) {
+    _inherits(Messaging, _React$Component);
+
+    function Messaging(props) {
+        _classCallCheck(this, Messaging);
+
+        var _this = _possibleConstructorReturn(this, (Messaging.__proto__ || Object.getPrototypeOf(Messaging)).call(this, props));
+
+        _this.state = {
+            messages: []
+        };
+        return _this;
+    }
+
+    _createClass(Messaging, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this2 = this;
+
+            _axios2.default.get('/api/message/' + this.props.chatId).then(function (res) {
+                return res.data;
+            }).then(function (messages) {
+                return _this2.setState({ messages: messages });
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            console.log(this.state);
+            return _react2.default.createElement('div', null);
+        }
+    }]);
+
+    return Messaging;
+}(_react2.default.Component);
+
+/**
+ * CONTAINER
+ */
+
+
+var mapState = function mapState(state) {
+    return {};
+};
+
+var mapDispatch = function mapDispatch(dispatch) {
+    return {};
+};
+
+// The `withRouter` wrapper makes sure that updates are not blocked
+// when the url changes
+exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapState, mapDispatch)(Messaging));
 
 /***/ })
 /******/ ]);
