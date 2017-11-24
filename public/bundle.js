@@ -10361,7 +10361,11 @@ var Jukebox = function (_React$Component) {
                             null,
                             song.name,
                             ' - ',
-                            song.artist
+                            _react2.default.createElement(
+                                'small',
+                                null,
+                                song.artist
+                            )
                         ),
                         _react2.default.createElement('img', { className: 'song-pic', src: song.image }),
                         _this2.state.songPlaying ? _react2.default.createElement('img', { className: 'song-play', src: 'https://image.freepik.com/free-icon/video-pause-button_318-33989.jpg',
@@ -10375,7 +10379,16 @@ var Jukebox = function (_React$Component) {
                                 _this2.audio.play();
                                 _this2.setState({ songPlaying: true });
                             } }),
-                        _react2.default.createElement('img', { className: 'song-play', src: 'http://icons.iconarchive.com/icons/iconsmind/outline/128/Like-2-icon.png' })
+                        _react2.default.createElement('img', { className: 'song-play', src: 'http://icons.iconarchive.com/icons/iconsmind/outline/128/Like-2-icon.png',
+                            onClick: function onClick() {
+                                return _this2.props.putLike(song.id);
+                            }
+                        }),
+                        _react2.default.createElement(
+                            'p',
+                            { className: 'num-likes' },
+                            song.likes
+                        )
                     );
                 }),
                 _react2.default.createElement(
@@ -10435,6 +10448,9 @@ var mapDispatch = function mapDispatch(dispatch) {
         },
         fetchSongs: function fetchSongs(chatId) {
             dispatch((0, _store.fetchSongs)(chatId));
+        },
+        putLike: function putLike(songId) {
+            dispatch((0, _store.putLike)(songId));
         }
     };
 };
@@ -11518,7 +11534,7 @@ var fetchChats = exports.fetchChats = function fetchChats() {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.postSong = exports.fetchSongs = undefined;
+exports.putLike = exports.postSong = exports.fetchSongs = undefined;
 
 exports.default = function () {
     var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
@@ -11529,6 +11545,10 @@ exports.default = function () {
             return action.songs;
         case POST_SONG:
             return [].concat(_toConsumableArray(state), [action.song]);
+        case NEW_LIKE:
+            return Object.assign([], state, state.map(function (song) {
+                return song.id === action.song.id ? action.song : song;
+            }));
         default:
             return state;
     }
@@ -11547,6 +11567,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 */
 var GET_SONGS = 'GET_SONGS';
 var POST_SONG = 'POST_SONG';
+var NEW_LIKE = 'NEW_LIKE';
 
 /*
     ACTION CREATORS
@@ -11561,6 +11582,13 @@ var getSongs = function getSongs(songs) {
 var newSong = function newSong(song) {
     return {
         type: POST_SONG,
+        song: song
+    };
+};
+
+var newLike = function newLike(song) {
+    return {
+        type: NEW_LIKE,
         song: song
     };
 };
@@ -11602,6 +11630,16 @@ var postSong = exports.postSong = function postSong(title, artist, user, chatId)
             }).then(function (postedSongData) {
                 return dispatch(newSong(postedSongData[0]));
             });
+        });
+    };
+};
+
+var putLike = exports.putLike = function putLike(id) {
+    return function (dispatch) {
+        _axios2.default.put('/api/song/' + id).then(function (res) {
+            return res.data;
+        }).then(function (song) {
+            return dispatch(newLike(song));
         });
     };
 };
@@ -11993,7 +12031,7 @@ exports = module.exports = __webpack_require__(132)();
 
 
 // module
-exports.push([module.i, "body {\n  font-family: sans-serif; }\n  body a {\n    text-decoration: none; }\n  body label {\n    display: block; }\n  body nav a {\n    display: inline-block;\n    margin: 1em; }\n  body form div {\n    margin: 1em;\n    display: inline-block; }\n\n.fullscreen-bg {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  overflow: hidden;\n  z-index: -100; }\n\n.fullscreen-bg__video {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  z-index: -100; }\n\n@media (min-aspect-ratio: 16 / 9) {\n  .fullscreen-bg__video {\n    height: 300%;\n    top: -100%;\n    z-index: -100; } }\n\n@media (max-aspect-ratio: 16 / 9) {\n  .fullscreen-bg__video {\n    width: 300%;\n    left: -100%;\n    z-index: -100; } }\n\n@media (max-width: 767px) {\n  .fullscreen-bg {\n    z-index: -100; }\n  .fullscreen-bg__video {\n    display: none;\n    z-index: -100; } }\n\n.heading {\n  color: white;\n  z-index: 1; }\n\n.chatPic {\n  height: 50px;\n  border-radius: 20px;\n  display: inline-block; }\n\n.song-pic {\n  height: 50px;\n  display: inline-block; }\n\n.song-play {\n  display: inline-block;\n  height: 25px; }\n", ""]);
+exports.push([module.i, "body {\n  font-family: sans-serif; }\n  body a {\n    text-decoration: none; }\n  body label {\n    display: block; }\n  body nav a {\n    display: inline-block;\n    margin: 1em; }\n  body form div {\n    margin: 1em;\n    display: inline-block; }\n\n.fullscreen-bg {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  overflow: hidden;\n  z-index: -100; }\n\n.fullscreen-bg__video {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  z-index: -100; }\n\n@media (min-aspect-ratio: 16 / 9) {\n  .fullscreen-bg__video {\n    height: 300%;\n    top: -100%;\n    z-index: -100; } }\n\n@media (max-aspect-ratio: 16 / 9) {\n  .fullscreen-bg__video {\n    width: 300%;\n    left: -100%;\n    z-index: -100; } }\n\n@media (max-width: 767px) {\n  .fullscreen-bg {\n    z-index: -100; }\n  .fullscreen-bg__video {\n    display: none;\n    z-index: -100; } }\n\n.heading {\n  color: white;\n  z-index: 1; }\n\n.chatPic {\n  height: 50px;\n  border-radius: 20px;\n  display: inline-block; }\n\n.song-pic {\n  height: 50px;\n  display: inline-block; }\n\n.song-play {\n  display: inline-block;\n  height: 25px; }\n\n.num-likes {\n  font-size: 75%;\n  display: inline-block; }\n", ""]);
 
 // exports
 

@@ -26,3 +26,14 @@ router.get('/:id', (req, res, next) => {
         .then(songs => res.json(songs))
         .catch(next)
 })
+
+router.put('/:id', (req, res, next) => {
+    Song.findOne({
+        where: {id: req.params.id}
+    })
+        .then(song => {
+            song.update({likes: song.likes + 1})
+            res.json(song) 
+        })
+        .catch(next)
+})

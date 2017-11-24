@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
-import {postSong, fetchSongs} from '../store'
+import {postSong, fetchSongs, putLike} from '../store'
 
 
 class Jukebox extends React.Component{
@@ -33,7 +33,7 @@ class Jukebox extends React.Component{
                 <h1>Jukebox</h1> 
                 {this.props.songs.map(song => (
                     <div className="song" key={song.id}>
-                        <p>{song.name} - {song.artist}</p>
+                        <p>{song.name} - <small>{song.artist}</small></p>
                         <img className="song-pic" src={song.image} />
                         {this.state.songPlaying ? <img className="song-play" src="https://image.freepik.com/free-icon/video-pause-button_318-33989.jpg" 
                         onClick={() => {this.audio.pause()
@@ -45,7 +45,10 @@ class Jukebox extends React.Component{
                             this.audio.play()
                             this.setState({songPlaying: true})
                         }} />}
-                        <img className="song-play" src="http://icons.iconarchive.com/icons/iconsmind/outline/128/Like-2-icon.png" />
+                        <img className="song-play" src="http://icons.iconarchive.com/icons/iconsmind/outline/128/Like-2-icon.png" 
+                        onClick={() => this.props.putLike(song.id)}
+                        />
+                        <p className="num-likes">{song.likes}</p>
                     </div>
                 ))}
                 <form onSubmit={this.handleSongSubmit}>
@@ -83,6 +86,9 @@ const mapDispatch = (dispatch) => {
     },
     fetchSongs(chatId) {
         dispatch(fetchSongs(chatId))
+    },
+    putLike(songId) {
+        dispatch(putLike(songId))
     }
   }
 }
