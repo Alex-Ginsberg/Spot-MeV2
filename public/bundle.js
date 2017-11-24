@@ -10319,10 +10319,12 @@ var Jukebox = function (_React$Component) {
 
         _this.state = {
             songText: '',
-            artistText: ''
+            artistText: '',
+            songPlaying: false
 
         };
         _this.handleSongSubmit = _this.handleSongSubmit.bind(_this);
+        _this.audio = document.createElement('audio');
         return _this;
     }
 
@@ -10362,7 +10364,17 @@ var Jukebox = function (_React$Component) {
                             song.artist
                         ),
                         _react2.default.createElement('img', { className: 'song-pic', src: song.image }),
-                        _react2.default.createElement('img', { className: 'song-play', src: 'https://image.flaticon.com/icons/svg/0/375.svg' }),
+                        _this2.state.songPlaying ? _react2.default.createElement('img', { className: 'song-play', src: 'https://image.freepik.com/free-icon/video-pause-button_318-33989.jpg',
+                            onClick: function onClick() {
+                                _this2.audio.pause();
+                                _this2.setState({ songPlaying: false });
+                            } }) : _react2.default.createElement('img', { className: 'song-play', src: 'https://image.flaticon.com/icons/svg/0/375.svg',
+                            onClick: function onClick() {
+                                _this2.audio.src = song.previewUrl;
+                                _this2.audio.load();
+                                _this2.audio.play();
+                                _this2.setState({ songPlaying: true });
+                            } }),
                         _react2.default.createElement('img', { className: 'song-play', src: 'http://icons.iconarchive.com/icons/iconsmind/outline/128/Like-2-icon.png' })
                     );
                 }),
