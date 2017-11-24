@@ -10,10 +10,12 @@ class Jukebox extends React.Component{
         super()
         this.state = {
             songText: '',
-            artistText: ''
+            artistText: '',
+            songPlaying: false
 
         }
         this.handleSongSubmit = this.handleSongSubmit.bind(this)
+        this.audio = document.createElement('audio')
     }
 
     componentDidMount() {
@@ -33,7 +35,16 @@ class Jukebox extends React.Component{
                     <div className="song" key={song.id}>
                         <p>{song.name} - {song.artist}</p>
                         <img className="song-pic" src={song.image} />
-                        <img className="song-play" src="https://image.flaticon.com/icons/svg/0/375.svg" />
+                        {this.state.songPlaying ? <img className="song-play" src="https://image.freepik.com/free-icon/video-pause-button_318-33989.jpg" 
+                        onClick={() => {this.audio.pause()
+                                        this.setState({songPlaying: false})}}/> : 
+                        <img className="song-play" src="https://image.flaticon.com/icons/svg/0/375.svg" 
+                        onClick={() => {
+                            this.audio.src = song.previewUrl
+                            this.audio.load()
+                            this.audio.play()
+                            this.setState({songPlaying: true})
+                        }} />}
                         <img className="song-play" src="http://icons.iconarchive.com/icons/iconsmind/outline/128/Like-2-icon.png" />
                     </div>
                 ))}
