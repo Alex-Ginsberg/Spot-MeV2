@@ -26,23 +26,30 @@ class Jukebox extends React.Component{
     }
 
     render() {
-        console.log(this.props.songs)
-      return (
-        <div>
-           <h1>Jukebox</h1> 
-           <form onSubmit={this.handleSongSubmit}>
-                <div className="form-group">
-                    <label htmlFor="name">Submit a Song</label>
-                    <input className="form-control" type="text" name="songName" placeholder="Enter song name" required 
-                    onChange={(e) => this.setState({songText: e.target.value})} />
-                    <input className="form-control" type="text" name="songArtist" placeholder="Enter artist" required  
-                    onChange={(e) => this.setState({artistText: e.target.value})}/>
-                </div>
-                <div className="form-group">
-                    <button type="submit" className="btn btn-default">Get Song</button>
-                </div>
-            </form>
-        </div>
+        return (
+            <div>
+                <h1>Jukebox</h1> 
+                {this.props.songs.map(song => (
+                    <div className="song" key={song.id}>
+                        <p>{song.name} - {song.artist}</p>
+                        <img className="song-pic" src={song.image} />
+                        <img className="song-play" src="https://image.flaticon.com/icons/svg/0/375.svg" />
+                        <img className="song-play" src="http://icons.iconarchive.com/icons/iconsmind/outline/128/Like-2-icon.png" />
+                    </div>
+                ))}
+                <form onSubmit={this.handleSongSubmit}>
+                    <div className="form-group">
+                        <label htmlFor="name">Submit a Song</label>
+                        <input className="form-control" type="text" name="songName" placeholder="Enter song name" required 
+                        onChange={(e) => this.setState({songText: e.target.value})} />
+                        <input className="form-control" type="text" name="songArtist" placeholder="Enter artist" required  
+                        onChange={(e) => this.setState({artistText: e.target.value})}/>
+                    </div>
+                    <div className="form-group">
+                        <button type="submit" className="btn btn-default">Get Song</button>
+                    </div>
+                </form>
+            </div>
       )
   }
 }
