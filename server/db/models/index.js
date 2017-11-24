@@ -7,6 +7,7 @@ const Message = require('./message')
 const Song = require('./song')
 
 const Friend = db.define('friend', {})
+const Liker = db.define('liker', {})
 
 User.hasMany(Chat)
 Chat.belongsTo(User)
@@ -20,10 +21,14 @@ Song.belongsTo(Song)
 
 User.belongsToMany(User, { through: Friend, as: 'friends'})
 
+User.belongsToMany(Song, { through: Liker})
+Song.belongsToMany(User, { through: Liker})
+
 module.exports = {
   User,
   Chat,
   Friend,
   Message,
-  Song
+  Song,
+  Liker
 }

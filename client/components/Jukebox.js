@@ -28,10 +28,23 @@ class Jukebox extends React.Component{
     }
 
     render() {
+        const songsToRender = this.props.songs.map(song => {
+            let beenLiked = false
+            if (song.users) {
+                for (let i = 0; i < song.users.length; i++) {
+                    if (song.users[i].id === this.props.user.id) {
+                        beenLiked = true
+                    }
+                }
+            }
+            song.beenLiked = beenLiked
+            return song
+        })
+        
         return (
             <div>
-                <h1>Jukebox</h1> 
-                {this.props.songs.map(song => (
+                <h1>Jukebox</h1>
+                {songsToRender.map(song => (
                     <div className="song" key={song.id}>
                         <p>{song.name} - <small>{song.artist}</small></p>
                         <img className="song-pic" src={song.image} />
@@ -45,9 +58,9 @@ class Jukebox extends React.Component{
                             this.audio.play()
                             this.setState({songPlaying: true})
                         }} />}
-                        <img className="song-play" src="http://icons.iconarchive.com/icons/iconsmind/outline/128/Like-2-icon.png" 
+                        {song.beenLiked ? <img className="been-liked" src="https://image.flaticon.com/icons/svg/81/81250.svg" /> : <img className="song-play" src="http://icons.iconarchive.com/icons/iconsmind/outline/128/Like-2-icon.png" 
                         onClick={() => this.props.putLike(song.id)}
-                        />
+                        />}
                         <p className="num-likes">{song.likes}</p>
                     </div>
                 ))}

@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Song} = require('../db/models')
+const {Song, User, Liker} = require('../db/models')
 module.exports = router
 
 router.post('/', (req, res, next) => {
@@ -21,7 +21,8 @@ router.post('/', (req, res, next) => {
 
 router.get('/:id', (req, res, next) => {
     Song.findAll({
-        where: {chatId: req.params.id}
+        where: {chatId: req.params.id},
+        include: [User]
     })
         .then(songs => res.json(songs))
         .catch(next)
@@ -33,7 +34,13 @@ router.put('/:id', (req, res, next) => {
     })
         .then(song => {
             song.update({likes: song.likes + 1})
-            res.json(song) 
+                .then(() => {
+                    Liker.create({
+                        userId: req.user.id,
+                        songId: song.id
+                    })
+                        .then(liker => res.json(song))
+                })
         })
         .catch(next)
 })

@@ -10344,6 +10344,19 @@ var Jukebox = function (_React$Component) {
         value: function render() {
             var _this2 = this;
 
+            var songsToRender = this.props.songs.map(function (song) {
+                var beenLiked = false;
+                if (song.users) {
+                    for (var i = 0; i < song.users.length; i++) {
+                        if (song.users[i].id === _this2.props.user.id) {
+                            beenLiked = true;
+                        }
+                    }
+                }
+                song.beenLiked = beenLiked;
+                return song;
+            });
+
             return _react2.default.createElement(
                 'div',
                 null,
@@ -10352,7 +10365,7 @@ var Jukebox = function (_React$Component) {
                     null,
                     'Jukebox'
                 ),
-                this.props.songs.map(function (song) {
+                songsToRender.map(function (song) {
                     return _react2.default.createElement(
                         'div',
                         { className: 'song', key: song.id },
@@ -10379,7 +10392,7 @@ var Jukebox = function (_React$Component) {
                                 _this2.audio.play();
                                 _this2.setState({ songPlaying: true });
                             } }),
-                        _react2.default.createElement('img', { className: 'song-play', src: 'http://icons.iconarchive.com/icons/iconsmind/outline/128/Like-2-icon.png',
+                        song.beenLiked ? _react2.default.createElement('img', { className: 'been-liked', src: 'https://image.flaticon.com/icons/svg/81/81250.svg' }) : _react2.default.createElement('img', { className: 'song-play', src: 'http://icons.iconarchive.com/icons/iconsmind/outline/128/Like-2-icon.png',
                             onClick: function onClick() {
                                 return _this2.props.putLike(song.id);
                             }
@@ -12031,7 +12044,7 @@ exports = module.exports = __webpack_require__(132)();
 
 
 // module
-exports.push([module.i, "body {\n  font-family: sans-serif; }\n  body a {\n    text-decoration: none; }\n  body label {\n    display: block; }\n  body nav a {\n    display: inline-block;\n    margin: 1em; }\n  body form div {\n    margin: 1em;\n    display: inline-block; }\n\n.fullscreen-bg {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  overflow: hidden;\n  z-index: -100; }\n\n.fullscreen-bg__video {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  z-index: -100; }\n\n@media (min-aspect-ratio: 16 / 9) {\n  .fullscreen-bg__video {\n    height: 300%;\n    top: -100%;\n    z-index: -100; } }\n\n@media (max-aspect-ratio: 16 / 9) {\n  .fullscreen-bg__video {\n    width: 300%;\n    left: -100%;\n    z-index: -100; } }\n\n@media (max-width: 767px) {\n  .fullscreen-bg {\n    z-index: -100; }\n  .fullscreen-bg__video {\n    display: none;\n    z-index: -100; } }\n\n.heading {\n  color: white;\n  z-index: 1; }\n\n.chatPic {\n  height: 50px;\n  border-radius: 20px;\n  display: inline-block; }\n\n.song-pic {\n  height: 50px;\n  display: inline-block; }\n\n.song-play {\n  display: inline-block;\n  height: 25px; }\n\n.num-likes {\n  font-size: 75%;\n  display: inline-block; }\n", ""]);
+exports.push([module.i, "body {\n  font-family: sans-serif; }\n  body a {\n    text-decoration: none; }\n  body label {\n    display: block; }\n  body nav a {\n    display: inline-block;\n    margin: 1em; }\n  body form div {\n    margin: 1em;\n    display: inline-block; }\n\n.fullscreen-bg {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  overflow: hidden;\n  z-index: -100; }\n\n.fullscreen-bg__video {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  z-index: -100; }\n\n@media (min-aspect-ratio: 16 / 9) {\n  .fullscreen-bg__video {\n    height: 300%;\n    top: -100%;\n    z-index: -100; } }\n\n@media (max-aspect-ratio: 16 / 9) {\n  .fullscreen-bg__video {\n    width: 300%;\n    left: -100%;\n    z-index: -100; } }\n\n@media (max-width: 767px) {\n  .fullscreen-bg {\n    z-index: -100; }\n  .fullscreen-bg__video {\n    display: none;\n    z-index: -100; } }\n\n.heading {\n  color: white;\n  z-index: 1; }\n\n.chatPic {\n  height: 50px;\n  border-radius: 20px;\n  display: inline-block; }\n\n.song-pic {\n  height: 50px;\n  display: inline-block; }\n\n.song-play {\n  display: inline-block;\n  height: 25px; }\n\n.num-likes {\n  font-size: 75%;\n  display: inline-block; }\n\n.been-liked {\n  display: inline-block;\n  height: 25px;\n  opacity: 0.5; }\n", ""]);
 
 // exports
 
