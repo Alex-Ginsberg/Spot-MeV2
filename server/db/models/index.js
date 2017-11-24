@@ -24,5 +24,6 @@ module.exports = {
   User,
   Chat,
   Friend,
-  Message
+  Message,
+  Song
 }
