@@ -5,6 +5,7 @@ import axios from 'axios'
 */
 const GET_SONGS = 'GET_SONGS'
 const POST_SONG = 'POST_SONG'
+const NEW_LIKE = 'NEW_LIKE'
 
 /*
     ACTION CREATORS
@@ -16,6 +17,11 @@ const getSongs = songs => ({
 
 const newSong = song => ({
     type: POST_SONG,
+    song
+})
+
+const newLike = song => ({
+    type: NEW_LIKE,
     song
 })
 
@@ -53,10 +59,15 @@ export const postSong = (title, artist, user, chatId) =>
                 })
                     .then(postedSong => postedSong.data)
                     .then(postedSongData => dispatch(newSong(postedSongData[0])))
-
-            })
-        
+            })      
 }
+
+export const putLike = id =>
+    dispatch => {
+        axios.put(`/api/song/${id}`)
+            .then(res => res.data)
+            .then(song => dispatch(newLike(song)))
+    }
 
 
 /*
@@ -68,6 +79,8 @@ export default function (state = [], action) {
             return action.songs
         case POST_SONG:
             return [...state, action.song]
+        case NEW_LIKE:
+            return Object.assign([], state, state.map(song => (song.id === action.song.id) ? action.song : song))
         default:
             return state
     }
