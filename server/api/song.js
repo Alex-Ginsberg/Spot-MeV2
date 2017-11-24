@@ -15,6 +15,14 @@ router.post('/', (req, res, next) => {
             chatId: req.body.chatId,
         }
     })
-    .then(newSong => res.json(newSong))
-    .catch(next)
+        .then(newSong => res.json(newSong))
+        .catch(next)
+})
+
+router.get('/:id', (req, res, next) => {
+    Song.findAll({
+        where: {chatId: req.params.id}
+    })
+        .then(songs => res.json(songs))
+        .catch(next)
 })

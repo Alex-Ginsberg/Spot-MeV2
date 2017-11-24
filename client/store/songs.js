@@ -3,11 +3,17 @@ import axios from 'axios'
 /*
     ACTION TYPES
 */
+const GET_SONGS = 'GET_SONGS'
 const POST_SONG = 'POST_SONG'
 
 /*
     ACTION CREATORS
 */
+const getSongs = songs => ({
+    type: GET_SONGS,
+    songs
+})
+
 const newSong = song => ({
     type: POST_SONG,
     song
@@ -17,6 +23,13 @@ const newSong = song => ({
 /*
     THUNK MIDDLEWARE
 */
+export const fetchSongs = chatId =>
+    dispatch => {
+        axios.get(`/api/song/${chatId}`)
+            .then(res => res.data)
+            .then(songs => dispatch(getSongs(songs)))
+    }
+
 export const postSong = (title, artist, user, chatId) => 
     dispatch => {
         axios({
@@ -38,6 +51,9 @@ export const postSong = (title, artist, user, chatId) =>
                     image: song.album.images[0].url,
                     chatId: chatId
                 })
+                    .then(postedSong => postedSong.data)
+                    .then(postedSongData => dispatch(newSong(postedSongData[0])))
+
             })
         
 }
@@ -48,6 +64,10 @@ export const postSong = (title, artist, user, chatId) =>
 */
 export default function (state = [], action) {
     switch (action.type) {
+        case GET_SONGS:
+            return action.songs
+        case POST_SONG:
+            return [...state, action.song]
         default:
             return state
     }

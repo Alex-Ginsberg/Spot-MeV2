@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
-import {postSong} from '../store'
+import {postSong, fetchSongs} from '../store'
 
 
 class Jukebox extends React.Component{
@@ -17,7 +17,7 @@ class Jukebox extends React.Component{
     }
 
     componentDidMount() {
-    
+        this.props.fetchSongs(this.props.match.params.id)
     }
 
     handleSongSubmit(e) {
@@ -26,6 +26,7 @@ class Jukebox extends React.Component{
     }
 
     render() {
+        console.log(this.props.songs)
       return (
         <div>
            <h1>Jukebox</h1> 
@@ -52,7 +53,8 @@ class Jukebox extends React.Component{
 const mapState = (state) => {
   return {
     user: state.user,
-    currentChat: state.currentChat
+    currentChat: state.currentChat,
+    songs: state.songs
   }
 }
 
@@ -60,6 +62,9 @@ const mapDispatch = (dispatch) => {
   return {
     postSong(title, artist, user, chatId) {
         dispatch(postSong(title, artist, user, chatId))
+    },
+    fetchSongs(chatId) {
+        dispatch(fetchSongs(chatId))
     }
   }
 }
