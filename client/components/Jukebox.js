@@ -22,7 +22,7 @@ class Jukebox extends React.Component{
 
     handleSongSubmit(e) {
         e.preventDefault()
-        this.props.postSong(this.state.songText, this.state.artistText, this.props.user)
+        this.props.postSong(this.state.songText, this.state.artistText, this.props.user, this.props.currentChat.id)
     }
 
     render() {
@@ -51,14 +51,15 @@ class Jukebox extends React.Component{
  */
 const mapState = (state) => {
   return {
-    user: state.user
+    user: state.user,
+    currentChat: state.currentChat
   }
 }
 
 const mapDispatch = (dispatch) => {
   return {
-    postSong(title, artist, user) {
-        dispatch(postSong(title, artist, user))
+    postSong(title, artist, user, chatId) {
+        dispatch(postSong(title, artist, user, chatId))
     }
   }
 }

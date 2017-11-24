@@ -17,7 +17,7 @@ const newSong = song => ({
 /*
     THUNK MIDDLEWARE
 */
-export const postSong = (title, artist, user) => 
+export const postSong = (title, artist, user, chatId) => 
     dispatch => {
         axios({
             method: 'get',
@@ -28,8 +28,16 @@ export const postSong = (title, artist, user) =>
         })
             .then(res => {
                 const song = res.data.tracks.items[0]
-                console.log(song)
-                // Submit song to db
+                axios.post('/api/song', {
+                    name: song.name,
+                    externalUrl: song.external_urls.spotify,
+                    spotifyId: song.id,
+                    previewUrl: song.preview_url,
+                    uri: song.uri,
+                    artist: song.artists[0].name,
+                    image: song.album.images[0].url,
+                    chatId: chatId
+                })
             })
         
 }
