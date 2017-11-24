@@ -10328,7 +10328,9 @@ var Jukebox = function (_React$Component) {
 
     _createClass(Jukebox, [{
         key: 'componentDidMount',
-        value: function componentDidMount() {}
+        value: function componentDidMount() {
+            this.props.fetchSongs(this.props.match.params.id);
+        }
     }, {
         key: 'handleSongSubmit',
         value: function handleSongSubmit(e) {
@@ -10340,6 +10342,7 @@ var Jukebox = function (_React$Component) {
         value: function render() {
             var _this2 = this;
 
+            console.log(this.props.songs);
             return _react2.default.createElement(
                 'div',
                 null,
@@ -10393,7 +10396,8 @@ var Jukebox = function (_React$Component) {
 var mapState = function mapState(state) {
     return {
         user: state.user,
-        currentChat: state.currentChat
+        currentChat: state.currentChat,
+        songs: state.songs
     };
 };
 
@@ -10401,6 +10405,9 @@ var mapDispatch = function mapDispatch(dispatch) {
     return {
         postSong: function postSong(title, artist, user, chatId) {
             dispatch((0, _store.postSong)(title, artist, user, chatId));
+        },
+        fetchSongs: function fetchSongs(chatId) {
+            dispatch((0, _store.fetchSongs)(chatId));
         }
     };
 };
@@ -11484,13 +11491,17 @@ var fetchChats = exports.fetchChats = function fetchChats() {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.postSong = undefined;
+exports.postSong = exports.fetchSongs = undefined;
 
 exports.default = function () {
     var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
     var action = arguments[1];
 
     switch (action.type) {
+        case GET_SONGS:
+            return action.songs;
+        case POST_SONG:
+            return [].concat(_toConsumableArray(state), [action.song]);
         default:
             return state;
     }
@@ -11502,14 +11513,24 @@ var _axios2 = _interopRequireDefault(_axios);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 /*
     ACTION TYPES
 */
+var GET_SONGS = 'GET_SONGS';
 var POST_SONG = 'POST_SONG';
 
 /*
     ACTION CREATORS
 */
+var getSongs = function getSongs(songs) {
+    return {
+        type: GET_SONGS,
+        songs: songs
+    };
+};
+
 var newSong = function newSong(song) {
     return {
         type: POST_SONG,
@@ -11520,6 +11541,16 @@ var newSong = function newSong(song) {
 /*
     THUNK MIDDLEWARE
 */
+var fetchSongs = exports.fetchSongs = function fetchSongs(chatId) {
+    return function (dispatch) {
+        _axios2.default.get('/api/song/' + chatId).then(function (res) {
+            return res.data;
+        }).then(function (songs) {
+            return dispatch(getSongs(songs));
+        });
+    };
+};
+
 var postSong = exports.postSong = function postSong(title, artist, user, chatId) {
     return function (dispatch) {
         (0, _axios2.default)({
@@ -11539,6 +11570,10 @@ var postSong = exports.postSong = function postSong(title, artist, user, chatId)
                 artist: song.artists[0].name,
                 image: song.album.images[0].url,
                 chatId: chatId
+            }).then(function (postedSong) {
+                return postedSong.data;
+            }).then(function (postedSongData) {
+                return dispatch(newSong(postedSongData[0]));
             });
         });
     };
