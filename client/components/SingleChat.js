@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import { fetchChat } from '../store/currentChat';
+import Jukebox from './Jukebox'
 import { slide as Menu } from 'react-burger-menu'
 import Messaging from './Messaging'
 import axios from 'axios'
@@ -31,8 +32,7 @@ class SingleChat extends React.Component{
       return (
         <div>
             <Menu styles={styles} right customBurgerIcon={<img src="https://image.flaticon.com/icons/svg/26/26805.svg" />}>
-              <p>Song</p>
-              <p>Song</p>
+              <Jukebox />
             </Menu>
             <h1>{currentChat.name}</h1>
             <a href={currentChat.externalUrl}>Open in Spotify</a>
