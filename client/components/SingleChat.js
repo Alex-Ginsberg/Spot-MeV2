@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import { fetchChat } from '../store/currentChat';
+import { slide as Menu } from 'react-burger-menu'
 import Messaging from './Messaging'
 import axios from 'axios'
 
@@ -29,6 +30,10 @@ class SingleChat extends React.Component{
       const {owner} = this.state
       return (
         <div>
+            <Menu styles={styles} right customBurgerIcon={<img src="https://image.flaticon.com/icons/svg/26/26805.svg" />}>
+              <p>Song</p>
+              <p>Song</p>
+            </Menu>
             <h1>{currentChat.name}</h1>
             <a href={currentChat.externalUrl}>Open in Spotify</a>
             <h3>Created by {owner.name}</h3>
@@ -56,6 +61,43 @@ const mapDispatch = (dispatch) => {
     }
   }
 }
+
+const styles = {
+  bmBurgerButton: {
+    position: 'fixed',
+    width: '36px',
+    height: '30px',
+    right: '36px',
+    top: '36px'
+  },
+  bmBurgerBars: {
+    background: '#b8b7ad',
+  },
+  bmCrossButton: {
+    height: '24px',
+    width: '24px'
+  },
+  bmCross: {
+    // background: '#bdc3c7'
+  },
+  bmMenu: {
+    background: 'white',
+    padding: '2.5em 1.5em 0',
+    fontSize: '1.15em',
+    // opacity: 0.7,/
+  },
+  bmMorphShape: {
+    fill: '#373a47'
+  },
+  bmItemList: {
+    color: '#b8b7ad',
+    padding: '0.8em',
+  },
+  bmOverlay: {
+    background: 'rgba(0, 0, 0, 0.3)'
+  }
+}
+
 
 // The `withRouter` wrapper makes sure that updates are not blocked
 // when the url changes

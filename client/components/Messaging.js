@@ -18,11 +18,19 @@ class Messaging extends React.Component{
 
     componentDidMount() {
         this.props.isLoggedIn()
+
+        /*
+            SOCKET EVENT LISTENERS
+        */
         socket.on('new-message', message => {
             const oldMessages = this.state.messages
             oldMessages.push(message)
             this.setState({messages: oldMessages})
         })
+        /*
+            END OF SOCKET EVENT LISTENERS
+        */
+
         axios.get(`/api/message/${this.props.chatId}`)
             .then(res => res.data)
             .then(messages => this.setState({messages}))
@@ -46,7 +54,7 @@ class Messaging extends React.Component{
     }
 
     render() {     
-        const {messages} = this.state 
+        const {messages} = this.state
         return (
             <div>
                 {messages.map(message => (
