@@ -789,6 +789,12 @@ module.exports = invariant;
 /* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
+module.exports = __webpack_require__(114);
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 
 
@@ -1161,7 +1167,7 @@ exports['default'] = function (styles) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1260,12 +1266,6 @@ var middleware = (0, _reduxDevtoolsExtension.composeWithDevTools)((0, _redux.app
 var store = (0, _redux.createStore)(reducer, middleware);
 
 exports.default = store;
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(114);
 
 /***/ }),
 /* 11 */
@@ -7002,7 +7002,7 @@ exports.default = function () {
     }
 };
 
-var _axios = __webpack_require__(10);
+var _axios = __webpack_require__(8);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -15126,9 +15126,9 @@ var _reactRedux = __webpack_require__(5);
 
 var _reactRouterDom = __webpack_require__(12);
 
-var _store = __webpack_require__(9);
+var _store = __webpack_require__(10);
 
-var _axios = __webpack_require__(10);
+var _axios = __webpack_require__(8);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -15305,7 +15305,7 @@ var _reactRedux = __webpack_require__(5);
 
 var _reactRouterDom = __webpack_require__(12);
 
-var _axios = __webpack_require__(10);
+var _axios = __webpack_require__(8);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -15323,23 +15323,69 @@ var AddToChat = function (_React$Component) {
     function AddToChat() {
         _classCallCheck(this, AddToChat);
 
-        return _possibleConstructorReturn(this, (AddToChat.__proto__ || Object.getPrototypeOf(AddToChat)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (AddToChat.__proto__ || Object.getPrototypeOf(AddToChat)).call(this));
+
+        _this.state = {
+            members: []
+        };
+        return _this;
     }
 
     _createClass(AddToChat, [{
-        key: 'render',
-        value: function render() {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
             var _this2 = this;
 
+            _axios2.default.get('/api/chat/members/' + this.props.match.params.id).then(function (res) {
+                return res.data;
+            }).then(function (members) {
+                return _this2.setState({ members: members });
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this3 = this;
+
+            var friendsNotAdded = [];
+            if (this.state.members) {
+                var friendsIds = [];
+                for (var i = 0; i < this.state.members.length; i++) {
+                    friendsIds.push(this.state.members[i].id);
+                }
+                console.log(friendsIds);
+                for (var _i = 0; _i < this.props.friends.length; _i++) {
+                    if (!friendsIds.includes(this.props.friends[_i].id)) {
+                        friendsNotAdded.push(this.props.friends[_i]);
+                    }
+                }
+            }
             return _react2.default.createElement(
                 'div',
                 null,
                 _react2.default.createElement(
                     'h1',
                     null,
+                    'Friends in Group'
+                ),
+                this.state.members.map(function (member) {
+                    return _react2.default.createElement(
+                        'div',
+                        { key: member.id },
+                        _react2.default.createElement('img', { className: 'friend-icon', src: member.proPic }),
+                        _react2.default.createElement(
+                            'p',
+                            { className: 'friend-text' },
+                            member.name
+                        )
+                    );
+                }),
+                _react2.default.createElement(
+                    'h1',
+                    null,
                     'Select Friends to Add'
                 ),
-                this.props.friends.map(function (friend) {
+                friendsNotAdded.map(function (friend) {
                     return _react2.default.createElement(
                         'div',
                         { key: friend.id },
@@ -15352,7 +15398,10 @@ var AddToChat = function (_React$Component) {
                         _react2.default.createElement(
                             'button',
                             { onClick: function onClick() {
-                                    _axios2.default.post('/api/chat/add', { userId: friend.id, chatId: _this2.props.match.params.id });
+                                    _axios2.default.post('/api/chat/add', { userId: friend.id, chatId: _this3.props.match.params.id });
+                                    var newFriends = _this3.state.members;
+                                    newFriends.push(friend);
+                                    _this3.setState({ members: newFriends });
                                 } },
                             'Add'
                         )
@@ -15406,7 +15455,7 @@ var _reactRedux = __webpack_require__(5);
 
 var _reactRouterDom = __webpack_require__(12);
 
-var _store = __webpack_require__(9);
+var _store = __webpack_require__(10);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -15603,9 +15652,9 @@ var _reactRedux = __webpack_require__(5);
 
 var _reactRouterDom = __webpack_require__(12);
 
-var _store = __webpack_require__(9);
+var _store = __webpack_require__(10);
 
-var _axios = __webpack_require__(10);
+var _axios = __webpack_require__(8);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -15781,7 +15830,7 @@ var _reactRedux = __webpack_require__(5);
 
 var _reactRouterDom = __webpack_require__(12);
 
-var _store = __webpack_require__(9);
+var _store = __webpack_require__(10);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -15887,9 +15936,9 @@ var _reactRedux = __webpack_require__(5);
 
 var _reactRouterDom = __webpack_require__(12);
 
-var _store = __webpack_require__(9);
+var _store = __webpack_require__(10);
 
-var _axios = __webpack_require__(10);
+var _axios = __webpack_require__(8);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -16075,11 +16124,11 @@ var _Messaging = __webpack_require__(134);
 
 var _Messaging2 = _interopRequireDefault(_Messaging);
 
-var _axios = __webpack_require__(10);
+var _axios = __webpack_require__(8);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _store = __webpack_require__(9);
+var _store = __webpack_require__(10);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -16285,7 +16334,7 @@ var _propTypes = __webpack_require__(3);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _store = __webpack_require__(9);
+var _store = __webpack_require__(10);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -16432,7 +16481,7 @@ var _reactRedux = __webpack_require__(5);
 
 var _reactRouterDom = __webpack_require__(12);
 
-var _store = __webpack_require__(9);
+var _store = __webpack_require__(10);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -16599,7 +16648,7 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactRedux = __webpack_require__(5);
 
-var _store = __webpack_require__(9);
+var _store = __webpack_require__(10);
 
 var _store2 = _interopRequireDefault(_store);
 
@@ -16643,7 +16692,7 @@ exports.default = function () {
     }
 };
 
-var _axios = __webpack_require__(10);
+var _axios = __webpack_require__(8);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -16723,7 +16772,7 @@ exports.default = function () {
     }
 };
 
-var _axios = __webpack_require__(10);
+var _axios = __webpack_require__(8);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -16791,7 +16840,7 @@ exports.default = function () {
     }
 };
 
-var _axios = __webpack_require__(10);
+var _axios = __webpack_require__(8);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -16911,7 +16960,7 @@ exports.default = function () {
   }
 };
 
-var _axios = __webpack_require__(10);
+var _axios = __webpack_require__(8);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -17470,7 +17519,7 @@ exports = module.exports = __webpack_require__(153)();
 
 
 // module
-exports.push([module.i, "body {\n  font-family: sans-serif; }\n  body a {\n    text-decoration: none; }\n  body label {\n    display: block; }\n  body nav a {\n    display: inline-block;\n    margin: 1em; }\n  body form div {\n    margin: 1em;\n    display: inline-block; }\n\n.fullscreen-bg {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  overflow: hidden;\n  z-index: -100; }\n\n.fullscreen-bg__video {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  z-index: -100; }\n\n@media (min-aspect-ratio: 16 / 9) {\n  .fullscreen-bg__video {\n    height: 300%;\n    top: -100%;\n    z-index: -100; } }\n\n@media (max-aspect-ratio: 16 / 9) {\n  .fullscreen-bg__video {\n    width: 300%;\n    left: -100%;\n    z-index: -100; } }\n\n@media (max-width: 767px) {\n  .fullscreen-bg {\n    z-index: -100; }\n  .fullscreen-bg__video {\n    display: none;\n    z-index: -100; } }\n\n.heading {\n  color: white;\n  z-index: 1; }\n\n.chatPic {\n  height: 50px;\n  border-radius: 20px;\n  display: inline-block; }\n\n.song-pic {\n  height: 50px;\n  display: inline-block; }\n\n.song-play {\n  display: inline-block;\n  height: 25px; }\n\n.num-likes {\n  font-size: 75%;\n  display: inline-block; }\n\n.been-liked {\n  display: inline-block;\n  height: 25px;\n  opacity: 0.5; }\n\n.friend-icon {\n  display: inline-block;\n  height: 35px; }\n\n.friend-text {\n  display: inline-block; }\n", ""]);
+exports.push([module.i, "body {\n  font-family: sans-serif; }\n  body a {\n    text-decoration: none; }\n  body label {\n    display: block; }\n  body nav a {\n    display: inline-block;\n    margin: 1em; }\n  body form div {\n    margin: 1em;\n    display: inline-block; }\n\n.fullscreen-bg {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  overflow: hidden;\n  z-index: -100; }\n\n.fullscreen-bg__video {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  z-index: -100; }\n\n@media (min-aspect-ratio: 16 / 9) {\n  .fullscreen-bg__video {\n    height: 300%;\n    top: -100%;\n    z-index: -100; } }\n\n@media (max-aspect-ratio: 16 / 9) {\n  .fullscreen-bg__video {\n    width: 300%;\n    left: -100%;\n    z-index: -100; } }\n\n@media (max-width: 767px) {\n  .fullscreen-bg {\n    z-index: -100; }\n  .fullscreen-bg__video {\n    display: none;\n    z-index: -100; } }\n\n.heading {\n  color: white;\n  z-index: 1; }\n\n.chatPic {\n  height: 50px;\n  border-radius: 20px;\n  display: inline-block; }\n\n.song-pic {\n  height: 50px;\n  display: inline-block; }\n\n.song-play {\n  display: inline-block;\n  height: 25px; }\n\n.num-likes {\n  font-size: 75%;\n  display: inline-block; }\n\n.been-liked {\n  display: inline-block;\n  height: 25px;\n  opacity: 0.5; }\n\n.friend-icon {\n  display: inline-block;\n  height: 35px;\n  border-radius: 20px; }\n\n.friend-text {\n  display: inline-block; }\n", ""]);
 
 // exports
 
@@ -24320,7 +24369,7 @@ var _snapsvgImporter = __webpack_require__(77);
 
 var _snapsvgImporter2 = _interopRequireDefault(_snapsvgImporter);
 
-var _menuFactory = __webpack_require__(8);
+var _menuFactory = __webpack_require__(9);
 
 var _menuFactory2 = _interopRequireDefault(_menuFactory);
 
@@ -24437,7 +24486,7 @@ var _snapsvgImporter = __webpack_require__(77);
 
 var _snapsvgImporter2 = _interopRequireDefault(_snapsvgImporter);
 
-var _menuFactory = __webpack_require__(8);
+var _menuFactory = __webpack_require__(9);
 
 var _menuFactory2 = _interopRequireDefault(_menuFactory);
 
@@ -24534,7 +24583,7 @@ Object.defineProperty(exports, '__esModule', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _menuFactory = __webpack_require__(8);
+var _menuFactory = __webpack_require__(9);
 
 var _menuFactory2 = _interopRequireDefault(_menuFactory);
 
@@ -24587,7 +24636,7 @@ Object.defineProperty(exports, '__esModule', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _menuFactory = __webpack_require__(8);
+var _menuFactory = __webpack_require__(9);
 
 var _menuFactory2 = _interopRequireDefault(_menuFactory);
 
@@ -24627,7 +24676,7 @@ Object.defineProperty(exports, '__esModule', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _menuFactory = __webpack_require__(8);
+var _menuFactory = __webpack_require__(9);
 
 var _menuFactory2 = _interopRequireDefault(_menuFactory);
 
@@ -24670,7 +24719,7 @@ Object.defineProperty(exports, '__esModule', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _menuFactory = __webpack_require__(8);
+var _menuFactory = __webpack_require__(9);
 
 var _menuFactory2 = _interopRequireDefault(_menuFactory);
 
@@ -24750,7 +24799,7 @@ Object.defineProperty(exports, '__esModule', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _menuFactory = __webpack_require__(8);
+var _menuFactory = __webpack_require__(9);
 
 var _menuFactory2 = _interopRequireDefault(_menuFactory);
 
@@ -24792,7 +24841,7 @@ Object.defineProperty(exports, '__esModule', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _menuFactory = __webpack_require__(8);
+var _menuFactory = __webpack_require__(9);
 
 var _menuFactory2 = _interopRequireDefault(_menuFactory);
 
@@ -24835,7 +24884,7 @@ Object.defineProperty(exports, '__esModule', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _menuFactory = __webpack_require__(8);
+var _menuFactory = __webpack_require__(9);
 
 var _menuFactory2 = _interopRequireDefault(_menuFactory);
 
@@ -24857,7 +24906,7 @@ Object.defineProperty(exports, '__esModule', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _menuFactory = __webpack_require__(8);
+var _menuFactory = __webpack_require__(9);
 
 var _menuFactory2 = _interopRequireDefault(_menuFactory);
 
