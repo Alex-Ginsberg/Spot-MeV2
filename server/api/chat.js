@@ -23,14 +23,26 @@ router.post('/', (req, res, next) => {
     .catch(next)
 })
 
+router.get('/members/:id', (req, res, next) => {
+    User.findAll({
+        include: [{
+            model: Chat,
+        }],
+        where: {'$chats.id$': req.params.id},
+    })
+    .then(users => res.json(users))
+    .catch(next)
+})
+
 router.get('/', (req, res, next) => {
     Chat.findAll({
         include: [{
             model: User,
-            through: { where: { userId: req.user.id } }
-        }]
+        }],
+        where: {'$users.id$': req.user.id}
     })
     .then(chats => res.json(chats))
+    .catch(next)
 })
 
 router.get('/:id', (req, res, next) => {
