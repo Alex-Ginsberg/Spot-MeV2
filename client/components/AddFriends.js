@@ -9,7 +9,8 @@ class AddFriends extends React.Component{
     constructor() {
         super()
         this.state = {
-            allUsers: []
+            allUsers: [],
+            sentRequests: []
         }
     }
 
@@ -17,7 +18,18 @@ class AddFriends extends React.Component{
         this.props.isLoggedIn()
         axios.get('/api/users')
             .then(res => res.data)
-            .then(users => this.setState({allUsers: users}))
+            .then(users => {
+                axios.get('/api/request')
+                    .then(res => res.data)
+                    .then(requests => {
+                        const sent = []
+                        for (let i = 0; i < requests.length; i++) {
+                            sent.push(requests[i].userId)
+                        }
+                        this.setState({allUsers: users, sentRequests: sent})
+                    })
+                
+            })
     }
 
     render() {
@@ -29,9 +41,12 @@ class AddFriends extends React.Component{
                     <div className="friend" key={user.id}>
                         <p>{user.name}</p>
                         <img src={user.proPic} />
-                        <button onClick={(e) => {
+                        {!this.state.sentRequests.includes(user.id) ? <button onClick={(e) => {
                             axios.post(`/api/request/${user.id}`, {id: this.props.user.id})
-                        }}>Send Friend Request</button>
+                            const oldRequests = this.state.sentRequests
+                            oldRequests.push(user.id)
+                            this.setState({sentRequests: oldRequests})
+                        }}>Send Friend Request</button> : <button disabled>Request pending</button>}
                     </div>
                 ))}
             </div>

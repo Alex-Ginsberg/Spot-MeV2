@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Request, User} = require('../db/models')
+const {Request} = require('../db/models')
 module.exports = router
 
 router.post('/:to', (req, res, next) => {
@@ -10,6 +10,14 @@ router.post('/:to', (req, res, next) => {
         }
     })
         .then(request => res.json(request))
+        .catch(next)
+})
+
+router.get('/', (req, res, next) => {
+    Request.findAll({
+        where: {from: req.user.id}
+    })
+        .then(requests => res.json(requests))
         .catch(next)
 })
 
