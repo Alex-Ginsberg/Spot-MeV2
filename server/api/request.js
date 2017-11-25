@@ -43,6 +43,7 @@ router.post('/accept', (req, res, next) => {
                     Request.destroy({
                         where: {to: req.body.userId, userId: req.body.friendId}
                     })
+                    .then(() => res.json('done'))
                 })
         })
 })

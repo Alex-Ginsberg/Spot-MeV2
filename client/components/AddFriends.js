@@ -45,8 +45,16 @@ class AddFriends extends React.Component{
                 {this.state.myRequests.map(request => (
                     <div className="friend-request" key={request.id}>
                         <p>{request.user.name}</p>
-                        <button onClick={() => {
+                        <button onClick={(e) => {
+                            e.preventDefault()
                             axios.post('/api/request/accept', {userId: this.props.user.id, friendId: request.user.id})
+                                .then(() => {
+                                    const oldRequests = this.state.myRequests
+                                    const newRequests = oldRequests.filter(req => {
+                                        return req.id !== request.id
+                                    })
+                                    this.setState({myRequests: newRequests})
+                                })
                         }}>Accept</button>
                     </div>
                 ))}
