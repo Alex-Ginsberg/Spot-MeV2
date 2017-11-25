@@ -22,7 +22,6 @@ class AddFriends extends React.Component{
 
     render() {
         const users = this.state.allUsers.filter(user => user.id !== this.props.user.id)
-        console.log(users)
         return (
             <div>
                 <h1>Add Friends</h1>
@@ -30,7 +29,9 @@ class AddFriends extends React.Component{
                     <div className="friend" key={user.id}>
                         <p>{user.name}</p>
                         <img src={user.proPic} />
-                        <button>Add Friend</button>
+                        <button onClick={(e) => {
+                            axios.post(`/api/request/${user.id}`, {id: this.props.user.id})
+                        }}>Send Friend Request</button>
                     </div>
                 ))}
             </div>
