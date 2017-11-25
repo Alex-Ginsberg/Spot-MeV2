@@ -28,7 +28,6 @@ class Jukebox extends React.Component{
     }
 
     render() {
-        console.log('STATE: ', this.state)
         const songsToRender = this.props.songs.map(song => {
             let beenLiked = false
             if (song.users) {

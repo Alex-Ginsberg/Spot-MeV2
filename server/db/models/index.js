@@ -21,6 +21,7 @@ Chat.hasMany(Song)
 Song.belongsTo(Song)
 
 User.hasMany(Request)
+Request.belongsTo(User)
 
 User.belongsToMany(User, { through: Friend, as: 'friends'})
 
