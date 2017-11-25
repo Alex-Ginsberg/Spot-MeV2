@@ -15195,8 +15195,15 @@ var AddFriends = function (_React$Component) {
                         ),
                         _react2.default.createElement(
                             'button',
-                            { onClick: function onClick() {
-                                    _axios2.default.post('/api/request/accept', { userId: _this3.props.user.id, friendId: request.user.id });
+                            { onClick: function onClick(e) {
+                                    e.preventDefault();
+                                    _axios2.default.post('/api/request/accept', { userId: _this3.props.user.id, friendId: request.user.id }).then(function () {
+                                        var oldRequests = _this3.state.myRequests;
+                                        var newRequests = oldRequests.filter(function (req) {
+                                            return req.id !== request.id;
+                                        });
+                                        _this3.setState({ myRequests: newRequests });
+                                    });
                                 } },
                             'Accept'
                         )
