@@ -6,6 +6,7 @@ import Jukebox from './Jukebox'
 import { slide as Menu } from 'react-burger-menu'
 import Messaging from './Messaging'
 import axios from 'axios'
+import {fetchFriends} from '../store'
 
 class SingleChat extends React.Component{
   constructor() {
@@ -17,9 +18,11 @@ class SingleChat extends React.Component{
 
   componentDidMount() {
     this.props.fetchChat(this.props.match.params.id)
+    this.props.fetchFriends()
   }
 
   render() {
+    console.log(this.props.friends)
       // Gets the info about the admin of the chat AFTER that currentChat has been set
       if (!this.state.owner.id && this.props.currentChat.userId){
         axios.get(`/api/users/${this.props.currentChat.userId}`)
@@ -50,7 +53,8 @@ class SingleChat extends React.Component{
 const mapState = (state) => {
   return {
     user: state.user,
-    currentChat: state.currentChat
+    currentChat: state.currentChat,
+    friends: state.friends
   }
 }
 
@@ -58,6 +62,9 @@ const mapDispatch = (dispatch) => {
   return {
     fetchChat(id) {
       dispatch(fetchChat(id))
+    },
+    fetchFriends() {
+      dispatch(fetchFriends())
     }
   }
 }

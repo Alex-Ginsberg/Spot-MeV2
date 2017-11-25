@@ -6,8 +6,9 @@ import user from './user'
 import chats from './chats'
 import currentChat from './currentChat'
 import songs from './songs'
+import friends from './friends'
 
-const reducer = combineReducers({user, chats, currentChat, songs})
+const reducer = combineReducers({user, chats, currentChat, songs, friends})
 const middleware = composeWithDevTools(applyMiddleware(
   thunkMiddleware,
   createLogger({collapsed: true})
@@ -19,3 +20,4 @@ export * from './user'
 export * from './chats'
 export * from './currentChat'
 export * from './songs'
+export * from './friends'
