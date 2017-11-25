@@ -10332,7 +10332,8 @@ var AddFriends = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (AddFriends.__proto__ || Object.getPrototypeOf(AddFriends)).call(this));
 
         _this.state = {
-            allUsers: []
+            allUsers: [],
+            sentRequests: []
         };
         return _this;
     }
@@ -10346,7 +10347,15 @@ var AddFriends = function (_React$Component) {
             _axios2.default.get('/api/users').then(function (res) {
                 return res.data;
             }).then(function (users) {
-                return _this2.setState({ allUsers: users });
+                _axios2.default.get('/api/request').then(function (res) {
+                    return res.data;
+                }).then(function (requests) {
+                    var sent = [];
+                    for (var i = 0; i < requests.length; i++) {
+                        sent.push(requests[i].userId);
+                    }
+                    _this2.setState({ allUsers: users, sentRequests: sent });
+                });
             });
         }
     }, {
@@ -10375,12 +10384,19 @@ var AddFriends = function (_React$Component) {
                             user.name
                         ),
                         _react2.default.createElement('img', { src: user.proPic }),
-                        _react2.default.createElement(
+                        !_this3.state.sentRequests.includes(user.id) ? _react2.default.createElement(
                             'button',
                             { onClick: function onClick(e) {
                                     _axios2.default.post('/api/request/' + user.id, { id: _this3.props.user.id });
+                                    var oldRequests = _this3.state.sentRequests;
+                                    oldRequests.push(user.id);
+                                    _this3.setState({ sentRequests: oldRequests });
                                 } },
                             'Send Friend Request'
+                        ) : _react2.default.createElement(
+                            'button',
+                            { disabled: true },
+                            'Request pending'
                         )
                     );
                 })
