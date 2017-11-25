@@ -11,7 +11,7 @@ class Jukebox extends React.Component{
         this.state = {
             songText: '',
             artistText: '',
-            songPlaying: false
+            songPlaying: 0
 
         }
         this.handleSongSubmit = this.handleSongSubmit.bind(this)
@@ -48,15 +48,15 @@ class Jukebox extends React.Component{
                     <div className="song" key={song.id}>
                         <p>{song.name} - <small>{song.artist}</small></p>
                         <img className="song-pic" src={song.image} />
-                        {this.state.songPlaying ? <img className="song-play" src="https://image.freepik.com/free-icon/video-pause-button_318-33989.jpg" 
+                        {this.state.songPlaying === song.id ? <img className="song-play" src="https://image.freepik.com/free-icon/video-pause-button_318-33989.jpg" 
                         onClick={() => {this.audio.pause()
-                                        this.setState({songPlaying: false})}}/> : 
+                                        this.setState({songPlaying: 0})}}/> : 
                         <img className="song-play" src="https://image.flaticon.com/icons/svg/0/375.svg" 
                         onClick={() => {
                             this.audio.src = song.previewUrl
                             this.audio.load()
                             this.audio.play()
-                            this.setState({songPlaying: true})
+                            this.setState({songPlaying: song.id})
                         }} />}
                         {song.beenLiked ? <img className="been-liked" src="https://image.flaticon.com/icons/svg/81/81250.svg" /> : <img className="song-play" src="http://icons.iconarchive.com/icons/iconsmind/outline/128/Like-2-icon.png" 
                         onClick={() => this.props.putLike(song.id)}

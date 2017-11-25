@@ -10320,7 +10320,7 @@ var Jukebox = function (_React$Component) {
         _this.state = {
             songText: '',
             artistText: '',
-            songPlaying: false
+            songPlaying: 0
 
         };
         _this.handleSongSubmit = _this.handleSongSubmit.bind(_this);
@@ -10381,16 +10381,16 @@ var Jukebox = function (_React$Component) {
                             )
                         ),
                         _react2.default.createElement('img', { className: 'song-pic', src: song.image }),
-                        _this2.state.songPlaying ? _react2.default.createElement('img', { className: 'song-play', src: 'https://image.freepik.com/free-icon/video-pause-button_318-33989.jpg',
+                        _this2.state.songPlaying === song.id ? _react2.default.createElement('img', { className: 'song-play', src: 'https://image.freepik.com/free-icon/video-pause-button_318-33989.jpg',
                             onClick: function onClick() {
                                 _this2.audio.pause();
-                                _this2.setState({ songPlaying: false });
+                                _this2.setState({ songPlaying: 0 });
                             } }) : _react2.default.createElement('img', { className: 'song-play', src: 'https://image.flaticon.com/icons/svg/0/375.svg',
                             onClick: function onClick() {
                                 _this2.audio.src = song.previewUrl;
                                 _this2.audio.load();
                                 _this2.audio.play();
-                                _this2.setState({ songPlaying: true });
+                                _this2.setState({ songPlaying: song.id });
                             } }),
                         song.beenLiked ? _react2.default.createElement('img', { className: 'been-liked', src: 'https://image.flaticon.com/icons/svg/81/81250.svg' }) : _react2.default.createElement('img', { className: 'song-play', src: 'http://icons.iconarchive.com/icons/iconsmind/outline/128/Like-2-icon.png',
                             onClick: function onClick() {
