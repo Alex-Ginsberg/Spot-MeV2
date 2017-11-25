@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!-- saved from url=(0034)http://localhost:8080/singlechat/1 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width initial-scale=1.0">
+    <title>Boilermaker</title>
+    <script defer="" src="./Boilermaker_files/bundle.js"></script>
+  <style type="text/css">body {
+  font-family: sans-serif; }
+  body a {
+    text-decoration: none; }
+  body label {
+    display: block; }
+  body nav a {
+    display: inline-block;
+    margin: 1em; }
+  body form div {
+    margin: 1em;
+    display: inline-block; }
+
+.fullscreen-bg {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  z-index: -100; }
+
+.fullscreen-bg__video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -100; }
+
+@media (min-aspect-ratio: 16 / 9) {
+  .fullscreen-bg__video {
+    height: 300%;
+    top: -100%;
+    z-index: -100; } }
+
+@media (max-aspect-ratio: 16 / 9) {
+  .fullscreen-bg__video {
+    width: 300%;
+    left: -100%;
+    z-index: -100; } }
+
+@media (max-width: 767px) {
+  .fullscreen-bg {
+    z-index: -100; }
+  .fullscreen-bg__video {
+    display: none;
+    z-index: -100; } }
+
+.heading {
+  color: white;
+  z-index: 1; }
+
+.chatPic {
+  height: 50px;
+  border-radius: 20px;
+  display: inline-block; }
+
+.song-pic {
+  height: 50px;
+  display: inline-block; }
+
+.song-play {
+  display: inline-block;
+  height: 25px; }
+
+.num-likes {
+  font-size: 75%;
+  display: inline-block; }
+
+.been-liked {
+  display: inline-block;
+  height: 25px;
+  opacity: 0.5; }
+</style></head>
+  <body>
+    <div id="app"><div><div><div><div class="bm-overlay " style="position: fixed; z-index: 1; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.3); opacity: 0; transform: translate3d(100%, 0px, 0px); transition: opacity 0.3s, transform 0s 0.3s;"></div><div id="" class="bm-menu-wrap " style="position: fixed; right: 0px; z-index: 2; width: 300px; height: 100%; transform: translate3d(100%, 0px, 0px); transition: all 0.5s;"><div class="bm-menu " style="height: 100%; box-sizing: border-box; overflow: auto; background: white; padding: 2.5em 1.5em 0px; font-size: 1.15em;"><nav class="bm-item-list " style="height: 100%; color: rgb(184, 183, 173); padding: 0.8em;"><div><h1>Jukebox</h1><form><div class="form-group"><label for="name">Submit a Song</label><input type="text" class="form-control" name="songName" placeholder="Enter song name" required=""><input type="text" class="form-control" name="songArtist" placeholder="Enter artist" required=""></div><div class="form-group"><button type="submit" class="btn btn-default">Get Song</button></div></form></div></nav></div><div><div class="bm-cross-button " style="position: absolute; width: 24px; height: 24px; right: 8px; top: 8px;"><span style="position: absolute; top: 6px; right: 14px;"><span class="bm-cross " style="position: absolute; width: 3px; height: 14px; transform: rotate(45deg);"></span><span class="bm-cross " style="position: absolute; width: 3px; height: 14px; transform: rotate(-45deg);"></span></span><button style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; margin: 0px; padding: 0px; border: none; text-indent: -9999px; background: transparent; outline: none; cursor: pointer;">Close Menu</button></div></div></div><div><div class="bm-burger-button " style="z-index: 1; position: fixed; width: 36px; height: 30px; right: 36px; top: 36px;"><img src="./Boilermaker_files/26805.svg" class="bm-icon" style="width: 100%; height: 100%;"><button style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; margin: 0px; padding: 0px; border: none; opacity: 0; font-size: 8px; cursor: pointer;">Open Menu</button></div></div></div><div><div class="bm-overlay " style="position: fixed; z-index: 1; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.3); opacity: 0; transform: translate3d(100%, 0px, 0px); transition: opacity 0.3s, transform 0s 0.3s;"></div><div id="" class="bm-menu-wrap " style="position: fixed; right: 0px; z-index: 2; width: 300px; height: 100%; transform: translate3d(100%, 0px, 0px); transition: all 0.5s;"><div class="bm-menu " style="height: 100%; box-sizing: border-box; overflow: auto; background: white; padding: 2.5em 1.5em 0px; font-size: 1.15em;"><nav class="bm-item-list " style="height: 100%; color: rgb(184, 183, 173); padding: 0.8em;"></nav></div><div><div class="bm-cross-button " style="position: absolute; width: 24px; height: 24px; right: 8px; top: 8px;"><span style="position: absolute; top: 6px; right: 14px;"><span class="bm-cross " style="position: absolute; width: 3px; height: 14px; transform: rotate(45deg);"></span><span class="bm-cross " style="position: absolute; width: 3px; height: 14px; transform: rotate(-45deg);"></span></span><button style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; margin: 0px; padding: 0px; border: none; text-indent: -9999px; background: transparent; outline: none; cursor: pointer;">Close Menu</button></div></div></div><div><div class="bm-burger-button " style="z-index: 1; position: fixed; width: 36px; height: 30px; right: 30px; top: 80px;"><img src="./Boilermaker_files/add_friend-512.png" class="bm-icon" style="width: 100%; height: 100%;"><button style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; margin: 0px; padding: 0px; border: none; opacity: 0; font-size: 8px; cursor: pointer;">Open Menu</button></div></div></div><h1>wqrqer1</h1><a href="http://open.spotify.com/user/12135118969/playlist/7ecBVogENvdlDW8ABRQFVg">Open in Spotify</a><h3>Created by Alex Ginsberg</h3><img src="./Boilermaker_files/18622656_10203195702410685_1875683150891651320_n.jpg"><div><form><div class="form-group"><input type="text" class="form-control" name="categoryName" placeholder="Send a message..." value=""></div><div class="form-group"><button type="submit" class="btn btn-default">Send</button></div></form></div></div></div></div>
+  
+
+
+</body></html>
