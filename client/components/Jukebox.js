@@ -11,8 +11,8 @@ class Jukebox extends React.Component{
         this.state = {
             songText: '',
             artistText: '',
-            songPlaying: 0
-
+            songPlaying: 0,
+            recentlyLiked: []
         }
         this.handleSongSubmit = this.handleSongSubmit.bind(this)
         this.audio = document.createElement('audio')
@@ -28,6 +28,7 @@ class Jukebox extends React.Component{
     }
 
     render() {
+        console.log('STATE: ', this.state)
         const songsToRender = this.props.songs.map(song => {
             let beenLiked = false
             if (song.users) {
@@ -58,8 +59,13 @@ class Jukebox extends React.Component{
                             this.audio.play()
                             this.setState({songPlaying: song.id})
                         }} />}
-                        {song.beenLiked ? <img className="been-liked" src="https://image.flaticon.com/icons/svg/81/81250.svg" /> : <img className="song-play" src="http://icons.iconarchive.com/icons/iconsmind/outline/128/Like-2-icon.png" 
-                        onClick={() => this.props.putLike(song.id)}
+                        {(song.beenLiked || this.state.recentlyLiked.includes(song.id)) ? <img className="been-liked" src="https://image.flaticon.com/icons/svg/81/81250.svg" /> : <img className="song-play" src="http://icons.iconarchive.com/icons/iconsmind/outline/128/Like-2-icon.png" 
+                        onClick={() => {
+                            this.props.putLike(song.id)
+                            const oldLikes = this.state.recentlyLiked
+                            oldLikes.push(song.id)
+                            this.setState({recentlyLiked: oldLikes})
+                        }}
                         />}
                         <p className="num-likes">{song.likes}</p>
                     </div>

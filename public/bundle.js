@@ -10320,8 +10320,8 @@ var Jukebox = function (_React$Component) {
         _this.state = {
             songText: '',
             artistText: '',
-            songPlaying: 0
-
+            songPlaying: 0,
+            recentlyLiked: []
         };
         _this.handleSongSubmit = _this.handleSongSubmit.bind(_this);
         _this.audio = document.createElement('audio');
@@ -10344,6 +10344,7 @@ var Jukebox = function (_React$Component) {
         value: function render() {
             var _this2 = this;
 
+            console.log('STATE: ', this.state);
             var songsToRender = this.props.songs.map(function (song) {
                 var beenLiked = false;
                 if (song.users) {
@@ -10392,9 +10393,12 @@ var Jukebox = function (_React$Component) {
                                 _this2.audio.play();
                                 _this2.setState({ songPlaying: song.id });
                             } }),
-                        song.beenLiked ? _react2.default.createElement('img', { className: 'been-liked', src: 'https://image.flaticon.com/icons/svg/81/81250.svg' }) : _react2.default.createElement('img', { className: 'song-play', src: 'http://icons.iconarchive.com/icons/iconsmind/outline/128/Like-2-icon.png',
+                        song.beenLiked || _this2.state.recentlyLiked.includes(song.id) ? _react2.default.createElement('img', { className: 'been-liked', src: 'https://image.flaticon.com/icons/svg/81/81250.svg' }) : _react2.default.createElement('img', { className: 'song-play', src: 'http://icons.iconarchive.com/icons/iconsmind/outline/128/Like-2-icon.png',
                             onClick: function onClick() {
-                                return _this2.props.putLike(song.id);
+                                _this2.props.putLike(song.id);
+                                var oldLikes = _this2.state.recentlyLiked;
+                                oldLikes.push(song.id);
+                                _this2.setState({ recentlyLiked: oldLikes });
                             }
                         }),
                         _react2.default.createElement(
