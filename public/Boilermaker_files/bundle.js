@@ -15964,10 +15964,6 @@ var _Jukebox = __webpack_require__(132);
 
 var _Jukebox2 = _interopRequireDefault(_Jukebox);
 
-var _AddToChat = __webpack_require__(267);
-
-var _AddToChat2 = _interopRequireDefault(_AddToChat);
-
 var _reactBurgerMenu = __webpack_require__(195);
 
 var _Messaging = __webpack_require__(133);
@@ -16033,11 +16029,7 @@ var SingleChat = function (_React$Component) {
           { styles: styles, right: true, customBurgerIcon: _react2.default.createElement('img', { src: 'https://image.flaticon.com/icons/svg/26/26805.svg' }) },
           _react2.default.createElement(_Jukebox2.default, null)
         ),
-        _react2.default.createElement(
-          _reactBurgerMenu.slide,
-          { styles: stylesFriends, right: true, customBurgerIcon: _react2.default.createElement('img', { src: 'https://d30y9cdsu7xlg0.cloudfront.net/png/138580-200.png' }) },
-          _react2.default.createElement(_AddToChat2.default, null)
-        ),
+        _react2.default.createElement(_reactBurgerMenu.slide, { styles: stylesFriends, right: true, customBurgerIcon: _react2.default.createElement('img', { src: 'https://cdn4.iconfinder.com/data/icons/eldorado-user/40/add_friend-512.png' }) }),
         _react2.default.createElement(
           'h1',
           null,
@@ -16128,7 +16120,7 @@ var stylesFriends = {
     position: 'fixed',
     width: '36px',
     height: '30px',
-    right: '36px',
+    right: '30px',
     top: '80px'
   },
   bmBurgerBars: {
@@ -17369,7 +17361,7 @@ exports = module.exports = __webpack_require__(152)();
 
 
 // module
-exports.push([module.i, "body {\n  font-family: sans-serif; }\n  body a {\n    text-decoration: none; }\n  body label {\n    display: block; }\n  body nav a {\n    display: inline-block;\n    margin: 1em; }\n  body form div {\n    margin: 1em;\n    display: inline-block; }\n\n.fullscreen-bg {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  overflow: hidden;\n  z-index: -100; }\n\n.fullscreen-bg__video {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  z-index: -100; }\n\n@media (min-aspect-ratio: 16 / 9) {\n  .fullscreen-bg__video {\n    height: 300%;\n    top: -100%;\n    z-index: -100; } }\n\n@media (max-aspect-ratio: 16 / 9) {\n  .fullscreen-bg__video {\n    width: 300%;\n    left: -100%;\n    z-index: -100; } }\n\n@media (max-width: 767px) {\n  .fullscreen-bg {\n    z-index: -100; }\n  .fullscreen-bg__video {\n    display: none;\n    z-index: -100; } }\n\n.heading {\n  color: white;\n  z-index: 1; }\n\n.chatPic {\n  height: 50px;\n  border-radius: 20px;\n  display: inline-block; }\n\n.song-pic {\n  height: 50px;\n  display: inline-block; }\n\n.song-play {\n  display: inline-block;\n  height: 25px; }\n\n.num-likes {\n  font-size: 75%;\n  display: inline-block; }\n\n.been-liked {\n  display: inline-block;\n  height: 25px;\n  opacity: 0.5; }\n\n.friend-icon {\n  display: inline-block;\n  height: 35px; }\n\n.friend-text {\n  display: inline-block; }\n", ""]);
+exports.push([module.i, "body {\n  font-family: sans-serif; }\n  body a {\n    text-decoration: none; }\n  body label {\n    display: block; }\n  body nav a {\n    display: inline-block;\n    margin: 1em; }\n  body form div {\n    margin: 1em;\n    display: inline-block; }\n\n.fullscreen-bg {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  overflow: hidden;\n  z-index: -100; }\n\n.fullscreen-bg__video {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  z-index: -100; }\n\n@media (min-aspect-ratio: 16 / 9) {\n  .fullscreen-bg__video {\n    height: 300%;\n    top: -100%;\n    z-index: -100; } }\n\n@media (max-aspect-ratio: 16 / 9) {\n  .fullscreen-bg__video {\n    width: 300%;\n    left: -100%;\n    z-index: -100; } }\n\n@media (max-width: 767px) {\n  .fullscreen-bg {\n    z-index: -100; }\n  .fullscreen-bg__video {\n    display: none;\n    z-index: -100; } }\n\n.heading {\n  color: white;\n  z-index: 1; }\n\n.chatPic {\n  height: 50px;\n  border-radius: 20px;\n  display: inline-block; }\n\n.song-pic {\n  height: 50px;\n  display: inline-block; }\n\n.song-play {\n  display: inline-block;\n  height: 25px; }\n\n.num-likes {\n  font-size: 75%;\n  display: inline-block; }\n\n.been-liked {\n  display: inline-block;\n  height: 25px;\n  opacity: 0.5; }\n", ""]);
 
 // exports
 
@@ -54630,99 +54622,6 @@ function extend() {
 /***/ (function(module, exports) {
 
 /* (ignored) */
-
-/***/ }),
-/* 267 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRedux = __webpack_require__(7);
-
-var _reactRouterDom = __webpack_require__(13);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var AddToChat = function (_React$Component) {
-    _inherits(AddToChat, _React$Component);
-
-    function AddToChat() {
-        _classCallCheck(this, AddToChat);
-
-        return _possibleConstructorReturn(this, (AddToChat.__proto__ || Object.getPrototypeOf(AddToChat)).apply(this, arguments));
-    }
-
-    _createClass(AddToChat, [{
-        key: 'render',
-        value: function render() {
-            return _react2.default.createElement(
-                'div',
-                null,
-                _react2.default.createElement(
-                    'h1',
-                    null,
-                    'Select Friends to Add'
-                ),
-                this.props.friends.map(function (friend) {
-                    return _react2.default.createElement(
-                        'div',
-                        { key: friend.id },
-                        _react2.default.createElement('img', { className: 'friend-icon', src: friend.proPic }),
-                        _react2.default.createElement(
-                            'p',
-                            { className: 'friend-text' },
-                            friend.name
-                        ),
-                        _react2.default.createElement(
-                            'button',
-                            null,
-                            'Add'
-                        )
-                    );
-                })
-            );
-        }
-    }]);
-
-    return AddToChat;
-}(_react2.default.Component);
-
-/**
- * CONTAINER
- */
-
-
-var mapState = function mapState(state) {
-    return {
-        user: state.user,
-        friends: state.friends
-    };
-};
-
-var mapDispatch = function mapDispatch(dispatch) {
-    return {};
-};
-
-// The `withRouter` wrapper makes sure that updates are not blocked
-// when the url changes
-exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapState, mapDispatch)(AddToChat));
 
 /***/ })
 /******/ ]);
