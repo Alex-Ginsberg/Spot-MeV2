@@ -4710,6 +4710,15 @@ Object.defineProperty(exports, 'SingleChat', {
   }
 });
 
+var _AddFriends = __webpack_require__(228);
+
+Object.defineProperty(exports, 'AddFriends', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_AddFriends).default;
+  }
+});
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
@@ -9323,7 +9332,8 @@ var Routes = function (_Component) {
             null,
             _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _components.Main }),
             _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/profile', component: _components.Profile }),
-            _react2.default.createElement(_reactRouterDom.Route, { path: '/singlechat/:id', component: _components.SingleChat })
+            _react2.default.createElement(_reactRouterDom.Route, { path: '/singlechat/:id', component: _components.SingleChat }),
+            _react2.default.createElement(_reactRouterDom.Route, { path: '/addfriends', component: _components.AddFriends })
           )
         )
       );
@@ -46603,6 +46613,131 @@ function toArray(list, index) {
 /***/ (function(module, exports) {
 
 /* (ignored) */
+
+/***/ }),
+/* 228 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(7);
+
+var _reactRouterDom = __webpack_require__(13);
+
+var _store = __webpack_require__(11);
+
+var _axios = __webpack_require__(12);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var AddFriends = function (_React$Component) {
+    _inherits(AddFriends, _React$Component);
+
+    function AddFriends() {
+        _classCallCheck(this, AddFriends);
+
+        var _this = _possibleConstructorReturn(this, (AddFriends.__proto__ || Object.getPrototypeOf(AddFriends)).call(this));
+
+        _this.state = {
+            allUsers: []
+        };
+        return _this;
+    }
+
+    _createClass(AddFriends, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this2 = this;
+
+            this.props.isLoggedIn();
+            _axios2.default.get('/api/users').then(function (res) {
+                return res.data;
+            }).then(function (users) {
+                return _this2.setState({ allUsers: users });
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this3 = this;
+
+            var users = this.state.allUsers.filter(function (user) {
+                return user.id !== _this3.props.user.id;
+            });
+            console.log(users);
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                    'h1',
+                    null,
+                    'Add Friends'
+                ),
+                users.map(function (user) {
+                    return _react2.default.createElement(
+                        'div',
+                        { className: 'friend', key: user.id },
+                        _react2.default.createElement(
+                            'p',
+                            null,
+                            user.name
+                        ),
+                        _react2.default.createElement('img', { src: user.proPic }),
+                        _react2.default.createElement(
+                            'button',
+                            null,
+                            'Add Friend'
+                        )
+                    );
+                })
+            );
+        }
+    }]);
+
+    return AddFriends;
+}(_react2.default.Component);
+
+/**
+ * CONTAINER
+ */
+
+
+var mapState = function mapState(state) {
+    return {
+        user: state.user
+    };
+};
+
+var mapDispatch = function mapDispatch(dispatch) {
+    return {
+        isLoggedIn: function isLoggedIn() {
+            dispatch((0, _store.me)());
+        }
+    };
+};
+
+// The `withRouter` wrapper makes sure that updates are not blocked
+// when the url changes
+exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapState, mapDispatch)(AddFriends));
 
 /***/ })
 /******/ ]);
