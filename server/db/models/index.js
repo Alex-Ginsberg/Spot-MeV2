@@ -25,7 +25,6 @@ Request.belongsTo(User)
 
 User.belongsToMany(User, { through: Friend, as: 'friends'})
 
-
 User.belongsToMany(Song, { through: Liker})
 Song.belongsToMany(User, { through: Liker})
 
