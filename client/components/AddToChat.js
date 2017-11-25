@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
+import axios from 'axios'
 
 
 
@@ -13,7 +14,9 @@ class AddToChat extends React.Component{
                     <div key={friend.id}>
                         <img className="friend-icon" src={friend.proPic} />
                         <p className="friend-text">{friend.name}</p>
-                        <button>Add</button>
+                        <button onClick={() => {
+                            axios.post('/api/chat/add', {userId: friend.id, chatId: this.props.match.params.id})
+                        }}>Add</button>
                     </div>
                 ))}
             </div>

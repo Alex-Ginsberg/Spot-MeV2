@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Chat} = require('../db/models')
+const {Chat, UserChat, User} = require('../db/models')
 module.exports = router
 
 router.post('/', (req, res, next) => {
@@ -9,20 +9,26 @@ router.post('/', (req, res, next) => {
             externalUrl: req.body.externalUrl,
             playlistId: req.body.playlistId,
             likesNeeded: req.body.likesNeeded,
-            userId: req.body.userId
         }
     })
-    .spread((user, created) => {
-        res.json(user)
+    .spread((chat, created) => {
+        UserChat.findOrCreate({
+            where: {
+                userId: req.user.id,
+                chatId: chat.id
+            }
+        })
+        .then(() => res.json(chat))   
     })
     .catch(next)
 })
 
 router.get('/', (req, res, next) => {
     Chat.findAll({
-        where: {
-            userId: req.user.id
-        }
+        include: [{
+            model: User,
+            through: { where: { userId: req.user.id } }
+        }]
     })
     .then(chats => res.json(chats))
 })
@@ -32,4 +38,14 @@ router.get('/:id', (req, res, next) => {
         where: {id: req.params.id}
     })
     .then(chat => res.json(chat))
+})
+
+router.post('/add', (req, res, next) => {
+    UserChat.findOrCreate({
+        where: {
+            userId: req.body.userId,
+            chatId: req.body.chatId
+        }
+    })
+        .then(() => res.json('done'))
 })
