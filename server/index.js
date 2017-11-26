@@ -34,10 +34,42 @@ passport.deserializeUser((id, done) =>
     .then(user => done(null, user))
     .catch(done))
 
+    // passport.use(new SpotifyStrategy({
+    //   clientID: process.env.appKey || appKey,
+    //   clientSecret: process.env.appSecret || appSecret,
+    //   callbackURL: 'http://localhost:8080/callback'
+    //   },
+    //   function(accessToken, refreshToken, profile, done) {
+    //     // asynchronous verification, for effect...
+    //     process.nextTick(function () {
+    //       console.log('Profile: ', profile)
+    
+    //       User.findOrCreate({
+    //         where: {
+    //           SpotifyId: profile.id
+    //         },
+    //         defaults: {
+    //           name: profile.displayName,
+    //           SpotifyId: profile.id,
+    //           accessToken: accessToken,
+    //           proPic: profile.photos[0],
+    //           refreshToken: refreshToken
+    //         }
+    //       })
+    //       .spread(function (user) {
+    //         console.log('MAKING USER: ', user)  
+    //         done(null, user);
+    //       })
+    //       .catch(done);
+    //       // return done(null, profile);
+    //     });
+    //   }));
+
+    // FOR DEPLOYED VERSION
     passport.use(new SpotifyStrategy({
       clientID: process.env.appKey || appKey,
       clientSecret: process.env.appSecret || appSecret,
-      callbackURL: 'http://localhost:8080/callback'
+      callbackURL: 'https://spot-mev2.herokuapp.com/callback'
       },
       function(accessToken, refreshToken, profile, done) {
         // asynchronous verification, for effect...
