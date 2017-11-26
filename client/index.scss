@@ -19,3 +19,92 @@ body {
     display: inline-block;
   }
 }
+
+.fullscreen-bg {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  z-index: -100;
+}
+
+.fullscreen-bg__video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -100;
+}
+
+@media (min-aspect-ratio: 16/9) {
+  .fullscreen-bg__video {
+    height: 300%;
+    top: -100%;
+    z-index: -100;
+  }
+}
+
+@media (max-aspect-ratio: 16/9) {
+  .fullscreen-bg__video {
+    width: 300%;
+    left: -100%;
+    z-index: -100;
+  }
+}
+
+@media (max-width: 767px) {
+  .fullscreen-bg {
+    // background: url('../img/videoframe.jpg') center center / cover no-repeat;
+    z-index: -100;
+  }
+
+  .fullscreen-bg__video {
+    display: none;
+    z-index: -100;
+  }
+}
+
+.heading {
+  color: white;
+  z-index: 1;
+}
+
+.chatPic {
+  height: 50px;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+.song-pic {
+  height: 50px;
+  display: inline-block;
+}
+
+.song-play {
+  display: inline-block;
+  height: 25px;
+}
+
+.num-likes {
+  font-size: 75%;
+  display: inline-block;
+}
+
+.been-liked {
+  display: inline-block;
+  height: 25px;
+  opacity: 0.5;
+}
+
+.friend-icon {
+  display: inline-block;
+  height: 35px;
+  border-radius: 20px;
+}
+
+.friend-text {
+  display: inline-block;
+}

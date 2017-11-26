@@ -1,5 +1,9 @@
 const router = require('express').Router()
 const User = require('../db/models/user')
+const axios = require('axios')
+const refresh = require('spotify-refresh')
+const appKey = require('../../secrets').appKey
+const appSecret = require('../../secrets').appSecret
 module.exports = router
 
 router.post('/login', (req, res, next) => {
@@ -37,6 +41,17 @@ router.post('/logout', (req, res) => {
 
 router.get('/me', (req, res) => {
   res.json(req.user)
+})
+
+router.get('/refresh', (req, res, next) => {
+  refresh(req.user.refreshToken, appKey, appSecret, (err, res, body) => {
+    if (err) return
+    const token = body.access_token
+    User.update(
+      {accessToken: token},
+      {where: {id: req.user.id}}
+    )
+  })
 })
 
 router.use('/google', require('./google'))

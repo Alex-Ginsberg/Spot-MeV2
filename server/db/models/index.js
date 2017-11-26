@@ -1,18 +1,43 @@
+const Sequelize = require('sequelize')
+const db = require('../db')
+
 const User = require('./user')
+const Chat = require('./chat')
+const Message = require('./message')
+const Song = require('./song')
+const Request = require('./requests')
 
-/**
- * If we had any associations to make, this would be a great place to put them!
- * ex. if we had another model called BlogPost, we might say:
- *
- *    BlogPost.belongsTo(User)
- */
+const Friend = db.define('friend', {})
+const Liker = db.define('liker', {})
 
-/**
- * We'll export all of our models here, so that any time a module needs a model,
- * we can just require it from 'db/models'
- * for example, we can say: const {User} = require('../db/models')
- * instead of: const User = require('../db/models/user')
- */
+const UserChat = db.define('user_chat', {})
+User.belongsToMany(Chat, { through: UserChat })
+Chat.belongsToMany(User, { through: UserChat })
+Chat.belongsTo(User)
+
+User.hasMany(Message)
+Message.belongsTo(User)
+Chat.hasMany(Message)
+
+Chat.hasMany(Song)
+Song.belongsTo(Song)
+
+User.hasMany(Request)
+Request.belongsTo(User)
+
+User.belongsToMany(User, { through: Friend, as: 'friends'})
+
+User.belongsToMany(Song, { through: Liker})
+Song.belongsToMany(User, { through: Liker})
+
+
 module.exports = {
-  User
+  User,
+  Chat,
+  Friend,
+  Message,
+  Song,
+  Liker,
+  Request,
+  UserChat
 }
