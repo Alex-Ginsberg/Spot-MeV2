@@ -16001,10 +16001,21 @@ var Profile = function (_React$Component) {
           null,
           _react2.default.createElement(
             'p',
-            null,
-            user.name
+            { className: 'profile-heading' },
+            'Welcome back, ',
+            user.name,
+            '!'
           ),
-          _react2.default.createElement('img', { src: user.proPic }),
+          _react2.default.createElement('img', { src: user.proPic, className: 'profile-pic' }),
+          _react2.default.createElement(
+            _reactRouterDom.Link,
+            { to: '/addfriends' },
+            _react2.default.createElement(
+              'p',
+              { className: 'link' },
+              'Friends'
+            )
+          ),
           _react2.default.createElement(
             'form',
             { onSubmit: function onSubmit(e) {
@@ -16366,14 +16377,14 @@ var Main = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var test = "Zedd.mp4";
+      var vids = ["Zedd.mp4", "Cage.mp4", "Imagine.mp4"];
       return _react2.default.createElement(
         'div',
         { className: 'fullscreen-bg' },
         _react2.default.createElement(
           'video',
           { loop: true, muted: true, autoPlay: true, className: 'fullscreen-bg__video' },
-          _react2.default.createElement('source', { src: test, type: 'video/mp4' })
+          _react2.default.createElement('source', { src: vids[Math.floor(Math.random() * vids.length)], type: 'video/mp4' })
         ),
         _react2.default.createElement(
           'h1',
@@ -16388,12 +16399,28 @@ var Main = function (_React$Component) {
         !this.props.user.id && _react2.default.createElement(
           'a',
           { href: '/auth/spotify' },
-          'Login with Spotify'
+          _react2.default.createElement(
+            'p',
+            { className: 'center' },
+            _react2.default.createElement(
+              'span',
+              { className: 'start' },
+              'GET STARTED'
+            )
+          )
         ),
         this.props.user.id && _react2.default.createElement(
           _reactRouterDom.Link,
           { to: '/profile' },
-          'Profile'
+          _react2.default.createElement(
+            'p',
+            { className: 'center' },
+            _react2.default.createElement(
+              'span',
+              { className: 'start' },
+              'START!'
+            )
+          )
         )
       );
     }
@@ -17383,7 +17410,7 @@ exports = module.exports = __webpack_require__(152)();
 
 
 // module
-exports.push([module.i, "body {\n  font-family: sans-serif; }\n  body a {\n    text-decoration: none; }\n  body label {\n    display: block; }\n  body nav a {\n    display: inline-block;\n    margin: 1em; }\n  body form div {\n    margin: 1em;\n    display: inline-block; }\n\n.fullscreen-bg {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  overflow: hidden;\n  z-index: -100; }\n\n.fullscreen-bg__video {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  z-index: -100; }\n\n@media (min-aspect-ratio: 16 / 9) {\n  .fullscreen-bg__video {\n    height: 300%;\n    top: -100%;\n    z-index: -100; } }\n\n@media (max-aspect-ratio: 16 / 9) {\n  .fullscreen-bg__video {\n    width: 300%;\n    left: -100%;\n    z-index: -100; } }\n\n@media (max-width: 767px) {\n  .fullscreen-bg {\n    z-index: -100; }\n  .fullscreen-bg__video {\n    display: none;\n    z-index: -100; } }\n\n.heading {\n  color: white;\n  z-index: 1; }\n\n.chatPic {\n  height: 50px;\n  border-radius: 20px;\n  display: inline-block; }\n\n.song-pic {\n  height: 50px;\n  display: inline-block; }\n\n.song-play {\n  display: inline-block;\n  height: 25px; }\n\n.num-likes {\n  font-size: 75%;\n  display: inline-block; }\n\n.been-liked {\n  display: inline-block;\n  height: 25px;\n  opacity: 0.5; }\n\n.friend-icon {\n  display: inline-block;\n  height: 35px;\n  border-radius: 20px; }\n\n.friend-text {\n  display: inline-block; }\n", ""]);
+exports.push([module.i, "body {\n  font-family: sans-serif; }\n  body a {\n    text-decoration: none; }\n  body label {\n    display: block; }\n  body nav a {\n    display: inline-block;\n    margin: 1em; }\n  body form div {\n    margin: 1em;\n    display: inline-block; }\n\n.fullscreen-bg {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  overflow: hidden;\n  z-index: -100; }\n\n.fullscreen-bg__video {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  z-index: -100; }\n\n@media (min-aspect-ratio: 16 / 9) {\n  .fullscreen-bg__video {\n    height: 300%;\n    top: -100%;\n    z-index: -100; } }\n\n@media (max-aspect-ratio: 16 / 9) {\n  .fullscreen-bg__video {\n    width: 300%;\n    left: -100%;\n    z-index: -100; } }\n\n@media (max-width: 767px) {\n  .fullscreen-bg {\n    z-index: -100; }\n  .fullscreen-bg__video {\n    display: none;\n    z-index: -100; } }\n\n.heading {\n  color: white;\n  z-index: 1;\n  text-align: center; }\n\n.chatPic {\n  height: 50px;\n  border-radius: 20px;\n  display: inline-block; }\n\n.song-pic {\n  height: 50px;\n  display: inline-block; }\n\n.song-play {\n  display: inline-block;\n  height: 25px; }\n\n.num-likes {\n  font-size: 75%;\n  display: inline-block; }\n\n.been-liked {\n  display: inline-block;\n  height: 25px;\n  opacity: 0.5; }\n\n.friend-icon {\n  display: inline-block;\n  height: 35px;\n  border-radius: 20px; }\n\n.friend-text {\n  display: inline-block; }\n\n.start {\n  background: initial;\n  border: initial;\n  border-width: 0 7px;\n  box-sizing: border-box;\n  color: green;\n  cursor: default;\n  display: inline-block;\n  font-size: 50px;\n  line-height: 50px;\n  margin: 0;\n  max-width: 100%;\n  overflow: hidden;\n  padding: 2px;\n  text-decoration: none;\n  text-overflow: ellipsis;\n  text-shadow: 0 1px 0 #EEE;\n  white-space: nowrap; }\n\n.profile-heading {\n  text-align: center;\n  background: initial;\n  border: initial;\n  border-width: 0 7px;\n  box-sizing: border-box;\n  color: black;\n  cursor: default;\n  font-size: 50px;\n  line-height: 50px;\n  margin: 0;\n  max-width: 100%;\n  overflow: hidden;\n  padding: 2px;\n  text-decoration: none;\n  text-overflow: ellipsis;\n  text-shadow: 0 1px 0 blue;\n  white-space: nowrap; }\n\n.profile-pic {\n  display: inline-block; }\n\n.center {\n  text-align: center; }\n\n.link {\n  display: inline-block; }\n", ""]);
 
 // exports
 

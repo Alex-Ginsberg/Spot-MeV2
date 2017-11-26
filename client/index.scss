@@ -70,6 +70,7 @@ body {
 .heading {
   color: white;
   z-index: 1;
+  text-align: center;
 }
 
 .chatPic {
@@ -106,5 +107,61 @@ body {
 }
 
 .friend-text {
+  display: inline-block;
+}
+
+.start {
+  // color: white;
+  // z-index: 1;
+  // background-color: green;
+  // border-radius: 20px;
+  background: initial;
+	border: initial;
+	border-width: 0 7px;
+	box-sizing: border-box;
+	color: green;
+	cursor: default;
+	display: inline-block;
+	font-size: 50px;
+	line-height: 50px;
+	margin: 0;
+	max-width: 100%;
+	overflow: hidden;
+	padding: 2px;
+	text-decoration: none;
+	text-overflow: ellipsis;
+	text-shadow: 0 1px 0 #EEE;
+	white-space: nowrap;
+}
+
+.profile-heading {
+  text-align: center;
+  background: initial;
+	border: initial;
+	border-width: 0 7px;
+	box-sizing: border-box;
+	color: black;
+	cursor: default;
+	font-size: 50px;
+	line-height: 50px;
+	margin: 0;
+	max-width: 100%;
+	overflow: hidden;
+	padding: 2px;
+	text-decoration: none;
+	text-overflow: ellipsis;
+	text-shadow: 0 1px 0 blue;
+	white-space: nowrap;
+}
+
+.profile-pic {
+  display: inline-block;
+}
+
+.center { 
+  text-align: center;
+}
+
+.link {
   display: inline-block;
 }

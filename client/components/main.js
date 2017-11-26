@@ -11,17 +11,17 @@ class Main extends React.Component{
 
 
   render(){
-    const test = "Zedd.mp4"
+    const vids = ["Zedd.mp4", "Cage.mp4", "Imagine.mp4"]
     return (
       <div className="fullscreen-bg">
           <video loop muted autoPlay className="fullscreen-bg__video">
-            <source src={test} type="video/mp4" />
+            <source src={vids[Math.floor(Math.random()*vids.length)]} type="video/mp4" />
           </video>
           <h1 className="heading">Spot-Me</h1>
           <h3 className="heading">Bringing people together through music</h3>
 
-        {!this.props.user.id && <a href="/auth/spotify">Login with Spotify</a>}
-        {this.props.user.id && <Link to={'/profile'}>Profile</Link>}
+        {!this.props.user.id && <a href="/auth/spotify"><p className="center"><span className="start">GET STARTED</span></p></a>}
+        {this.props.user.id && <Link to={'/profile'}><p className="center"><span className="start">START!</span></p></Link>}
       </div>
     )
   }

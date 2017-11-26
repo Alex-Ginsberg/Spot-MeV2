@@ -28,8 +28,9 @@ class Profile extends React.Component{
       <div>
         {user.id && 
         <div>
-            <p>{user.name}</p>
-            <img src={user.proPic} />
+            <p className="profile-heading">Welcome back, {user.name}!</p>
+            <img src={user.proPic} className="profile-pic" />
+            <Link to={'/addfriends'}><p className="link">Friends</p></Link>
             <form onSubmit={(e) => {
               e.preventDefault()
               const jsonData = {
