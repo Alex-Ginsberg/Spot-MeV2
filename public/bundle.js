@@ -5108,6 +5108,10 @@ socket.on('new-song', function (song) {
   _store2.default.dispatch((0, _store.newSong)(song));
 });
 
+socket.on('new-like', function (song) {
+  _store2.default.dispatch((0, _store.newLike)(song));
+});
+
 socket.on('connect', function () {
   console.log('Connected!');
 });
@@ -16829,7 +16833,7 @@ var fetchFriends = exports.fetchFriends = function fetchFriends() {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.putLike = exports.postSong = exports.fetchSongs = exports.newSong = undefined;
+exports.putLike = exports.postSong = exports.fetchSongs = exports.newLike = exports.newSong = undefined;
 
 exports.default = function () {
     var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
@@ -16885,7 +16889,7 @@ var newSong = exports.newSong = function newSong(song) {
     };
 };
 
-var newLike = function newLike(song) {
+var newLike = exports.newLike = function newLike(song) {
     return {
         type: NEW_LIKE,
         song: song
@@ -16939,7 +16943,8 @@ var putLike = exports.putLike = function putLike(id) {
         _axios2.default.put('/api/song/' + id).then(function (res) {
             return res.data;
         }).then(function (song) {
-            return dispatch(newLike(song));
+            _socket2.default.emit('new-like', song);
+            dispatch(newLike(song));
         });
     };
 };

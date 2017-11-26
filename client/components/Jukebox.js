@@ -25,8 +25,7 @@ class Jukebox extends React.Component{
     handleSongSubmit(e) {
         e.preventDefault()
         this.setState({songText: '', artistText: ''})
-        this.props.postSong(this.state.songText, this.state.artistText, this.props.user, this.props.currentChat.id)
-        
+        this.props.postSong(this.state.songText, this.state.artistText, this.props.user, this.props.currentChat.id)      
     }
 
     render() {
