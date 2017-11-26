@@ -5,7 +5,6 @@
  */
 export {default as Main} from './main'
 export {default as UserHome} from './user-home'
-export {Login, Signup} from './auth-form'
 export {default as Profile} from './Profile'
 export {default as MyChats} from './MyChats'
 export {default as SingleChat} from './SingleChat'
