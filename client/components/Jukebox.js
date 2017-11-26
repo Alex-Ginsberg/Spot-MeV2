@@ -24,7 +24,9 @@ class Jukebox extends React.Component{
 
     handleSongSubmit(e) {
         e.preventDefault()
+        this.setState({songText: '', artistText: ''})
         this.props.postSong(this.state.songText, this.state.artistText, this.props.user, this.props.currentChat.id)
+        
     }
 
     render() {
@@ -73,9 +75,9 @@ class Jukebox extends React.Component{
                     <div className="form-group">
                         <label htmlFor="name">Submit a Song</label>
                         <input className="form-control" type="text" name="songName" placeholder="Enter song name" required 
-                        onChange={(e) => this.setState({songText: e.target.value})} />
+                        onChange={(e) => this.setState({songText: e.target.value})} value={this.state.songText} />
                         <input className="form-control" type="text" name="songArtist" placeholder="Enter artist" required  
-                        onChange={(e) => this.setState({artistText: e.target.value})}/>
+                        onChange={(e) => this.setState({artistText: e.target.value})} value={this.state.artistText} />
                     </div>
                     <div className="form-group">
                         <button type="submit" className="btn btn-default">Get Song</button>
