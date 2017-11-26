@@ -1,4 +1,5 @@
 import axios from 'axios'
+import socket from '../socket'
 
 /*
     ACTION TYPES
@@ -15,7 +16,7 @@ const getSongs = songs => ({
     songs
 })
 
-const newSong = song => ({
+export const newSong = song => ({
     type: POST_SONG,
     song
 })
@@ -58,8 +59,11 @@ export const postSong = (title, artist, user, chatId) =>
                     chatId: chatId
                 })
                     .then(postedSong => postedSong.data)
-                    .then(postedSongData => dispatch(newSong(postedSongData[0])))
-            })      
+                    .then(postedSongData => {
+                        dispatch(newSong(postedSongData[0]))
+                        socket.emit('new-song', postedSongData[0])
+                    })
+            })
 }
 
 export const putLike = id =>
