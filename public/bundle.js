@@ -6549,9 +6549,17 @@ var _socket = __webpack_require__(248);
 
 var _socket2 = _interopRequireDefault(_socket);
 
+var _store = __webpack_require__(10);
+
+var _store2 = _interopRequireDefault(_store);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var socket = (0, _socket2.default)(window.location.origin);
+
+socket.on('new-song', function (song) {
+  _store2.default.dispatch((0, _store.newSong)(song));
+});
 
 socket.on('connect', function () {
   console.log('Connected!');
@@ -16820,7 +16828,7 @@ var fetchFriends = exports.fetchFriends = function fetchFriends() {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.putLike = exports.postSong = exports.fetchSongs = undefined;
+exports.putLike = exports.postSong = exports.fetchSongs = exports.newSong = undefined;
 
 exports.default = function () {
     var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
@@ -16844,6 +16852,10 @@ var _axios = __webpack_require__(8);
 
 var _axios2 = _interopRequireDefault(_axios);
 
+var _socket = __webpack_require__(47);
+
+var _socket2 = _interopRequireDefault(_socket);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -16865,7 +16877,7 @@ var getSongs = function getSongs(songs) {
     };
 };
 
-var newSong = function newSong(song) {
+var newSong = exports.newSong = function newSong(song) {
     return {
         type: POST_SONG,
         song: song
@@ -16914,7 +16926,8 @@ var postSong = exports.postSong = function postSong(title, artist, user, chatId)
             }).then(function (postedSong) {
                 return postedSong.data;
             }).then(function (postedSongData) {
-                return dispatch(newSong(postedSongData[0]));
+                dispatch(newSong(postedSongData[0]));
+                _socket2.default.emit('new-song', postedSongData[0]);
             });
         });
     };
