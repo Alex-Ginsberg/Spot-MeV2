@@ -70,10 +70,19 @@ body {
 .heading {
   color: white;
   z-index: 1;
+  text-align: center;
+}
+
+.chatBubble {
+
+}
+
+.chatText {
+  margin: 10;
 }
 
 .chatPic {
-  height: 50px;
+  height: 25px;
   border-radius: 20px;
   display: inline-block;
 }
@@ -107,4 +116,129 @@ body {
 
 .friend-text {
   display: inline-block;
+  margin: 0;
+}
+
+.start {
+  // color: white;
+  // z-index: 1;
+  // background-color: green;
+  // border-radius: 20px;
+  background: initial;
+	border: initial;
+	border-width: 0 7px;
+	box-sizing: border-box;
+	color: green;
+	cursor: default;
+	display: inline-block;
+	font-size: 50px;
+	line-height: 50px;
+	margin: 0;
+	max-width: 100%;
+	overflow: hidden;
+	padding: 2px;
+	text-decoration: none;
+	text-overflow: ellipsis;
+	text-shadow: 0 1px 0 #EEE;
+	white-space: nowrap;
+}
+
+.profile-heading {
+  text-align: center;
+  background: initial;
+	border: initial;
+	border-width: 0 7px;
+	box-sizing: border-box;
+	color: black;
+	cursor: default;
+	font-size: 50px;
+	line-height: 50px;
+	margin: 0;
+	max-width: 100%;
+	overflow: hidden;
+	padding: 2px;
+	text-decoration: none;
+	text-overflow: ellipsis;
+	text-shadow: 0 1px 0 blue;
+	white-space: nowrap;
+}
+
+.center { 
+  text-align: center;
+}
+
+.col-left {
+  float:left; 
+  margin:0; 
+  width:50%;
+}
+
+.col-right {
+  float:left; 
+  margin:0; 
+  width:50%;
+}
+
+.columns {
+  margin:0px auto; 
+  width:100%;
+}
+
+.form-box {
+  clear: both;
+}
+
+.btn {
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  background: #34d934;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
+}
+
+
+.chat {
+  background-color: gray;
+  width: 33%;
+}
+
+.btn-open {
+  background: #3498db;
+  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+  background-image: -o-linear-gradient(top, #3498db, #2980b9);
+  background-image: linear-gradient(to bottom, #3498db, #2980b9);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 12px;
+  padding: 10px 10px 10px 10px;
+  text-decoration: none;
+}
+
+.btn-open:hover {
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
 }

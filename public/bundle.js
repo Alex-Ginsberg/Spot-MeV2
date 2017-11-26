@@ -15757,12 +15757,15 @@ var Messaging = function (_React$Component) {
                     return _react2.default.createElement(
                         'div',
                         { className: 'chatBubble', key: message.id },
-                        _react2.default.createElement('img', { className: 'chatPic', src: message.user.proPic }),
+                        _react2.default.createElement('img', { className: 'friend-icon', src: message.user.proPic }),
                         _react2.default.createElement(
                             'p',
-                            null,
-                            message.user.name,
-                            ': ',
+                            { className: 'friend-text' },
+                            message.user.name
+                        ),
+                        _react2.default.createElement(
+                            'p',
+                            { className: 'chatText' },
                             message.body
                         )
                     );
@@ -15872,6 +15875,11 @@ var MyChats = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         null,
+        _react2.default.createElement(
+          'h2',
+          null,
+          'Your Music-Groups'
+        ),
         this.props.chats.map(function (chat) {
           return _react2.default.createElement(
             'div',
@@ -15879,14 +15887,21 @@ var MyChats = function (_React$Component) {
             _react2.default.createElement(
               'a',
               { href: chat.externalUrl },
-              'Play!'
+              _react2.default.createElement(
+                'button',
+                { className: 'btn' },
+                'Open ',
+                chat.name,
+                ' in Spotify'
+              )
             ),
             _react2.default.createElement(
               _reactRouterDom.Link,
               { to: '/singlechat/' + chat.id },
               _react2.default.createElement(
-                'p',
-                null,
+                'button',
+                { className: 'btn-open' },
+                'Open ',
                 chat.name
               )
             )
@@ -15984,14 +15999,16 @@ var Profile = function (_React$Component) {
     value: function componentDidMount() {
       this.props.isLoggedIn();
       this.props.refreshToken();
+      this.props.fetchFriends();
     }
   }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
 
-      var user = this.props.user;
-
+      var _props = this.props,
+          user = _props.user,
+          friends = _props.friends;
 
       return _react2.default.createElement(
         'div',
@@ -16001,64 +16018,108 @@ var Profile = function (_React$Component) {
           null,
           _react2.default.createElement(
             'p',
-            null,
-            user.name
+            { className: 'profile-heading' },
+            'Welcome back, ',
+            user.name,
+            '!'
           ),
-          _react2.default.createElement('img', { src: user.proPic }),
           _react2.default.createElement(
-            'form',
-            { onSubmit: function onSubmit(e) {
-                e.preventDefault();
-                var jsonData = {
-                  name: _this2.state.formName,
-                  public: false,
-                  collaborative: true
-                };
-
-                (0, _axios2.default)({
-                  method: 'post',
-                  url: 'https://api.spotify.com/v1/users/' + user.SpotifyId + '/playlists',
-                  data: jsonData,
-                  dataType: 'json',
-                  headers: {
-                    'Authorization': 'Bearer ' + user.accessToken,
-                    'Content-Type': 'application/json'
-                  }
-                }).then(function (res) {
-                  console.log(res.data);
-                  _this2.props.makeNewChat({
-                    name: _this2.state.formName,
-                    externalUrl: res.data.external_urls.spotify,
-                    playlistId: res.data.id,
-                    likesNeeded: _this2.state.formLikesNeeded,
-                    userId: user.id
-                  });
-                }).catch(function (err) {
-                  console.log('There was an error: ', err);
-                });
-              } },
+            'div',
+            { className: 'columns' },
             _react2.default.createElement(
               'div',
-              { className: 'form-group' },
-              _react2.default.createElement(
-                'label',
-                { htmlFor: 'name' },
-                'Create a new music group!'
-              ),
-              _react2.default.createElement('input', { className: 'form-control', type: 'text', name: 'playlistName', placeholder: 'Enter playlist name', onChange: function onChange(e) {
-                  return _this2.setState({ formName: e.target.value });
-                } }),
-              _react2.default.createElement('input', { className: 'form-control', type: 'number', name: 'likesNeeded', placeholder: 'Enter likes needed for a song to be added', onChange: function onChange(e) {
-                  return _this2.setState({ formLikesNeeded: e.target.value });
-                } })
+              { className: 'col-left' },
+              _react2.default.createElement('img', { src: user.proPic, className: 'profile-pic' })
             ),
             _react2.default.createElement(
               'div',
-              { className: 'form-group' },
+              { className: 'col-right' },
               _react2.default.createElement(
-                'button',
-                { type: 'submit', className: 'btn btn-default' },
-                'Submit Music Group'
+                _reactRouterDom.Link,
+                { to: '/addfriends' },
+                _react2.default.createElement(
+                  'button',
+                  { className: 'btn' },
+                  'Add Friends'
+                )
+              ),
+              _react2.default.createElement(
+                'h3',
+                null,
+                'Your Friends'
+              ),
+              friends.map(function (friend) {
+                return _react2.default.createElement(
+                  'div',
+                  { key: friend.id },
+                  _react2.default.createElement('img', { className: 'friend-icon', src: friend.proPic }),
+                  _react2.default.createElement(
+                    'p',
+                    { className: 'friend-text' },
+                    friend.name
+                  )
+                );
+              })
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'form-box' },
+            _react2.default.createElement(
+              'form',
+              { onSubmit: function onSubmit(e) {
+                  e.preventDefault();
+                  var jsonData = {
+                    name: _this2.state.formName,
+                    public: false,
+                    collaborative: true
+                  };
+
+                  (0, _axios2.default)({
+                    method: 'post',
+                    url: 'https://api.spotify.com/v1/users/' + user.SpotifyId + '/playlists',
+                    data: jsonData,
+                    dataType: 'json',
+                    headers: {
+                      'Authorization': 'Bearer ' + user.accessToken,
+                      'Content-Type': 'application/json'
+                    }
+                  }).then(function (res) {
+                    console.log(res.data);
+                    _this2.props.makeNewChat({
+                      name: _this2.state.formName,
+                      externalUrl: res.data.external_urls.spotify,
+                      playlistId: res.data.id,
+                      likesNeeded: _this2.state.formLikesNeeded,
+                      userId: user.id
+                    });
+                  }).catch(function (err) {
+                    console.log('There was an error: ', err);
+                  });
+                } },
+              _react2.default.createElement(
+                'div',
+                { className: 'form-group' },
+                _react2.default.createElement(
+                  'label',
+                  { htmlFor: 'name' },
+                  'Create a new music group!'
+                ),
+                _react2.default.createElement('input', { className: 'form-control', type: 'text', name: 'playlistName', placeholder: 'Enter playlist name', onChange: function onChange(e) {
+                    return _this2.setState({ formName: e.target.value });
+                  } }),
+                _react2.default.createElement('input', { className: 'form-control', type: 'number', name: 'likesNeeded', placeholder: 'Enter likes needed for a song to be added', onChange: function onChange(e) {
+                    return _this2.setState({ formLikesNeeded: e.target.value });
+                  } })
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'form-group' },
+                _react2.default.createElement(
+                  'button',
+                  { type: 'submit', className: 'btn' },
+                  'Submit Music Group'
+                )
               )
             )
           )
@@ -16078,7 +16139,8 @@ var Profile = function (_React$Component) {
 
 var mapState = function mapState(state) {
   return {
-    user: state.user
+    user: state.user,
+    friends: state.friends
   };
 };
 
@@ -16092,6 +16154,9 @@ var mapDispatch = function mapDispatch(dispatch) {
     },
     refreshToken: function refreshToken() {
       dispatch((0, _store.refresh)());
+    },
+    fetchFriends: function fetchFriends() {
+      dispatch((0, _store.fetchFriends)());
     }
   };
 };
@@ -16198,7 +16263,11 @@ var SingleChat = function (_React$Component) {
         _react2.default.createElement(
           'a',
           { href: chat.externalUrl },
-          'Open in Spotify'
+          _react2.default.createElement(
+            'button',
+            { className: 'btn' },
+            'Open in Spotify'
+          )
         ),
         _react2.default.createElement(
           'h3',
@@ -16206,7 +16275,6 @@ var SingleChat = function (_React$Component) {
           'Created by ',
           owner.name
         ),
-        _react2.default.createElement('img', { src: owner.proPic }),
         chat.id && _react2.default.createElement(_Messaging2.default, { chatId: chat.id })
       );
     }
@@ -16366,14 +16434,14 @@ var Main = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var test = "Zedd.mp4";
+      var vids = ["Zedd.mp4", "Cage.mp4", "Imagine.mp4"];
       return _react2.default.createElement(
         'div',
         { className: 'fullscreen-bg' },
         _react2.default.createElement(
           'video',
           { loop: true, muted: true, autoPlay: true, className: 'fullscreen-bg__video' },
-          _react2.default.createElement('source', { src: test, type: 'video/mp4' })
+          _react2.default.createElement('source', { src: vids[Math.floor(Math.random() * vids.length)], type: 'video/mp4' })
         ),
         _react2.default.createElement(
           'h1',
@@ -16388,12 +16456,28 @@ var Main = function (_React$Component) {
         !this.props.user.id && _react2.default.createElement(
           'a',
           { href: '/auth/spotify' },
-          'Login with Spotify'
+          _react2.default.createElement(
+            'p',
+            { className: 'center' },
+            _react2.default.createElement(
+              'span',
+              { className: 'start' },
+              'GET STARTED'
+            )
+          )
         ),
         this.props.user.id && _react2.default.createElement(
           _reactRouterDom.Link,
           { to: '/profile' },
-          'Profile'
+          _react2.default.createElement(
+            'p',
+            { className: 'center' },
+            _react2.default.createElement(
+              'span',
+              { className: 'start' },
+              'START!'
+            )
+          )
         )
       );
     }
@@ -16545,6 +16629,8 @@ exports.default = function () {
     switch (action.type) {
         case GET_CHATS:
             return action.chats;
+        case POST_CHAT:
+            return [].concat(_toConsumableArray(state), [action.chat]);
         default:
             return state;
     }
@@ -16555,6 +16641,8 @@ var _axios = __webpack_require__(8);
 var _axios2 = _interopRequireDefault(_axios);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 /*
     ACTION TYPES
@@ -16586,8 +16674,8 @@ var postChat = exports.postChat = function postChat(chat) {
     return function (dispatch) {
         _axios2.default.post('/api/chat', chat).then(function (res) {
             return res.data;
-        }).then(function (chat) {
-            return console.log(chat);
+        }).then(function (created) {
+            return dispatch(newChat(created));
         });
     };
 };
@@ -17383,7 +17471,7 @@ exports = module.exports = __webpack_require__(152)();
 
 
 // module
-exports.push([module.i, "body {\n  font-family: sans-serif; }\n  body a {\n    text-decoration: none; }\n  body label {\n    display: block; }\n  body nav a {\n    display: inline-block;\n    margin: 1em; }\n  body form div {\n    margin: 1em;\n    display: inline-block; }\n\n.fullscreen-bg {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  overflow: hidden;\n  z-index: -100; }\n\n.fullscreen-bg__video {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  z-index: -100; }\n\n@media (min-aspect-ratio: 16 / 9) {\n  .fullscreen-bg__video {\n    height: 300%;\n    top: -100%;\n    z-index: -100; } }\n\n@media (max-aspect-ratio: 16 / 9) {\n  .fullscreen-bg__video {\n    width: 300%;\n    left: -100%;\n    z-index: -100; } }\n\n@media (max-width: 767px) {\n  .fullscreen-bg {\n    z-index: -100; }\n  .fullscreen-bg__video {\n    display: none;\n    z-index: -100; } }\n\n.heading {\n  color: white;\n  z-index: 1; }\n\n.chatPic {\n  height: 50px;\n  border-radius: 20px;\n  display: inline-block; }\n\n.song-pic {\n  height: 50px;\n  display: inline-block; }\n\n.song-play {\n  display: inline-block;\n  height: 25px; }\n\n.num-likes {\n  font-size: 75%;\n  display: inline-block; }\n\n.been-liked {\n  display: inline-block;\n  height: 25px;\n  opacity: 0.5; }\n\n.friend-icon {\n  display: inline-block;\n  height: 35px;\n  border-radius: 20px; }\n\n.friend-text {\n  display: inline-block; }\n", ""]);
+exports.push([module.i, "body {\n  font-family: sans-serif; }\n  body a {\n    text-decoration: none; }\n  body label {\n    display: block; }\n  body nav a {\n    display: inline-block;\n    margin: 1em; }\n  body form div {\n    margin: 1em;\n    display: inline-block; }\n\n.fullscreen-bg {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  overflow: hidden;\n  z-index: -100; }\n\n.fullscreen-bg__video {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  z-index: -100; }\n\n@media (min-aspect-ratio: 16 / 9) {\n  .fullscreen-bg__video {\n    height: 300%;\n    top: -100%;\n    z-index: -100; } }\n\n@media (max-aspect-ratio: 16 / 9) {\n  .fullscreen-bg__video {\n    width: 300%;\n    left: -100%;\n    z-index: -100; } }\n\n@media (max-width: 767px) {\n  .fullscreen-bg {\n    z-index: -100; }\n  .fullscreen-bg__video {\n    display: none;\n    z-index: -100; } }\n\n.heading {\n  color: white;\n  z-index: 1;\n  text-align: center; }\n\n.chatText {\n  margin: 10; }\n\n.chatPic {\n  height: 25px;\n  border-radius: 20px;\n  display: inline-block; }\n\n.song-pic {\n  height: 50px;\n  display: inline-block; }\n\n.song-play {\n  display: inline-block;\n  height: 25px; }\n\n.num-likes {\n  font-size: 75%;\n  display: inline-block; }\n\n.been-liked {\n  display: inline-block;\n  height: 25px;\n  opacity: 0.5; }\n\n.friend-icon {\n  display: inline-block;\n  height: 35px;\n  border-radius: 20px; }\n\n.friend-text {\n  display: inline-block;\n  margin: 0; }\n\n.start {\n  background: initial;\n  border: initial;\n  border-width: 0 7px;\n  box-sizing: border-box;\n  color: green;\n  cursor: default;\n  display: inline-block;\n  font-size: 50px;\n  line-height: 50px;\n  margin: 0;\n  max-width: 100%;\n  overflow: hidden;\n  padding: 2px;\n  text-decoration: none;\n  text-overflow: ellipsis;\n  text-shadow: 0 1px 0 #EEE;\n  white-space: nowrap; }\n\n.profile-heading {\n  text-align: center;\n  background: initial;\n  border: initial;\n  border-width: 0 7px;\n  box-sizing: border-box;\n  color: black;\n  cursor: default;\n  font-size: 50px;\n  line-height: 50px;\n  margin: 0;\n  max-width: 100%;\n  overflow: hidden;\n  padding: 2px;\n  text-decoration: none;\n  text-overflow: ellipsis;\n  text-shadow: 0 1px 0 blue;\n  white-space: nowrap; }\n\n.center {\n  text-align: center; }\n\n.col-left {\n  float: left;\n  margin: 0;\n  width: 50%; }\n\n.col-right {\n  float: left;\n  margin: 0;\n  width: 50%; }\n\n.columns {\n  margin: 0px auto;\n  width: 100%; }\n\n.form-box {\n  clear: both; }\n\n.btn {\n  -webkit-border-radius: 28;\n  -moz-border-radius: 28;\n  border-radius: 28px;\n  font-family: Arial;\n  color: #ffffff;\n  font-size: 20px;\n  background: #34d934;\n  padding: 10px 20px 10px 20px;\n  text-decoration: none; }\n\n.btn:hover {\n  background: #3cb0fd;\n  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);\n  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);\n  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);\n  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);\n  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);\n  text-decoration: none; }\n\n.chat {\n  background-color: gray;\n  width: 33%; }\n\n.btn-open {\n  background: #3498db;\n  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);\n  background-image: -moz-linear-gradient(top, #3498db, #2980b9);\n  background-image: -ms-linear-gradient(top, #3498db, #2980b9);\n  background-image: -o-linear-gradient(top, #3498db, #2980b9);\n  background-image: linear-gradient(to bottom, #3498db, #2980b9);\n  -webkit-border-radius: 28;\n  -moz-border-radius: 28;\n  border-radius: 28px;\n  font-family: Arial;\n  color: #ffffff;\n  font-size: 12px;\n  padding: 10px 10px 10px 10px;\n  text-decoration: none; }\n\n.btn-open:hover {\n  background: #3cb0fd;\n  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);\n  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);\n  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);\n  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);\n  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);\n  text-decoration: none; }\n", ""]);
 
 // exports
 
