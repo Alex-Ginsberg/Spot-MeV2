@@ -13,6 +13,7 @@ const Liker = db.define('liker', {})
 const UserChat = db.define('user_chat', {})
 User.belongsToMany(Chat, { through: UserChat })
 Chat.belongsToMany(User, { through: UserChat })
+Chat.belongsTo(User)
 
 User.hasMany(Message)
 Message.belongsTo(User)

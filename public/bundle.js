@@ -789,6 +789,12 @@ module.exports = invariant;
 /* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
+module.exports = __webpack_require__(114);
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 
 
@@ -885,12 +891,6 @@ var middleware = (0, _reduxDevtoolsExtension.composeWithDevTools)((0, _redux.app
 var store = (0, _redux.createStore)(reducer, middleware);
 
 exports.default = store;
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(114);
 
 /***/ }),
 /* 10 */
@@ -5096,7 +5096,7 @@ var _socket = __webpack_require__(248);
 
 var _socket2 = _interopRequireDefault(_socket);
 
-var _store = __webpack_require__(8);
+var _store = __webpack_require__(9);
 
 var _store2 = _interopRequireDefault(_store);
 
@@ -7014,7 +7014,7 @@ exports.default = function () {
     }
 };
 
-var _axios = __webpack_require__(9);
+var _axios = __webpack_require__(8);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -15138,9 +15138,9 @@ var _reactRedux = __webpack_require__(5);
 
 var _reactRouterDom = __webpack_require__(12);
 
-var _store = __webpack_require__(8);
+var _store = __webpack_require__(9);
 
-var _axios = __webpack_require__(9);
+var _axios = __webpack_require__(8);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -15317,7 +15317,7 @@ var _reactRedux = __webpack_require__(5);
 
 var _reactRouterDom = __webpack_require__(12);
 
-var _axios = __webpack_require__(9);
+var _axios = __webpack_require__(8);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -15467,7 +15467,11 @@ var _reactRedux = __webpack_require__(5);
 
 var _reactRouterDom = __webpack_require__(12);
 
-var _store = __webpack_require__(8);
+var _store = __webpack_require__(9);
+
+var _axios = __webpack_require__(8);
+
+var _axios2 = _interopRequireDefault(_axios);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -15506,7 +15510,7 @@ var Jukebox = function (_React$Component) {
         value: function handleSongSubmit(e) {
             e.preventDefault();
             this.setState({ songText: '', artistText: '' });
-            this.props.postSong(this.state.songText, this.state.artistText, this.props.user, this.props.currentChat.id);
+            this.props.postSong(this.state.songText, this.state.artistText, this.props.user, this.props.currentChat[0].id);
         }
     }, {
         key: 'render',
@@ -15525,7 +15529,7 @@ var Jukebox = function (_React$Component) {
                 song.beenLiked = beenLiked;
                 return song;
             });
-
+            console.log(this.props.currentChat);
             return _react2.default.createElement(
                 'div',
                 null,
@@ -15563,6 +15567,16 @@ var Jukebox = function (_React$Component) {
                             } }),
                         song.beenLiked || _this2.state.recentlyLiked.includes(song.id) ? _react2.default.createElement('img', { className: 'been-liked', src: 'https://image.flaticon.com/icons/svg/81/81250.svg' }) : _react2.default.createElement('img', { className: 'song-play', src: 'http://icons.iconarchive.com/icons/iconsmind/outline/128/Like-2-icon.png',
                             onClick: function onClick() {
+                                if (song.likes + 1 >= _this2.props.currentChat[0].likesNeeded) {
+                                    (0, _axios2.default)({
+                                        method: 'post',
+                                        url: 'https://api.spotify.com/v1/users/' + _this2.props.currentChat[0].admin + '/playlists/' + _this2.props.currentChat[0].playlistId + '/tracks?uris=' + song.uri,
+                                        headers: {
+                                            'Authorization': 'Bearer ' + _this2.props.currentChat[1].accessToken,
+                                            'Content-Type': 'application/json'
+                                        }
+                                    });
+                                }
                                 _this2.props.putLike(song.id);
                                 var oldLikes = _this2.state.recentlyLiked;
                                 oldLikes.push(song.id);
@@ -15665,9 +15679,9 @@ var _reactRedux = __webpack_require__(5);
 
 var _reactRouterDom = __webpack_require__(12);
 
-var _store = __webpack_require__(8);
+var _store = __webpack_require__(9);
 
-var _axios = __webpack_require__(9);
+var _axios = __webpack_require__(8);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -15843,7 +15857,7 @@ var _reactRedux = __webpack_require__(5);
 
 var _reactRouterDom = __webpack_require__(12);
 
-var _store = __webpack_require__(8);
+var _store = __webpack_require__(9);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -15949,9 +15963,9 @@ var _reactRedux = __webpack_require__(5);
 
 var _reactRouterDom = __webpack_require__(12);
 
-var _store = __webpack_require__(8);
+var _store = __webpack_require__(9);
 
-var _axios = __webpack_require__(9);
+var _axios = __webpack_require__(8);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -16012,7 +16026,8 @@ var Profile = function (_React$Component) {
                 e.preventDefault();
                 var jsonData = {
                   name: _this2.state.formName,
-                  public: true
+                  public: false,
+                  collaborative: true
                 };
 
                 (0, _axios2.default)({
@@ -16137,11 +16152,11 @@ var _Messaging = __webpack_require__(134);
 
 var _Messaging2 = _interopRequireDefault(_Messaging);
 
-var _axios = __webpack_require__(9);
+var _axios = __webpack_require__(8);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _store = __webpack_require__(8);
+var _store = __webpack_require__(9);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -16174,20 +16189,9 @@ var SingleChat = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
       // Gets the info about the admin of the chat AFTER that currentChat has been set
-      if (!this.state.owner.id && this.props.currentChat.userId) {
-        _axios2.default.get('/api/users/' + this.props.currentChat.userId).then(function (res) {
-          return res.data;
-        }).then(function (user) {
-          return _this2.setState({ owner: user });
-        });
-      }
-
-      var currentChat = this.props.currentChat;
-      var owner = this.state.owner;
-
+      var chat = this.props.currentChat[0] || { name: 'hi', externalUrl: 'hi' };
+      var owner = this.props.currentChat[1] || { name: 'hi', proPic: '' };
       return _react2.default.createElement(
         'div',
         null,
@@ -16204,11 +16208,11 @@ var SingleChat = function (_React$Component) {
         _react2.default.createElement(
           'h1',
           null,
-          currentChat.name
+          chat.name
         ),
         _react2.default.createElement(
           'a',
-          { href: currentChat.externalUrl },
+          { href: chat.externalUrl },
           'Open in Spotify'
         ),
         _react2.default.createElement(
@@ -16218,7 +16222,7 @@ var SingleChat = function (_React$Component) {
           owner.name
         ),
         _react2.default.createElement('img', { src: owner.proPic }),
-        currentChat.id && _react2.default.createElement(_Messaging2.default, { chatId: currentChat.id })
+        chat.id && _react2.default.createElement(_Messaging2.default, { chatId: chat.id })
       );
     }
   }]);
@@ -16347,7 +16351,7 @@ var _propTypes = __webpack_require__(3);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _store = __webpack_require__(8);
+var _store = __webpack_require__(9);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -16494,7 +16498,7 @@ var _reactRedux = __webpack_require__(5);
 
 var _reactRouterDom = __webpack_require__(12);
 
-var _store = __webpack_require__(8);
+var _store = __webpack_require__(9);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -16661,7 +16665,7 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactRedux = __webpack_require__(5);
 
-var _store = __webpack_require__(8);
+var _store = __webpack_require__(9);
 
 var _store2 = _interopRequireDefault(_store);
 
@@ -16705,7 +16709,7 @@ exports.default = function () {
     }
 };
 
-var _axios = __webpack_require__(9);
+var _axios = __webpack_require__(8);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -16785,7 +16789,7 @@ exports.default = function () {
     }
 };
 
-var _axios = __webpack_require__(9);
+var _axios = __webpack_require__(8);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -16853,7 +16857,7 @@ exports.default = function () {
     }
 };
 
-var _axios = __webpack_require__(9);
+var _axios = __webpack_require__(8);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -16979,7 +16983,7 @@ exports.default = function () {
   }
 };
 
-var _axios = __webpack_require__(9);
+var _axios = __webpack_require__(8);
 
 var _axios2 = _interopRequireDefault(_axios);
 

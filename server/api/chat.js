@@ -9,6 +9,8 @@ router.post('/', (req, res, next) => {
             externalUrl: req.body.externalUrl,
             playlistId: req.body.playlistId,
             likesNeeded: req.body.likesNeeded,
+            admin: req.user.SpotifyId,
+            userId: req.body.userId
         }
     })
     .spread((chat, created) => {
@@ -47,9 +49,16 @@ router.get('/', (req, res, next) => {
 
 router.get('/:id', (req, res, next) => {
     Chat.findOne({
-        where: {id: req.params.id}
+        where: {id: req.params.id},
     })
-    .then(chat => res.json(chat))
+    .then(chat => {
+        User.findOne({
+            where: {id: chat.userId}
+        })
+            .then(user => {
+                res.json([chat, user])
+            })       
+    })
 })
 
 router.post('/add', (req, res, next) => {

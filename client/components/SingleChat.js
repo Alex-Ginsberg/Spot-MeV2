@@ -24,14 +24,8 @@ class SingleChat extends React.Component{
 
   render() {
       // Gets the info about the admin of the chat AFTER that currentChat has been set
-      if (!this.state.owner.id && this.props.currentChat.userId){
-        axios.get(`/api/users/${this.props.currentChat.userId}`)
-          .then(res => res.data)
-          .then(user => this.setState({owner: user}))
-      }
-
-      const {currentChat} = this.props
-      const {owner} = this.state
+      const chat = this.props.currentChat[0] || {name: 'hi', externalUrl: 'hi'}
+      const owner = this.props.currentChat[1] || {name: 'hi', proPic: ''}
       return (
         <div>
             <Menu styles={styles} right customBurgerIcon={<img src="https://image.flaticon.com/icons/svg/26/26805.svg" />}>
@@ -40,11 +34,11 @@ class SingleChat extends React.Component{
             <Menu styles={stylesFriends} right customBurgerIcon={<img src="https://d30y9cdsu7xlg0.cloudfront.net/png/138580-200.png" />}>
               <AddToChat />
             </Menu>
-            <h1>{currentChat.name}</h1>
-            <a href={currentChat.externalUrl}>Open in Spotify</a>
+            <h1>{chat.name}</h1>
+            <a href={chat.externalUrl}>Open in Spotify</a>
             <h3>Created by {owner.name}</h3>
             <img src={owner.proPic} />
-            {currentChat.id && <Messaging chatId={currentChat.id} />}
+            {chat.id && <Messaging chatId={chat.id} />}
         </div>
       )
   }
