@@ -34,7 +34,8 @@ class Profile extends React.Component{
               e.preventDefault()
               const jsonData = {
                 name: this.state.formName,
-                public: true,
+                public: false,
+                collaborative: true
               }
 
               axios({

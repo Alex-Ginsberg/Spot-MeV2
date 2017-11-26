@@ -15469,6 +15469,10 @@ var _reactRouterDom = __webpack_require__(12);
 
 var _store = __webpack_require__(8);
 
+var _axios = __webpack_require__(9);
+
+var _axios2 = _interopRequireDefault(_axios);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -15563,6 +15567,16 @@ var Jukebox = function (_React$Component) {
                             } }),
                         song.beenLiked || _this2.state.recentlyLiked.includes(song.id) ? _react2.default.createElement('img', { className: 'been-liked', src: 'https://image.flaticon.com/icons/svg/81/81250.svg' }) : _react2.default.createElement('img', { className: 'song-play', src: 'http://icons.iconarchive.com/icons/iconsmind/outline/128/Like-2-icon.png',
                             onClick: function onClick() {
+                                if (song.likes + 1 >= _this2.props.currentChat.likesNeeded) {
+                                    (0, _axios2.default)({
+                                        method: 'post',
+                                        url: 'https://api.spotify.com/v1/users/' + _this2.props.currentChat.admin + '/playlists/' + _this2.props.currentChat.playlistId + '/tracks?uris=' + song.uri,
+                                        headers: {
+                                            'Authorization': 'Bearer ' + _this2.props.user.accessToken,
+                                            'Content-Type': 'application/json'
+                                        }
+                                    });
+                                }
                                 _this2.props.putLike(song.id);
                                 var oldLikes = _this2.state.recentlyLiked;
                                 oldLikes.push(song.id);
@@ -16012,7 +16026,8 @@ var Profile = function (_React$Component) {
                 e.preventDefault();
                 var jsonData = {
                   name: _this2.state.formName,
-                  public: true
+                  public: false,
+                  collaborative: true
                 };
 
                 (0, _axios2.default)({

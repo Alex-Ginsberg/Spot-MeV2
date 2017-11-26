@@ -9,6 +9,7 @@ router.post('/', (req, res, next) => {
             externalUrl: req.body.externalUrl,
             playlistId: req.body.playlistId,
             likesNeeded: req.body.likesNeeded,
+            admin: req.user.SpotifyId
         }
     })
     .spread((chat, created) => {

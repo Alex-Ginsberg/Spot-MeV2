@@ -5,7 +5,8 @@ const Chat = db.define('chat', {
   name: Sequelize.STRING,
   externalUrl: Sequelize.STRING,
   playlistId: Sequelize.STRING,
-  likesNeeded: Sequelize.INTEGER
+  likesNeeded: Sequelize.INTEGER,
+  admin: Sequelize.STRING
 })
 
 module.exports = Chat

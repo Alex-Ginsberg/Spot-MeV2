@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import {postSong, fetchSongs, putLike} from '../store'
+import axios from 'axios'
 
 
 class Jukebox extends React.Component{
@@ -61,7 +62,17 @@ class Jukebox extends React.Component{
                         }} />}
                         {(song.beenLiked || this.state.recentlyLiked.includes(song.id)) ? <img className="been-liked" src="https://image.flaticon.com/icons/svg/81/81250.svg" /> : <img className="song-play" src="http://icons.iconarchive.com/icons/iconsmind/outline/128/Like-2-icon.png" 
                         onClick={() => {
-                            this.props.putLike(song.id)
+                            if (song.likes + 1 >= this.props.currentChat.likesNeeded) {
+                                axios({
+                                    method: 'post',
+                                    url: `https://api.spotify.com/v1/users/${this.props.currentChat.admin}/playlists/${this.props.currentChat.playlistId}/tracks?uris=${song.uri}`,
+                                    headers: {
+                                        'Authorization': 'Bearer ' + this.props.user.accessToken,
+                                        'Content-Type': 'application/json'
+                                    }
+                                })
+                            }
+                            this.props.putLike(song.id)   
                             const oldLikes = this.state.recentlyLiked
                             oldLikes.push(song.id)
                             this.setState({recentlyLiked: oldLikes})
