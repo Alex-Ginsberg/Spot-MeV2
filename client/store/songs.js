@@ -21,7 +21,7 @@ export const newSong = song => ({
     song
 })
 
-const newLike = song => ({
+export const newLike = song => ({
     type: NEW_LIKE,
     song
 })
@@ -70,7 +70,10 @@ export const putLike = id =>
     dispatch => {
         axios.put(`/api/song/${id}`)
             .then(res => res.data)
-            .then(song => dispatch(newLike(song)))
+            .then(song => {
+                socket.emit('new-like', song)
+                dispatch(newLike(song))
+            })
     }
 
 
