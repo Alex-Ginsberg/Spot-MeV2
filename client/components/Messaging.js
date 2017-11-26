@@ -59,8 +59,9 @@ class Messaging extends React.Component{
             <div>
                 {messages.map(message => (
                     <div className="chatBubble" key={message.id}>
-                        <img className="chatPic" src={message.user.proPic} />
-                        <p>{message.user.name}: {message.body}</p>
+                        <img className="friend-icon" src={message.user.proPic} />
+                        <p className="friend-text">{message.user.name}</p>
+                        <p className="chatText">{message.body}</p>
                     </div>
                 ))}
                 <form onSubmit={(e) => {

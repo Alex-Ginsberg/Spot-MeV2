@@ -35,9 +35,8 @@ class SingleChat extends React.Component{
               <AddToChat />
             </Menu>
             <h1>{chat.name}</h1>
-            <a href={chat.externalUrl}>Open in Spotify</a>
+            <a href={chat.externalUrl}><button className="btn">Open in Spotify</button></a>
             <h3>Created by {owner.name}</h3>
-            <img src={owner.proPic} />
             {chat.id && <Messaging chatId={chat.id} />}
         </div>
       )

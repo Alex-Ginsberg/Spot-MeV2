@@ -26,7 +26,7 @@ export const postChat = chat =>
     dispatch => {
         axios.post('/api/chat', chat)
             .then(res => res.data)
-            .then(chat => console.log(chat))
+            .then(created => dispatch(newChat(created)))
 }
 
 export const fetchChats = () => 
@@ -43,6 +43,8 @@ export default function (state = [], action) {
     switch (action.type) {
         case GET_CHATS:
             return action.chats
+        case POST_CHAT:
+            return [...state, action.chat]
         default:
             return state
     }

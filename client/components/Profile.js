@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
-import {me, postChat, refresh} from '../store'
+import {me, postChat, refresh, fetchFriends} from '../store'
 import axios from 'axios'
 import {MyChats} from './index'
 
@@ -18,19 +18,33 @@ class Profile extends React.Component{
   componentDidMount() {
     this.props.isLoggedIn()
     this.props.refreshToken()
+    this.props.fetchFriends()
   }
 
 
   render(){
-    const {user} = this.props
-
+    const {user, friends} = this.props
     return (
       <div>
         {user.id && 
         <div>
             <p className="profile-heading">Welcome back, {user.name}!</p>
-            <img src={user.proPic} className="profile-pic" />
-            <Link to={'/addfriends'}><p className="link">Friends</p></Link>
+            <div className="columns">
+              <div className="col-left">
+                <img src={user.proPic} className="profile-pic" />
+              </div>
+              <div className="col-right">
+                <Link to={'/addfriends'}><button className="btn">Add Friends</button></Link>
+                <h3>Your Friends</h3>
+                {friends.map(friend => (
+                  <div key={friend.id}>
+                    <img className="friend-icon" src={friend.proPic} />
+                    <p className="friend-text">{friend.name}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="form-box">
             <form onSubmit={(e) => {
               e.preventDefault()
               const jsonData = {
@@ -69,9 +83,10 @@ class Profile extends React.Component{
               <input className="form-control" type="number" name="likesNeeded" placeholder="Enter likes needed for a song to be added" onChange={(e) => this.setState({formLikesNeeded: e.target.value})} />
             </div>
             <div className="form-group">
-                <button type="submit" className="btn btn-default">Submit Music Group</button>
+                <button type="submit" className="btn">Submit Music Group</button>
             </div>
             </form>
+          </div>
         </div>
         }
         <MyChats />
@@ -85,7 +100,8 @@ class Profile extends React.Component{
  */
 const mapState = (state) => {
   return {
-    user: state.user
+    user: state.user,
+    friends: state.friends
   }
 }
 
@@ -99,6 +115,9 @@ const mapDispatch = (dispatch) => {
     },
     refreshToken() {
       dispatch(refresh())
+    },
+    fetchFriends() {
+      dispatch(fetchFriends())
     }
   }
 }

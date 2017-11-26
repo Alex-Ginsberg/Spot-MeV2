@@ -12,11 +12,12 @@ class MyChats extends React.Component{
   render() {
       return (
         <div>
+          <h2>Your Music-Groups</h2>
             {this.props.chats.map(chat => (
                 <div key={chat.id}>
-                    <a href={chat.externalUrl}>Play!</a>
+                    <a href={chat.externalUrl}><button className="btn">Open {chat.name} in Spotify</button></a>
                     <Link to={`/singlechat/${chat.id}`}>
-                    <p>{chat.name}</p>
+                    <button className="btn-open">Open {chat.name}</button>
                     </Link>
                 </div>
             ))}
