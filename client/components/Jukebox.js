@@ -26,7 +26,7 @@ class Jukebox extends React.Component{
     handleSongSubmit(e) {
         e.preventDefault()
         this.setState({songText: '', artistText: ''})
-        this.props.postSong(this.state.songText, this.state.artistText, this.props.user, this.props.currentChat.id)      
+        this.props.postSong(this.state.songText, this.state.artistText, this.props.user, this.props.currentChat[0].id)      
     }
 
     render() {
@@ -42,8 +42,9 @@ class Jukebox extends React.Component{
             song.beenLiked = beenLiked
             return song
         })
-        
+        console.log(this.props.currentChat)
         return (
+            
             <div>
                 <h1>Jukebox</h1>
                 {songsToRender.map(song => (
@@ -62,12 +63,12 @@ class Jukebox extends React.Component{
                         }} />}
                         {(song.beenLiked || this.state.recentlyLiked.includes(song.id)) ? <img className="been-liked" src="https://image.flaticon.com/icons/svg/81/81250.svg" /> : <img className="song-play" src="http://icons.iconarchive.com/icons/iconsmind/outline/128/Like-2-icon.png" 
                         onClick={() => {
-                            if (song.likes + 1 >= this.props.currentChat.likesNeeded) {
+                            if (song.likes + 1 >= this.props.currentChat[0].likesNeeded) {
                                 axios({
                                     method: 'post',
-                                    url: `https://api.spotify.com/v1/users/${this.props.currentChat.admin}/playlists/${this.props.currentChat.playlistId}/tracks?uris=${song.uri}`,
+                                    url: `https://api.spotify.com/v1/users/${this.props.currentChat[0].admin}/playlists/${this.props.currentChat[0].playlistId}/tracks?uris=${song.uri}`,
                                     headers: {
-                                        'Authorization': 'Bearer ' + this.props.user.accessToken,
+                                        'Authorization': 'Bearer ' + this.props.currentChat[1].accessToken,
                                         'Content-Type': 'application/json'
                                     }
                                 })
