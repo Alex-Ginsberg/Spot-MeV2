@@ -35,8 +35,8 @@ passport.deserializeUser((id, done) =>
     .catch(done))
 
     passport.use(new SpotifyStrategy({
-      clientID: appKey,
-      clientSecret: appSecret,
+      clientID: process.env.appKey || appKey,
+      clientSecret: process.env.appSecret || appSecret,
       callbackURL: 'http://localhost:8080/callback'
       },
       function(accessToken, refreshToken, profile, done) {
