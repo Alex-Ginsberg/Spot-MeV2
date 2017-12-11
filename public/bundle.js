@@ -403,25 +403,6 @@ module.exports = warning;
 
 /***/ }),
 /* 5 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Provider__ = __webpack_require__(211);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_connectAdvanced__ = __webpack_require__(79);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__connect_connect__ = __webpack_require__(212);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Provider", function() { return __WEBPACK_IMPORTED_MODULE_0__components_Provider__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "createProvider", function() { return __WEBPACK_IMPORTED_MODULE_0__components_Provider__["b"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "connectAdvanced", function() { return __WEBPACK_IMPORTED_MODULE_1__components_connectAdvanced__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "connect", function() { return __WEBPACK_IMPORTED_MODULE_2__connect_connect__["a"]; });
-
-
-
-
-
-
-/***/ }),
-/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -727,7 +708,7 @@ module.exports = {
 
 
 /***/ }),
-/* 7 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -784,6 +765,25 @@ var invariant = function(condition, format, a, b, c, d, e, f) {
 module.exports = invariant;
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
+/* 7 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Provider__ = __webpack_require__(211);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_connectAdvanced__ = __webpack_require__(79);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__connect_connect__ = __webpack_require__(212);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Provider", function() { return __WEBPACK_IMPORTED_MODULE_0__components_Provider__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "createProvider", function() { return __WEBPACK_IMPORTED_MODULE_0__components_Provider__["b"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "connectAdvanced", function() { return __WEBPACK_IMPORTED_MODULE_1__components_connectAdvanced__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "connect", function() { return __WEBPACK_IMPORTED_MODULE_2__connect_connect__["a"]; });
+
+
+
+
+
 
 /***/ }),
 /* 8 */
@@ -4892,7 +4892,7 @@ function nextTick(fn, arg1, arg2, arg3) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react__);
@@ -5125,7 +5125,7 @@ exports.default = socket;
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
-var utils = __webpack_require__(6);
+var utils = __webpack_require__(5);
 var normalizeHeaderName = __webpack_require__(128);
 
 var PROTECTION_PREFIX = /^\)\]\}',?\n/;
@@ -5890,7 +5890,7 @@ function warning(message) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react__);
@@ -6624,7 +6624,7 @@ if (process.env.NODE_ENV === 'production') {
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
-var utils = __webpack_require__(6);
+var utils = __webpack_require__(5);
 var settle = __webpack_require__(120);
 var buildURL = __webpack_require__(123);
 var parseHeaders = __webpack_require__(129);
@@ -8147,7 +8147,7 @@ var _warning = __webpack_require__(4);
 
 var _warning2 = _interopRequireDefault(_warning);
 
-var _invariant = __webpack_require__(7);
+var _invariant = __webpack_require__(6);
 
 var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -9185,7 +9185,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 /* WEBPACK VAR INJECTION */(function(process) {/* harmony export (immutable) */ __webpack_exports__["a"] = connectAdvanced;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_hoist_non_react_statics__ = __webpack_require__(72);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_hoist_non_react_statics___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_hoist_non_react_statics__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react__);
@@ -9610,7 +9610,7 @@ function verifyPlainObject(value, displayName, methodName) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_invariant__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_invariant__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_invariant__);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -9798,7 +9798,7 @@ MemoryRouter.propTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_invariant__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_invariant__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_invariant__);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -9891,7 +9891,7 @@ Prompt.contextTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_warning__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_warning__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_invariant__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_invariant__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_invariant__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_history__ = __webpack_require__(176);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -9995,7 +9995,7 @@ Redirect.contextTypes = {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react__);
@@ -10182,7 +10182,7 @@ StaticRouter.childContextTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_warning__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_warning__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_invariant__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_invariant__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_invariant__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__matchPath__ = __webpack_require__(30);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -14104,7 +14104,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(5);
+var _reactRedux = __webpack_require__(7);
 
 var _reactRouter = __webpack_require__(230);
 
@@ -14284,7 +14284,7 @@ module.exports = function(arraybuffer, start, end) {
 "use strict";
 
 
-var utils = __webpack_require__(6);
+var utils = __webpack_require__(5);
 var bind = __webpack_require__(53);
 var Axios = __webpack_require__(116);
 var defaults = __webpack_require__(32);
@@ -14408,7 +14408,7 @@ module.exports = CancelToken;
 
 
 var defaults = __webpack_require__(32);
-var utils = __webpack_require__(6);
+var utils = __webpack_require__(5);
 var InterceptorManager = __webpack_require__(117);
 var dispatchRequest = __webpack_require__(118);
 var isAbsoluteURL = __webpack_require__(126);
@@ -14499,7 +14499,7 @@ module.exports = Axios;
 "use strict";
 
 
-var utils = __webpack_require__(6);
+var utils = __webpack_require__(5);
 
 function InterceptorManager() {
   this.handlers = [];
@@ -14558,7 +14558,7 @@ module.exports = InterceptorManager;
 "use strict";
 
 
-var utils = __webpack_require__(6);
+var utils = __webpack_require__(5);
 var transformData = __webpack_require__(121);
 var isCancel = __webpack_require__(51);
 var defaults = __webpack_require__(32);
@@ -14702,7 +14702,7 @@ module.exports = function settle(resolve, reject, response) {
 "use strict";
 
 
-var utils = __webpack_require__(6);
+var utils = __webpack_require__(5);
 
 /**
  * Transform the data for a request or a response
@@ -14772,7 +14772,7 @@ module.exports = btoa;
 "use strict";
 
 
-var utils = __webpack_require__(6);
+var utils = __webpack_require__(5);
 
 function encode(val) {
   return encodeURIComponent(val).
@@ -14866,7 +14866,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 "use strict";
 
 
-var utils = __webpack_require__(6);
+var utils = __webpack_require__(5);
 
 module.exports = (
   utils.isStandardBrowserEnv() ?
@@ -14947,7 +14947,7 @@ module.exports = function isAbsoluteURL(url) {
 "use strict";
 
 
-var utils = __webpack_require__(6);
+var utils = __webpack_require__(5);
 
 module.exports = (
   utils.isStandardBrowserEnv() ?
@@ -15022,7 +15022,7 @@ module.exports = (
 "use strict";
 
 
-var utils = __webpack_require__(6);
+var utils = __webpack_require__(5);
 
 module.exports = function normalizeHeaderName(headers, normalizedName) {
   utils.forEach(headers, function processHeader(value, name) {
@@ -15041,7 +15041,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 "use strict";
 
 
-var utils = __webpack_require__(6);
+var utils = __webpack_require__(5);
 
 /**
  * Parse headers into an object
@@ -15129,7 +15129,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(5);
+var _reactRedux = __webpack_require__(7);
 
 var _reactRouterDom = __webpack_require__(10);
 
@@ -15308,7 +15308,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(5);
+var _reactRedux = __webpack_require__(7);
 
 var _reactRouterDom = __webpack_require__(10);
 
@@ -15458,7 +15458,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(5);
+var _reactRedux = __webpack_require__(7);
 
 var _reactRouterDom = __webpack_require__(10);
 
@@ -15670,7 +15670,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(5);
+var _reactRedux = __webpack_require__(7);
 
 var _reactRouterDom = __webpack_require__(10);
 
@@ -15851,7 +15851,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(5);
+var _reactRedux = __webpack_require__(7);
 
 var _reactRouterDom = __webpack_require__(10);
 
@@ -15882,6 +15882,7 @@ var MyChats = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      console.log(this.props.chats);
       return _react2.default.createElement(
         'div',
         null,
@@ -15891,28 +15892,35 @@ var MyChats = function (_React$Component) {
           'Your Music-Groups'
         ),
         this.props.chats.map(function (chat) {
-          return _react2.default.createElement(
-            'div',
-            { key: chat.id },
+          return (
+            // <div key={chat.id}>
+            //     <a href={chat.externalUrl}><button className="btn">Open {chat.name} in Spotify</button></a>
+            //     <Link to={`/singlechat/${chat.id}`}>
+            //     <button className="btn-open">Open {chat.name}</button>
+            //     </Link>
+            // </div>
             _react2.default.createElement(
-              'a',
-              { href: chat.externalUrl },
+              'div',
+              { key: chat.id },
               _react2.default.createElement(
-                'button',
-                { className: 'btn' },
-                'Open ',
-                chat.name,
-                ' in Spotify'
-              )
-            ),
-            _react2.default.createElement(
-              _reactRouterDom.Link,
-              { to: '/singlechat/' + chat.id },
-              _react2.default.createElement(
-                'button',
-                { className: 'btn-open' },
-                'Open ',
+                'h3',
+                null,
                 chat.name
+              ),
+              _react2.default.createElement(
+                'a',
+                { href: chat.externalUrl },
+                _react2.default.createElement('img', { className: 'open', src: 'https://upload.wikimedia.org/wikipedia/commons/4/48/Spotify_Badge_%28large%29.png' })
+              ),
+              _react2.default.createElement(
+                _reactRouterDom.Link,
+                { to: '/singlechat/' + chat.id },
+                _react2.default.createElement(
+                  'button',
+                  { className: 'btn-open' },
+                  'Open ',
+                  chat.name
+                )
               )
             )
           );
@@ -16080,7 +16088,7 @@ var _propTypes = __webpack_require__(3);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactRedux = __webpack_require__(5);
+var _reactRedux = __webpack_require__(7);
 
 var _reactRouterDom = __webpack_require__(10);
 
@@ -16186,70 +16194,70 @@ var Profile = function (_React$Component) {
                 );
               })
             )
-          ),
+          )
+        ),
+        _react2.default.createElement(_index.MyChats, null),
+        _react2.default.createElement(
+          'div',
+          { className: 'form-box' },
           _react2.default.createElement(
-            'div',
-            { className: 'form-box' },
-            _react2.default.createElement(
-              'form',
-              { onSubmit: function onSubmit(e) {
-                  e.preventDefault();
-                  var jsonData = {
-                    name: _this2.state.formName,
-                    public: false,
-                    collaborative: true
-                  };
+            'form',
+            { onSubmit: function onSubmit(e) {
+                e.preventDefault();
+                var jsonData = {
+                  name: _this2.state.formName,
+                  public: false,
+                  collaborative: true
+                };
 
-                  (0, _axios2.default)({
-                    method: 'post',
-                    url: 'https://api.spotify.com/v1/users/' + user.SpotifyId + '/playlists',
-                    data: jsonData,
-                    dataType: 'json',
-                    headers: {
-                      'Authorization': 'Bearer ' + user.accessToken,
-                      'Content-Type': 'application/json'
-                    }
-                  }).then(function (res) {
-                    console.log(res.data);
-                    _this2.props.makeNewChat({
-                      name: _this2.state.formName,
-                      externalUrl: res.data.external_urls.spotify,
-                      playlistId: res.data.id,
-                      likesNeeded: _this2.state.formLikesNeeded,
-                      userId: user.id
-                    });
-                  }).catch(function (err) {
-                    console.log('There was an error: ', err);
+                (0, _axios2.default)({
+                  method: 'post',
+                  url: 'https://api.spotify.com/v1/users/' + user.SpotifyId + '/playlists',
+                  data: jsonData,
+                  dataType: 'json',
+                  headers: {
+                    'Authorization': 'Bearer ' + user.accessToken,
+                    'Content-Type': 'application/json'
+                  }
+                }).then(function (res) {
+                  console.log(res.data);
+                  _this2.props.makeNewChat({
+                    name: _this2.state.formName,
+                    externalUrl: res.data.external_urls.spotify,
+                    playlistId: res.data.id,
+                    likesNeeded: _this2.state.formLikesNeeded,
+                    userId: user.id
                   });
-                } },
+                }).catch(function (err) {
+                  console.log('There was an error: ', err);
+                });
+              } },
+            _react2.default.createElement(
+              'div',
+              { className: 'form-group' },
               _react2.default.createElement(
-                'div',
-                { className: 'form-group' },
-                _react2.default.createElement(
-                  'label',
-                  { htmlFor: 'name' },
-                  'Create a new music group!'
-                ),
-                _react2.default.createElement('input', { className: 'form-control', type: 'text', name: 'playlistName', placeholder: 'Enter playlist name', onChange: function onChange(e) {
-                    return _this2.setState({ formName: e.target.value });
-                  } }),
-                _react2.default.createElement('input', { className: 'form-control', type: 'number', name: 'likesNeeded', placeholder: 'Enter likes needed for a song to be added', onChange: function onChange(e) {
-                    return _this2.setState({ formLikesNeeded: e.target.value });
-                  } })
+                'label',
+                { htmlFor: 'name' },
+                'Create a new music group!'
               ),
+              _react2.default.createElement('input', { className: 'form-control', type: 'text', name: 'playlistName', placeholder: 'Enter playlist name', onChange: function onChange(e) {
+                  return _this2.setState({ formName: e.target.value });
+                } }),
+              _react2.default.createElement('input', { className: 'form-control', type: 'number', name: 'likesNeeded', placeholder: 'Enter likes needed for a song to be added', onChange: function onChange(e) {
+                  return _this2.setState({ formLikesNeeded: e.target.value });
+                } })
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'form-group' },
               _react2.default.createElement(
-                'div',
-                { className: 'form-group' },
-                _react2.default.createElement(
-                  'button',
-                  { type: 'submit', className: 'btn' },
-                  'Submit Music Group'
-                )
+                'button',
+                { type: 'submit', className: 'btn' },
+                'Submit Music Group'
               )
             )
           )
-        ),
-        _react2.default.createElement(_index.MyChats, null)
+        )
       );
     }
   }]);
@@ -16307,7 +16315,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(5);
+var _reactRedux = __webpack_require__(7);
 
 var _reactRouterDom = __webpack_require__(10);
 
@@ -16528,7 +16536,7 @@ var _propTypes = __webpack_require__(3);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactRedux = __webpack_require__(5);
+var _reactRedux = __webpack_require__(7);
 
 var _reactRouterDom = __webpack_require__(10);
 
@@ -16654,7 +16662,7 @@ var _propTypes = __webpack_require__(3);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactRedux = __webpack_require__(5);
+var _reactRedux = __webpack_require__(7);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -16713,7 +16721,7 @@ var _reactDom = __webpack_require__(48);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactRedux = __webpack_require__(5);
+var _reactRedux = __webpack_require__(7);
 
 var _store = __webpack_require__(11);
 
@@ -17596,7 +17604,7 @@ exports = module.exports = __webpack_require__(153)();
 
 
 // module
-exports.push([module.i, "body {\n  font-family: sans-serif; }\n  body a {\n    text-decoration: none; }\n  body label {\n    display: block; }\n  body nav a {\n    display: inline-block;\n    margin: 1em; }\n  body form div {\n    margin: 1em;\n    display: inline-block; }\n\n.fullscreen-bg {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  overflow: hidden;\n  z-index: -100; }\n\n.fullscreen-bg__video {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  z-index: -100; }\n\n@media (min-aspect-ratio: 16 / 9) {\n  .fullscreen-bg__video {\n    height: 300%;\n    top: -100%;\n    z-index: -100; } }\n\n@media (max-aspect-ratio: 16 / 9) {\n  .fullscreen-bg__video {\n    width: 300%;\n    left: -100%;\n    z-index: -100; } }\n\n@media (max-width: 767px) {\n  .fullscreen-bg {\n    z-index: -100; }\n  .fullscreen-bg__video {\n    display: none;\n    z-index: -100; } }\n\n.heading {\n  color: white;\n  z-index: 1;\n  text-align: center; }\n\n.chatText {\n  margin: 10; }\n\n.chatPic {\n  height: 25px;\n  border-radius: 20px;\n  display: inline-block; }\n\n.song-pic {\n  height: 50px;\n  display: inline-block; }\n\n.song-play {\n  display: inline-block;\n  height: 25px; }\n\n.num-likes {\n  font-size: 75%;\n  display: inline-block; }\n\n.been-liked {\n  display: inline-block;\n  height: 25px;\n  opacity: 0.5; }\n\n.friend-icon {\n  display: inline-block;\n  height: 35px;\n  border-radius: 20px; }\n\n.friend-text {\n  display: inline-block;\n  margin: 0; }\n\n.start {\n  background: initial;\n  border: initial;\n  border-width: 0 7px;\n  box-sizing: border-box;\n  color: green;\n  cursor: default;\n  display: inline-block;\n  font-size: 50px;\n  line-height: 50px;\n  margin: 0;\n  max-width: 100%;\n  overflow: hidden;\n  padding: 2px;\n  text-decoration: none;\n  text-overflow: ellipsis;\n  text-shadow: 0 1px 0 #EEE;\n  white-space: nowrap; }\n\n.profile-heading {\n  text-align: center;\n  background: initial;\n  border: initial;\n  border-width: 0 7px;\n  box-sizing: border-box;\n  color: black;\n  cursor: default;\n  font-size: 50px;\n  line-height: 50px;\n  margin: 0;\n  max-width: 100%;\n  overflow: hidden;\n  padding: 2px;\n  text-decoration: none;\n  text-overflow: ellipsis;\n  text-shadow: 0 1px 0 blue;\n  white-space: nowrap; }\n\n.center {\n  text-align: center; }\n\n.col-left {\n  float: left;\n  margin: 0;\n  width: 50%; }\n\n.col-right {\n  float: left;\n  margin: 0;\n  width: 50%; }\n\n.columns {\n  margin: 0px auto;\n  width: 100%; }\n\n.form-box {\n  clear: both; }\n\n.btn {\n  -webkit-border-radius: 28;\n  -moz-border-radius: 28;\n  border-radius: 28px;\n  font-family: Arial;\n  color: #ffffff;\n  font-size: 20px;\n  background: #34d934;\n  padding: 10px 20px 10px 20px;\n  text-decoration: none; }\n\n.btn:hover {\n  background: #3cb0fd;\n  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);\n  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);\n  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);\n  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);\n  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);\n  text-decoration: none; }\n\n.chat {\n  background-color: gray;\n  width: 33%; }\n\n.btn-open {\n  background: #3498db;\n  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);\n  background-image: -moz-linear-gradient(top, #3498db, #2980b9);\n  background-image: -ms-linear-gradient(top, #3498db, #2980b9);\n  background-image: -o-linear-gradient(top, #3498db, #2980b9);\n  background-image: linear-gradient(to bottom, #3498db, #2980b9);\n  -webkit-border-radius: 28;\n  -moz-border-radius: 28;\n  border-radius: 28px;\n  font-family: Arial;\n  color: #ffffff;\n  font-size: 12px;\n  padding: 10px 10px 10px 10px;\n  text-decoration: none; }\n\n.btn-open:hover {\n  background: #3cb0fd;\n  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);\n  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);\n  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);\n  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);\n  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);\n  text-decoration: none; }\n\n.navbar {\n  list-style-type: none;\n  margin: 0;\n  padding: 0;\n  overflow: hidden;\n  background-color: #333; }\n\n.nav-box {\n  float: left; }\n\n.nav-box:hover {\n  background-color: green;\n  cursor: pointer; }\n\n.nav-item {\n  display: block;\n  color: white;\n  text-align: center;\n  padding: 14px 16px;\n  text-decoration: none; }\n\n.artist-icon {\n  display: inline-block;\n  height: 50px;\n  border-radius: 20px; }\n", ""]);
+exports.push([module.i, "body {\n  font-family: sans-serif; }\n  body a {\n    text-decoration: none; }\n  body label {\n    display: block; }\n  body nav a {\n    display: inline-block;\n    margin: 1em; }\n  body form div {\n    margin: 1em;\n    display: inline-block; }\n\n.fullscreen-bg {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  overflow: hidden;\n  z-index: -100; }\n\n.fullscreen-bg__video {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  z-index: -100; }\n\n@media (min-aspect-ratio: 16 / 9) {\n  .fullscreen-bg__video {\n    height: 300%;\n    top: -100%;\n    z-index: -100; } }\n\n@media (max-aspect-ratio: 16 / 9) {\n  .fullscreen-bg__video {\n    width: 300%;\n    left: -100%;\n    z-index: -100; } }\n\n@media (max-width: 767px) {\n  .fullscreen-bg {\n    z-index: -100; }\n  .fullscreen-bg__video {\n    display: none;\n    z-index: -100; } }\n\n.heading {\n  color: white;\n  z-index: 1;\n  text-align: center; }\n\n.chatText {\n  margin: 10; }\n\n.chatPic {\n  height: 25px;\n  border-radius: 20px;\n  display: inline-block; }\n\n.song-pic {\n  height: 50px;\n  display: inline-block; }\n\n.song-play {\n  display: inline-block;\n  height: 25px; }\n\n.num-likes {\n  font-size: 75%;\n  display: inline-block; }\n\n.been-liked {\n  display: inline-block;\n  height: 25px;\n  opacity: 0.5; }\n\n.friend-icon {\n  display: inline-block;\n  height: 35px;\n  border-radius: 20px; }\n\n.friend-text {\n  display: inline-block;\n  margin: 0; }\n\n.start {\n  background: initial;\n  border: initial;\n  border-width: 0 7px;\n  box-sizing: border-box;\n  color: green;\n  cursor: default;\n  display: inline-block;\n  font-size: 50px;\n  line-height: 50px;\n  margin: 0;\n  max-width: 100%;\n  overflow: hidden;\n  padding: 2px;\n  text-decoration: none;\n  text-overflow: ellipsis;\n  text-shadow: 0 1px 0 #EEE;\n  white-space: nowrap; }\n\n.profile-heading {\n  text-align: center;\n  background: initial;\n  border: initial;\n  border-width: 0 7px;\n  box-sizing: border-box;\n  color: black;\n  cursor: default;\n  font-size: 50px;\n  line-height: 50px;\n  margin: 0;\n  max-width: 100%;\n  overflow: hidden;\n  padding: 2px;\n  text-decoration: none;\n  text-overflow: ellipsis;\n  text-shadow: 0 1px 0 blue;\n  white-space: nowrap; }\n\n.center {\n  text-align: center; }\n\n.col-left {\n  float: left;\n  margin: 0;\n  width: 50%; }\n\n.col-right {\n  float: left;\n  margin: 0;\n  width: 50%; }\n\n.columns {\n  margin: 0px auto;\n  width: 100%; }\n\n.form-box {\n  clear: both; }\n\n.btn {\n  -webkit-border-radius: 28;\n  -moz-border-radius: 28;\n  border-radius: 28px;\n  font-family: Arial;\n  color: #ffffff;\n  font-size: 20px;\n  background: #34d934;\n  padding: 10px 20px 10px 20px;\n  text-decoration: none; }\n\n.btn:hover {\n  background: #3cb0fd;\n  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);\n  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);\n  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);\n  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);\n  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);\n  text-decoration: none; }\n\n.chat {\n  background-color: gray;\n  width: 33%; }\n\n.btn-open {\n  background: #3498db;\n  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);\n  background-image: -moz-linear-gradient(top, #3498db, #2980b9);\n  background-image: -ms-linear-gradient(top, #3498db, #2980b9);\n  background-image: -o-linear-gradient(top, #3498db, #2980b9);\n  background-image: linear-gradient(to bottom, #3498db, #2980b9);\n  -webkit-border-radius: 28;\n  -moz-border-radius: 28;\n  border-radius: 28px;\n  font-family: Arial;\n  color: #ffffff;\n  font-size: 12px;\n  padding: 10px 10px 10px 10px;\n  text-decoration: none; }\n\n.btn-open:hover {\n  background: #3cb0fd;\n  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);\n  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);\n  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);\n  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);\n  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);\n  text-decoration: none; }\n\n.navbar {\n  list-style-type: none;\n  margin: 0;\n  padding: 0;\n  overflow: hidden;\n  background-color: #333; }\n\n.nav-box {\n  float: left; }\n\n.nav-box:hover {\n  background-color: green;\n  cursor: pointer; }\n\n.nav-item {\n  display: block;\n  color: white;\n  text-align: center;\n  padding: 14px 16px;\n  text-decoration: none; }\n\n.artist-icon {\n  display: inline-block;\n  height: 50px;\n  border-radius: 20px; }\n\n.open {\n  height: 50px;\n  display: block; }\n", ""]);
 
 // exports
 
@@ -21001,7 +21009,7 @@ var _warning = __webpack_require__(4);
 
 var _warning2 = _interopRequireDefault(_warning);
 
-var _invariant = __webpack_require__(7);
+var _invariant = __webpack_require__(6);
 
 var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -21323,7 +21331,7 @@ exports.default = createHashHistory;
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PathUtils__ = __webpack_require__(22);
@@ -21627,7 +21635,7 @@ var createBrowserHistory = function createBrowserHistory() {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PathUtils__ = __webpack_require__(22);
