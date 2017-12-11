@@ -64,7 +64,10 @@ class Profile extends React.Component{
                 ))}
               </div>
             </div>
-            <div className="form-box">
+        </div>
+        }
+        <MyChats />
+        <div className="form-box">
             <form onSubmit={(e) => {
               e.preventDefault()
               const jsonData = {
@@ -107,9 +110,6 @@ class Profile extends React.Component{
             </div>
             </form>
           </div>
-        </div>
-        }
-        <MyChats />
       </div>
     )
   }
