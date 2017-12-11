@@ -73,9 +73,6 @@ body {
   text-align: center;
 }
 
-.chatBubble {
-
-}
 
 .chatText {
   margin: 10;
@@ -240,5 +237,30 @@ body {
   background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
   background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
   background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
+}
+
+.navbar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+.nav-box {
+  float: left;
+}
+
+.nav-box:hover {
+  background-color: green;
+  cursor: pointer;
+}
+
+.nav-item {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
   text-decoration: none;
 }
