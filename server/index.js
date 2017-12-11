@@ -42,7 +42,7 @@ passport.deserializeUser((id, done) =>
       function(accessToken, refreshToken, profile, done) {
         // asynchronous verification, for effect...
         process.nextTick(function () {
-          console.log('Profile: ', profile)
+          console.log('Profile****************************: ', profile)
     
           User.findOrCreate({
             where: {
@@ -121,7 +121,7 @@ const createApp = () => {
 
   // auth and api routes
   app.get('/auth/spotify',
-    passport.authenticate('spotify', {scope: [ 'user-read-email','playlist-modify-private', 'playlist-modify-public'], showDialog: true}),
+    passport.authenticate('spotify', {scope: [ 'user-read-email','playlist-modify-private', 'playlist-modify-public', 'user-top-read'], showDialog: true}),
     function(req, res){
     // The request will be redirected to spotify for authentication, so this
     // function will not be called.
