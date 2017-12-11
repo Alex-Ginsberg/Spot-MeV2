@@ -1,6 +1,5 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import {withRouter} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 
 class Navbar extends React.Component{
@@ -8,10 +7,10 @@ class Navbar extends React.Component{
         return (
             <div>
                 <ul className="navbar">
-                    <li className="nav-box"><a className="nav-item">Home</a></li>
-                    <li className="nav-box"><a className="nav-item">Add Friends</a></li>
-                    <li className="nav-box"><a className="nav-item">My Friends</a></li>
-                    <li className="nav-box"><a className="nav-item">My Groups</a></li>
+                    <Link to={'/profile'}><li className="nav-box"><a className="nav-item">Home</a></li></Link>
+                    <Link to ={'/addfriends'}><li className="nav-box"><a className="nav-item">Add Friends</a></li></Link>
+                    <Link to={'/myfriends'}><li className="nav-box"><a className="nav-item">My Friends</a></li></Link>
+                    <Link to={'/mygroups'}><li className="nav-box"><a className="nav-item">My Groups</a></li></Link>
                 </ul>
             </div>
       )

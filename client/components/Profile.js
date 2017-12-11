@@ -12,6 +12,7 @@ class Profile extends React.Component{
     this.state = {
       formName: '',
       formLikesNeeded: 0,
+      items: []
     }
   }
 
@@ -24,6 +25,19 @@ class Profile extends React.Component{
 
   render(){
     const {user, friends} = this.props
+    if (this.props.user.id && this.state.items.length === 0) {
+      axios({
+        method: 'get',
+        url: `https://api.spotify.com/v1/me/top/artists`,
+        headers: {
+            'Authorization': 'Bearer ' + user.accessToken,
+        }
+        })
+        .then(res => {
+            const items = res.data.items.slice(0, 3)
+            this.setState({items})
+        })
+    }
     return (
       <div>
         {user.id && 
@@ -34,12 +48,18 @@ class Profile extends React.Component{
                 <img src={user.proPic} className="profile-pic" />
               </div>
               <div className="col-right">
-                <Link to={'/addfriends'}><button className="btn">Add Friends</button></Link>
-                <h3>Your Friends</h3>
+                {/* <h3>Your Friends</h3>
                 {friends.map(friend => (
                   <div key={friend.id}>
                     <img className="friend-icon" src={friend.proPic} />
                     <p className="friend-text">{friend.name}</p>
+                  </div>
+                ))} */}
+                <h3>Your Top Artists</h3>
+                {this.state.items.map(item => (
+                  <div className="artist" key={item.id}>
+                    <img className="artist-icon" src={item.images[0].url} />
+                    <a href={item.external_urls.spotify} className="friend-text">{item.name}</a>
                   </div>
                 ))}
               </div>
