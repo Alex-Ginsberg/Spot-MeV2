@@ -25,19 +25,7 @@ class Profile extends React.Component{
 
   render(){
     const {user, friends} = this.props
-    if (this.props.user.id && this.state.items.length === 0) {
-      axios({
-        method: 'get',
-        url: `https://api.spotify.com/v1/me/top/artists`,
-        headers: {
-            'Authorization': 'Bearer ' + user.accessToken,
-        }
-        })
-        .then(res => {
-            const items = res.data.items.slice(0, 3)
-            this.setState({items})
-        })
-    }
+    
     return (
       <div>
         {user.id && 
@@ -56,12 +44,18 @@ class Profile extends React.Component{
                   </div>
                 ))} */}
                 <h3>Your Top Artists</h3>
-                {this.state.items.map(item => (
-                  <div className="artist" key={item.id}>
-                    <img className="artist-icon" src={item.images[0].url} />
-                    <a href={item.external_urls.spotify} className="friend-text">{item.name}</a>
+                  <div className="artist" key={user.artist1Name}>
+                    <img className="artist-icon" src={user.artist1Pic} />
+                    <a href={user.artist1Url} className="friend-text">{user.artist1Name}</a>
                   </div>
-                ))}
+                  <div className="artist" key={user.artist2Name}>
+                    <img className="artist-icon" src={user.artist2Pic} />
+                    <a href={user.artist2Url} className="friend-text">{user.artist2Name}</a>
+                  </div>
+                  <div className="artist" key={user.artist3Name}>
+                    <img className="artist-icon" src={user.artist3Pic} />
+                    <a href={user.artist3Url} className="friend-text">{user.artist3Name}</a>
+                  </div>
               </div>
             </div>
         </div>

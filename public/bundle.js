@@ -16140,18 +16140,7 @@ var Profile = function (_React$Component) {
           user = _props.user,
           friends = _props.friends;
 
-      if (this.props.user.id && this.state.items.length === 0) {
-        (0, _axios2.default)({
-          method: 'get',
-          url: 'https://api.spotify.com/v1/me/top/artists',
-          headers: {
-            'Authorization': 'Bearer ' + user.accessToken
-          }
-        }).then(function (res) {
-          var items = res.data.items.slice(0, 3);
-          _this2.setState({ items: items });
-        });
-      }
+
       return _react2.default.createElement(
         'div',
         null,
@@ -16181,18 +16170,36 @@ var Profile = function (_React$Component) {
                 null,
                 'Your Top Artists'
               ),
-              this.state.items.map(function (item) {
-                return _react2.default.createElement(
-                  'div',
-                  { className: 'artist', key: item.id },
-                  _react2.default.createElement('img', { className: 'artist-icon', src: item.images[0].url }),
-                  _react2.default.createElement(
-                    'a',
-                    { href: item.external_urls.spotify, className: 'friend-text' },
-                    item.name
-                  )
-                );
-              })
+              _react2.default.createElement(
+                'div',
+                { className: 'artist', key: user.artist1Name },
+                _react2.default.createElement('img', { className: 'artist-icon', src: user.artist1Pic }),
+                _react2.default.createElement(
+                  'a',
+                  { href: user.artist1Url, className: 'friend-text' },
+                  user.artist1Name
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'artist', key: user.artist2Name },
+                _react2.default.createElement('img', { className: 'artist-icon', src: user.artist2Pic }),
+                _react2.default.createElement(
+                  'a',
+                  { href: user.artist2Url, className: 'friend-text' },
+                  user.artist2Name
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'artist', key: user.artist3Name },
+                _react2.default.createElement('img', { className: 'artist-icon', src: user.artist3Pic }),
+                _react2.default.createElement(
+                  'a',
+                  { href: user.artist3Url, className: 'friend-text' },
+                  user.artist3Name
+                )
+              )
             )
           )
         ),

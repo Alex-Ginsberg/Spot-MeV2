@@ -14,6 +14,7 @@ const appKey = require('../secrets').appKey
 const appSecret = require('../secrets').appSecret
 const socketio = require('socket.io')
 const User = require('./db/models/user')
+const axios = require('axios')
 const SpotifyStrategy = require('passport-spotify').Strategy;
 module.exports = app
 
@@ -43,24 +44,45 @@ passport.deserializeUser((id, done) =>
         // asynchronous verification, for effect...
         process.nextTick(function () {
           console.log('Profile****************************: ', profile)
-    
-          User.findOrCreate({
-            where: {
-              SpotifyId: profile.id
-            },
-            defaults: {
-              name: profile.displayName,
-              SpotifyId: profile.id,
-              accessToken: accessToken,
-              proPic: profile.photos[0],
-              refreshToken: refreshToken
-            }
-          })
-          .spread(function (user) {
-            console.log('MAKING USER: ', user)  
-            done(null, user);
-          })
-          .catch(done);
+          axios({
+                method: 'get',
+                url: `https://api.spotify.com/v1/me/top/artists`,
+                headers: {
+                    'Authorization': 'Bearer ' + accessToken,
+                }
+                })
+                .then(res => {
+                    const items = res.data.items.slice(0, 3)
+                    console.log('ITEMS****************** ', items)
+                    User.findOrCreate({
+                      where: {
+                        SpotifyId: profile.id
+                      },
+                      defaults: {
+                        name: profile.displayName,
+                        SpotifyId: profile.id,
+                        accessToken: accessToken,
+                        proPic: profile.photos[0],
+                        refreshToken: refreshToken,
+                        artist1Name: items[0].name,
+                        artist2Name: items[1].name,
+                        artist3Name: items[2].name,
+                        artist1Pic: items[0].images[0].url,
+                        artist2Pic: items[1].images[0].url,
+                        artist3Pic: items[2].images[0].url,
+                        artist1Url: items[0].external_urls.spotify,
+                        artist2Url: items[1].external_urls.spotify,
+                        artist3Url: items[2].external_urls.spotify,
+
+                      }
+                    })
+                    .spread(function (user) {
+                      console.log('MAKING USER: ', user)  
+                      done(null, user);
+                    })
+                    .catch(done);
+                })
+          
           // return done(null, profile);
         });
       }));
